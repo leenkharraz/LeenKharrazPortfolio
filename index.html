@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leen Kharraz — Software Engineering Student. Portfolio: experience timeline and projects.">
+  <title>Leen Kharraz — Software Engineering Student</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="Leen Kharraz — home">
+      <span class="logo">LK<span class="logo__dot">.</span></span>
+    </a>
+
+    <div class="nav__right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/>
+            <line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/>
+            <line x1="5.3" y1="5.3" x2="7" y2="7"/><line x1="17" y1="17" x2="18.7" y2="18.7"/>
+            <line x1="18.7" y1="5.3" x2="17" y2="7"/><line x1="7" y1="17" x2="5.3" y2="18.7"/>
+          </g>
+        </svg>
+        <svg class="theme-toggle__icon icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M20 14.2A8 8 0 0 1 9.8 4 8 8 0 1 0 20 14.2Z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navTabs">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav__tabs" id="navTabs">
+        <li><a class="tab" href="#about">About</a></li>
+        <li><a class="tab" href="#experience">Experience</a></li>
+        <li><a class="tab tab--accent" href="#projects">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO / COVER ============ -->
+    <section class="hero" aria-label="Introduction">
+      <h2 class="hero__ghost" aria-hidden="true">Portfolio</h2>
+
+      <div class="hero__inner">
+        <div class="hero__copy reveal">
+          <p class="path-label">~/leen-kharraz</p>
+          <h1 class="hero__name">Leen Kharraz</h1>
+          <p class="hero__role">Software Engineering Student</p>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener">Contact Me</a>
+            <a class="btn btn--ghost" href="#skills">Skills</a>
+          </div>
+        </div>
+
+        <div class="hero__folder reveal" aria-hidden="true">
+          <div class="bigfolder">
+            <div class="bigfolder__tab">portfolio</div>
+            <div class="bigfolder__body">
+              <span class="bigfolder__line"></span>
+              <span class="bigfolder__line"></span>
+              <span class="bigfolder__line short"></span>
+            </div>
+          </div>
+          <span class="float-card float-card--1">Software Engineering</span>
+          <span class="float-card float-card--2">Project Management</span>
+          <span class="float-card float-card--3">GitHub Workflow</span>
+          <span class="float-card float-card--4">Team Coordination</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT — dusty blue ============ -->
+    <section class="section reveal" id="about" data-accent="blue" aria-labelledby="about-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">about</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">about/</p>
+        <h2 class="section__title" id="about-h">About Me</h2>
+        <div class="about__grid">
+          <div class="contentbox about__bio-box">
+            <p class="about__bio">
+              I'm a Software Engineering student at the <strong>University of Jeddah</strong>.
+              I enjoy building software and coordinating the plans and people around it —
+              pairing engineering with hands-on project management across campus clubs and
+              volunteer teams.
+            </p>
+          </div>
+          <div class="about__facts">
+            <div class="filecard">
+              <span class="filecard__label">University</span>
+              <span class="filecard__value">University of Jeddah — Software Engineering</span>
+            </div>
+            <div class="filecard">
+              <span class="filecard__label">Languages</span>
+              <span class="filecard__value">
+                <span class="pill pill--sage">Arabic</span>
+                <span class="pill pill--blue">English</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small skills block (hero "Skills" button scrolls here) -->
+        <div class="about__skills" id="skills">
+          <h3 class="about__skills-h">Skills</h3>
+          <div class="skills-mini">
+            <div class="skills-mini__group">
+              <span class="skills-mini__label">Technical</span>
+              <div class="skills-mini__pills">
+                <span class="pill pill--blue">HTML</span>
+                <span class="pill pill--blue">CSS</span>
+                <span class="pill pill--blue">JavaScript</span>
+                <span class="pill pill--blue">Node.js</span>
+                <span class="pill pill--blue">MySQL</span>
+                <span class="pill pill--mocha">Git &amp; GitHub</span>
+              </div>
+            </div>
+            <div class="skills-mini__group">
+              <span class="skills-mini__label">Tools &amp; Project Management</span>
+              <div class="skills-mini__pills">
+                <span class="pill pill--sage">Monday.com</span>
+                <span class="pill pill--sage">Google Workspace</span>
+                <span class="pill pill--sage">Microsoft Office</span>
+                <span class="pill pill--apricot">Project Management</span>
+                <span class="pill pill--apricot">Leadership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE — sage / olive ============ -->
+    <section class="section reveal" id="experience" data-accent="olive" aria-labelledby="exp-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">experience</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">experience/</p>
+        <h2 class="section__title" id="exp-h">Experience</h2>
+        <p class="section__lede">A timeline of my roles, most recent first. Tap an entry to expand.</p>
+
+        <ol class="timeline">
+
+          <li class="tl-item tl-item--berry">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--internship">Internship</span>
+                  <span class="tl-card__badge tl-card__badge--backend">Backend</span>
+                </div>
+                <span class="tl-card__dates placeholder-text">[LEEN: dates]</span>
+                <h3 class="tl-card__role placeholder-text">[LEEN: internship title]</h3>
+                <span class="tl-card__org placeholder-text">[LEEN: company]</span>
+              </button>
+              <div class="tl-card__body">
+                <p class="placeholder-text">[LEEN: internship — 2–3 sentence description of what you did]</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--berry">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
+                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
+                </div>
+                <span class="tl-card__dates">Nov 2025 – Present</span>
+                <h3 class="tl-card__role">Project Management Coordinator (Planning &amp; Ideas)</h3>
+                <span class="tl-card__org">Google Developer Group on Campus</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Driving planning and ideation for developer-focused campus events — shaping event concepts, timelines, and task ownership across the team.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--blue">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
+                  <span class="tl-card__badge tl-card__badge--student">Student</span>
+                </div>
+                <span class="tl-card__dates">Nov 2025 – Present</span>
+                <h3 class="tl-card__role">Project Management Member</h3>
+                <span class="tl-card__org">Artificial Intelligence Club</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Supporting project planning and delivery for AI workshops, sessions, and technical initiatives.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--olive">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
+                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
+                </div>
+                <span class="tl-card__dates">Sept 2025 – Present</span>
+                <h3 class="tl-card__role">Leader — Management &amp; Marketing Committee</h3>
+                <span class="tl-card__org">Drone Club</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Leading the committee responsible for the club's management and marketing — planning activities, coordinating members, and promoting events.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--apricot">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
+                  <span class="tl-card__badge tl-card__badge--student">Student</span>
+                </div>
+                <span class="tl-card__dates">Sept 2025 – Present</span>
+                <h3 class="tl-card__role">Project Management Member</h3>
+                <span class="tl-card__org">Games &amp; Virtual Reality Club</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Planning and coordinating club projects and events across games and VR experiences.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--mocha">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
+                </div>
+                <span class="tl-card__dates">Sept 2025 – Present</span>
+                <h3 class="tl-card__role">Public Relations Member</h3>
+                <span class="tl-card__org">Cybersecurity Club</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Managing communication and outreach — announcements, member engagement, and event publicity.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--blue">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
+                </div>
+                <span class="tl-card__dates">Aug 2025 – Nov 2025</span>
+                <h3 class="tl-card__role">Vice Team Leader</h3>
+                <span class="tl-card__org">Bashosh Volunteer Team</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Supported team leadership across volunteer initiatives — coordinating members, tracking tasks, and keeping events running smoothly.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--olive">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
+                </div>
+                <span class="tl-card__dates">March 2025 – July 2025</span>
+                <h3 class="tl-card__role">Leader — Event Planning &amp; Management Department</h3>
+                <span class="tl-card__org">Bashosh Volunteer Team</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Led event planning and management for volunteer activities — from concept and logistics to on-the-day coordination and evaluation.</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tl-item tl-item--berry">
+            <div class="tl-dot" aria-hidden="true"></div>
+            <article class="tl-card">
+              <button class="tl-card__head" aria-expanded="false">
+                <div class="tl-card__tags">
+                  <span class="tl-card__badge tl-card__badge--sports">Sports Volunteering</span>
+                </div>
+                <span class="tl-card__dates">March 2024 – Present</span>
+                <h3 class="tl-card__role">Scrutineer Marshal</h3>
+                <span class="tl-card__org">Saudi Automobile and Motorcycle Federation</span>
+              </button>
+              <div class="tl-card__body">
+                <p>Performing detailed technical inspections of tires, interiors, and safety equipment for FIA compliance at major international race events (Formula 1, Formula E, WRC, and more).</p>
+              </div>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS — mocha / apricot / burgundy ============ -->
+    <section class="section reveal" id="projects" data-accent="mocha" aria-labelledby="proj-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">projects</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">projects/</p>
+        <h2 class="section__title" id="proj-h">Projects</h2>
+        <p class="section__lede">Selected work shown in device mockups — app projects sit in an iPhone frame, websites and dashboards in a browser frame. Hover (or tap on mobile) any project to reveal its details.</p>
+
+        <!-- ================================================================
+             HOW TO EDIT A PROJECT
+             • Frame type: set the article class to device-card--phone (iPhone)
+               or device-card--browser (browser window). Update data-type + the
+               .device-badge label to match (App / Website / Dashboard / Case Study).
+             • Screenshot: drop an image into /assets/images/projects/ and set the
+               <img src>. If the file is missing, the placeholder gradient shows.
+             • Text: replace the [LEEN: ...] placeholders (name, description, role)
+               and the tech pills. Set the CTA href + label.
+        ================================================================= -->
+        <div class="showcase">
+
+          <!-- FEATURED — App (iPhone), details always visible -->
+          <article class="device-card device-card--featured device-card--phone" data-type="app" tabindex="0">
+            <div class="device-stage">
+              <span class="device-badge">App</span>
+              <div class="iphone">
+                <div class="device-screen">
+                  <img class="device-screen__img" src="assets/images/projects/p1.jpg" alt="[LEEN: screenshot of project 1]" loading="lazy" onerror="this.style.display='none'">
+                  <span class="device-screen__label">screenshot → /assets/images/projects/p1.jpg</span>
+                </div>
+              </div>
+            </div>
+            <div class="device-info">
+              <p class="device-info__type">Featured · App</p>
+              <h3 class="device-info__name placeholder-text">[Project name]</h3>
+              <p class="device-info__desc placeholder-text">[LEEN: 1–2 sentence description of the project.]</p>
+              <div class="device-info__meta">
+                <div><span class="k">Tech</span><span class="device-tags"><span class="pill pill--mocha">Tech</span><span class="pill pill--blue">Tech</span></span></div>
+                <div><span class="k">Role</span><span class="placeholder-text">[LEEN: your role]</span></div>
+              </div>
+              <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
+            </div>
+          </article>
+
+          <!-- SECONDARY GRID — hover/tap reveals a sliding panel -->
+          <div class="showcase__grid">
+
+            <!-- Website (browser) -->
+            <article class="device-card device-card--browser" data-type="website" tabindex="0" aria-label="Website project — tap to reveal details">
+              <div class="device-stage">
+                <span class="device-badge device-badge--alt">Website</span>
+                <div class="browser">
+                  <div class="browser__bar" aria-hidden="true">
+                    <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
+                    <span class="browser__url">https://…</span>
+                  </div>
+                  <div class="device-screen">
+                    <img class="device-screen__img" src="assets/images/projects/p2.jpg" alt="[LEEN: screenshot of project 2]" loading="lazy" onerror="this.style.display='none'">
+                    <span class="device-screen__label">screenshot → p2.jpg</span>
+                  </div>
+                </div>
+                <div class="device-overlay">
+                  <p class="device-overlay__type">Website</p>
+                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
+                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
+                  <div class="device-overlay__meta">
+                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--apricot">Tech</span><span class="pill pill--olive">Tech</span></span>
+                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
+                  </div>
+                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dashboard (browser) -->
+            <article class="device-card device-card--browser" data-type="dashboard" tabindex="0" aria-label="Dashboard project — tap to reveal details">
+              <div class="device-stage">
+                <span class="device-badge device-badge--alt">Dashboard</span>
+                <div class="browser">
+                  <div class="browser__bar" aria-hidden="true">
+                    <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
+                    <span class="browser__url">app.…/dashboard</span>
+                  </div>
+                  <div class="device-screen">
+                    <img class="device-screen__img" src="assets/images/projects/p3.jpg" alt="[LEEN: screenshot of project 3]" loading="lazy" onerror="this.style.display='none'">
+                    <span class="device-screen__label">screenshot → p3.jpg</span>
+                  </div>
+                </div>
+                <div class="device-overlay">
+                  <p class="device-overlay__type">Dashboard</p>
+                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
+                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
+                  <div class="device-overlay__meta">
+                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--berry">Tech</span><span class="pill pill--apricot">Tech</span></span>
+                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
+                  </div>
+                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">Case Study →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- App (iPhone) -->
+            <article class="device-card device-card--phone" data-type="app" tabindex="0" aria-label="App project — tap to reveal details">
+              <div class="device-stage">
+                <span class="device-badge">App</span>
+                <div class="iphone">
+                  <div class="device-screen">
+                    <img class="device-screen__img" src="assets/images/projects/p4.jpg" alt="[LEEN: screenshot of project 4]" loading="lazy" onerror="this.style.display='none'">
+                    <span class="device-screen__label">screenshot → p4.jpg</span>
+                  </div>
+                </div>
+                <div class="device-overlay">
+                  <p class="device-overlay__type">App</p>
+                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
+                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
+                  <div class="device-overlay__meta">
+                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--apricot">Tech</span><span class="pill pill--mocha">Tech</span></span>
+                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
+                  </div>
+                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER — integrated bottom band ============ -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo footer__logo">LK<span class="logo__dot">.</span></span>
+        <span class="footer__tag">Software Engineering Student</span>
+      </div>
+      <div class="footer__icons">
+        <a class="iconbtn" href="https://github.com/leenkharraz" target="_blank" rel="noopener" aria-label="GitHub profile" data-tip="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/></svg>
+        </a>
+        <a class="iconbtn" href="https://www.linkedin.com/in/leen-kharraz-a57869280" target="_blank" rel="noopener" aria-label="LinkedIn profile" data-tip="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9Z" fill="currentColor"/></svg>
+        </a>
+        <a class="iconbtn" href="https://x.com/leenkh7" target="_blank" rel="noopener" aria-label="X (Twitter) profile" data-tip="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3H20.5l-6.49 7.42L21.75 21h-6l-4.7-6.15L5.67 21H2.7l6.94-7.94L2.5 3h6.15l4.25 5.62L17.53 3Zm-1.05 16.2h1.64L7.6 4.72H5.84L16.48 19.2Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Leen Kharraz. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
