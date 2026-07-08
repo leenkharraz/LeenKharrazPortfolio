@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
     </a>
 
     <div class="nav__right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" aria-pressed="false">
         <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
           <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -158,169 +158,31 @@
       <div class="panel">
         <p class="path-label">experience/</p>
         <h2 class="section__title" id="exp-h">Experience</h2>
-        <p class="section__lede">A timeline of my roles, most recent first. Tap an entry to expand.</p>
+        <p class="section__lede">A timeline of my roles, most recent first. Click a card to reveal the details and top skills.</p>
 
-        <ol class="timeline">
+        <!-- Timeline is rendered from the EXPERIENCE data array in js/main.js.
+             To add/edit a role or paste a LinkedIn URL, edit that array. -->
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
 
-          <li class="tl-item tl-item--berry">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--internship">Internship</span>
-                  <span class="tl-card__badge tl-card__badge--backend">Backend</span>
-                </div>
-                <span class="tl-card__dates placeholder-text">[LEEN: dates]</span>
-                <h3 class="tl-card__role placeholder-text">[LEEN: internship title]</h3>
-                <span class="tl-card__org placeholder-text">[LEEN: company]</span>
-              </button>
-              <div class="tl-card__body">
-                <p class="placeholder-text">[LEEN: internship — 2–3 sentence description of what you did]</p>
-              </div>
-            </article>
-          </li>
+    <!-- ============ MOTORSPORT TIMELINE — tied to SAMF / Scrutineer Marshal ============ -->
+    <section class="section reveal motorsport-section" id="motorsport" data-accent="berry" aria-labelledby="motorsport-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">motorsport</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">motorsport/</p>
+        <h2 class="section__title" id="motorsport-h">Motorsport Race Timeline</h2>
+        <p class="section__lede">Since March 2024, I have supported multiple motorsport events as a Scrutineer Marshal, delivering technical inspection support across Formula E and global racing venues.</p>
 
-          <li class="tl-item tl-item--berry">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
-                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
-                </div>
-                <span class="tl-card__dates">Nov 2025 – Present</span>
-                <h3 class="tl-card__role">Project Management Coordinator (Planning &amp; Ideas)</h3>
-                <span class="tl-card__org">Google Developer Group on Campus</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Driving planning and ideation for developer-focused campus events — shaping event concepts, timelines, and task ownership across the team.</p>
-              </div>
-            </article>
-          </li>
+        <div class="motorsport-track" aria-hidden="true">
+          <div class="f1-car"></div>
+        </div>
 
-          <li class="tl-item tl-item--blue">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
-                  <span class="tl-card__badge tl-card__badge--student">Student</span>
-                </div>
-                <span class="tl-card__dates">Nov 2025 – Present</span>
-                <h3 class="tl-card__role">Project Management Member</h3>
-                <span class="tl-card__org">Artificial Intelligence Club</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Supporting project planning and delivery for AI workshops, sessions, and technical initiatives.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--olive">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
-                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
-                </div>
-                <span class="tl-card__dates">Sept 2025 – Present</span>
-                <h3 class="tl-card__role">Leader — Management &amp; Marketing Committee</h3>
-                <span class="tl-card__org">Drone Club</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Leading the committee responsible for the club's management and marketing — planning activities, coordinating members, and promoting events.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--apricot">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
-                  <span class="tl-card__badge tl-card__badge--student">Student</span>
-                </div>
-                <span class="tl-card__dates">Sept 2025 – Present</span>
-                <h3 class="tl-card__role">Project Management Member</h3>
-                <span class="tl-card__org">Games &amp; Virtual Reality Club</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Planning and coordinating club projects and events across games and VR experiences.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--mocha">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--club">University Club</span>
-                </div>
-                <span class="tl-card__dates">Sept 2025 – Present</span>
-                <h3 class="tl-card__role">Public Relations Member</h3>
-                <span class="tl-card__org">Cybersecurity Club</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Managing communication and outreach — announcements, member engagement, and event publicity.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--blue">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
-                </div>
-                <span class="tl-card__dates">Aug 2025 – Nov 2025</span>
-                <h3 class="tl-card__role">Vice Team Leader</h3>
-                <span class="tl-card__org">Bashosh Volunteer Team</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Supported team leadership across volunteer initiatives — coordinating members, tracking tasks, and keeping events running smoothly.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--olive">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--leadership">Leadership</span>
-                </div>
-                <span class="tl-card__dates">March 2025 – July 2025</span>
-                <h3 class="tl-card__role">Leader — Event Planning &amp; Management Department</h3>
-                <span class="tl-card__org">Bashosh Volunteer Team</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Led event planning and management for volunteer activities — from concept and logistics to on-the-day coordination and evaluation.</p>
-              </div>
-            </article>
-          </li>
-
-          <li class="tl-item tl-item--berry">
-            <div class="tl-dot" aria-hidden="true"></div>
-            <article class="tl-card">
-              <button class="tl-card__head" aria-expanded="false">
-                <div class="tl-card__tags">
-                  <span class="tl-card__badge tl-card__badge--sports">Sports Volunteering</span>
-                </div>
-                <span class="tl-card__dates">March 2024 – Present</span>
-                <h3 class="tl-card__role">Scrutineer Marshal</h3>
-                <span class="tl-card__org">Saudi Automobile and Motorcycle Federation</span>
-              </button>
-              <div class="tl-card__body">
-                <p>Performing detailed technical inspections of tires, interiors, and safety equipment for FIA compliance at major international race events (Formula 1, Formula E, WRC, and more).</p>
-              </div>
-            </article>
-          </li>
-
-        </ol>
+        <div class="motorsport-grid" id="motorsportTimeline"></div>
       </div>
     </section>
 
@@ -334,124 +196,21 @@
       <div class="panel">
         <p class="path-label">projects/</p>
         <h2 class="section__title" id="proj-h">Projects</h2>
-        <p class="section__lede">Selected work shown in device mockups — app projects sit in an iPhone frame, websites and dashboards in a browser frame. Hover (or tap on mobile) any project to reveal its details.</p>
+        <p class="section__lede">Selected work, grouped by type. Applications are shown in iPhone mockups; websites in browser mockups. Hover (or tap on mobile) any project to reveal its details.</p>
 
-        <!-- ================================================================
-             HOW TO EDIT A PROJECT
-             • Frame type: set the article class to device-card--phone (iPhone)
-               or device-card--browser (browser window). Update data-type + the
-               .device-badge label to match (App / Website / Dashboard / Case Study).
-             • Screenshot: drop an image into /assets/images/projects/ and set the
-               <img src>. If the file is missing, the placeholder gradient shows.
-             • Text: replace the [LEEN: ...] placeholders (name, description, role)
-               and the tech pills. Set the CTA href + label.
-        ================================================================= -->
+        <!-- Projects render from the PROJECTS data in js/main.js.
+             Each entry has: name, type, badge, frame ('phone'|'browser'),
+             accent, description, role, tags[], link. Edit there. -->
         <div class="showcase">
+          <section class="showcase__group" aria-labelledby="apps-h">
+            <h3 class="showcase__group-h" id="apps-h"><span class="showcase__group-kicker">Applications</span> Mobile Apps</h3>
+            <div class="showcase__grid showcase__grid--apps" id="appsGrid"></div>
+          </section>
 
-          <!-- FEATURED — App (iPhone), details always visible -->
-          <article class="device-card device-card--featured device-card--phone" data-type="app" tabindex="0">
-            <div class="device-stage">
-              <span class="device-badge">App</span>
-              <div class="iphone">
-                <div class="device-screen">
-                  <img class="device-screen__img" src="assets/images/projects/p1.jpg" alt="[LEEN: screenshot of project 1]" loading="lazy" onerror="this.style.display='none'">
-                  <span class="device-screen__label">screenshot → /assets/images/projects/p1.jpg</span>
-                </div>
-              </div>
-            </div>
-            <div class="device-info">
-              <p class="device-info__type">Featured · App</p>
-              <h3 class="device-info__name placeholder-text">[Project name]</h3>
-              <p class="device-info__desc placeholder-text">[LEEN: 1–2 sentence description of the project.]</p>
-              <div class="device-info__meta">
-                <div><span class="k">Tech</span><span class="device-tags"><span class="pill pill--mocha">Tech</span><span class="pill pill--blue">Tech</span></span></div>
-                <div><span class="k">Role</span><span class="placeholder-text">[LEEN: your role]</span></div>
-              </div>
-              <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
-            </div>
-          </article>
-
-          <!-- SECONDARY GRID — hover/tap reveals a sliding panel -->
-          <div class="showcase__grid">
-
-            <!-- Website (browser) -->
-            <article class="device-card device-card--browser" data-type="website" tabindex="0" aria-label="Website project — tap to reveal details">
-              <div class="device-stage">
-                <span class="device-badge device-badge--alt">Website</span>
-                <div class="browser">
-                  <div class="browser__bar" aria-hidden="true">
-                    <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
-                    <span class="browser__url">https://…</span>
-                  </div>
-                  <div class="device-screen">
-                    <img class="device-screen__img" src="assets/images/projects/p2.jpg" alt="[LEEN: screenshot of project 2]" loading="lazy" onerror="this.style.display='none'">
-                    <span class="device-screen__label">screenshot → p2.jpg</span>
-                  </div>
-                </div>
-                <div class="device-overlay">
-                  <p class="device-overlay__type">Website</p>
-                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
-                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
-                  <div class="device-overlay__meta">
-                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--apricot">Tech</span><span class="pill pill--olive">Tech</span></span>
-                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
-                  </div>
-                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Dashboard (browser) -->
-            <article class="device-card device-card--browser" data-type="dashboard" tabindex="0" aria-label="Dashboard project — tap to reveal details">
-              <div class="device-stage">
-                <span class="device-badge device-badge--alt">Dashboard</span>
-                <div class="browser">
-                  <div class="browser__bar" aria-hidden="true">
-                    <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
-                    <span class="browser__url">app.…/dashboard</span>
-                  </div>
-                  <div class="device-screen">
-                    <img class="device-screen__img" src="assets/images/projects/p3.jpg" alt="[LEEN: screenshot of project 3]" loading="lazy" onerror="this.style.display='none'">
-                    <span class="device-screen__label">screenshot → p3.jpg</span>
-                  </div>
-                </div>
-                <div class="device-overlay">
-                  <p class="device-overlay__type">Dashboard</p>
-                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
-                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
-                  <div class="device-overlay__meta">
-                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--berry">Tech</span><span class="pill pill--apricot">Tech</span></span>
-                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
-                  </div>
-                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">Case Study →</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- App (iPhone) -->
-            <article class="device-card device-card--phone" data-type="app" tabindex="0" aria-label="App project — tap to reveal details">
-              <div class="device-stage">
-                <span class="device-badge">App</span>
-                <div class="iphone">
-                  <div class="device-screen">
-                    <img class="device-screen__img" src="assets/images/projects/p4.jpg" alt="[LEEN: screenshot of project 4]" loading="lazy" onerror="this.style.display='none'">
-                    <span class="device-screen__label">screenshot → p4.jpg</span>
-                  </div>
-                </div>
-                <div class="device-overlay">
-                  <p class="device-overlay__type">App</p>
-                  <h3 class="device-overlay__name placeholder-text">[Project name]</h3>
-                  <p class="device-overlay__desc placeholder-text">[LEEN: short description]</p>
-                  <div class="device-overlay__meta">
-                    <span class="k">Tech</span><span class="device-tags"><span class="pill pill--apricot">Tech</span><span class="pill pill--mocha">Tech</span></span>
-                    <span class="k">Role</span><span class="placeholder-text">[LEEN: role]</span>
-                  </div>
-                  <a class="btn btn--small btn--solid" href="#" aria-disabled="true">View Project →</a>
-                </div>
-              </div>
-            </article>
-
-          </div>
+          <section class="showcase__group" aria-labelledby="sites-h">
+            <h3 class="showcase__group-h" id="sites-h"><span class="showcase__group-kicker">Websites</span> Web Projects</h3>
+            <div class="showcase__grid showcase__grid--sites" id="sitesGrid"></div>
+          </section>
         </div>
       </div>
     </section>
