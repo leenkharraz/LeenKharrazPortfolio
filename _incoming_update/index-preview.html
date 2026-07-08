@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leen Kharraz — Software Engineering Student. Portfolio: experience timeline and projects.">
+  <title>Leen Kharraz — Software Engineering Student</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
 /* ============================================================
    LEEN YOUSEF — PORTFOLIO STYLESHEET (v3)
    Folder/file system concept · Dark mode default + light theme
@@ -65,23 +78,23 @@
 }
 
 [data-theme="light"] {
-  --bg:        #F6F1EB;
-  --bg-soft:   #F8F4EE;
+  --bg:        #F7F3EC;
+  --bg-soft:   #FBF8F2;
   --card:      #FFFFFF;
-  --card-hi:   #F5ECE6;
-  --text:      #2F2A26;
-  --text-2:    #665E55;
-  --text-mut:  #8E8578;
-  --border:    #D6C9BF;
+  --card-hi:   #FFFFFF;
+  --text:      #2B2320;
+  --text-2:    #5C524B;
+  --text-mut:  #8A7E75;
+  --border:    #E4DCCF;
 
-  --glow-apricot: rgba(206, 134, 144, 0.24);
-  --glow-blue:    rgba(141, 172, 186, 0.24);
-  --glow-green:   rgba(119, 127, 93, 0.22);
+  --glow-apricot: rgba(206, 134, 144, 0.35);
+  --glow-blue:    rgba(141, 172, 186, 0.35);
+  --glow-green:   rgba(119, 127, 93, 0.30);
 
-  --shadow: 0 18px 40px rgba(46, 38, 33, 0.12);
-  --shadow-sm: 0 8px 22px rgba(46, 38, 33, 0.08);
+  --shadow: 0 18px 40px rgba(43, 35, 32, 0.12);
+  --shadow-sm: 0 8px 22px rgba(43, 35, 32, 0.10);
 
-  --on-apricot: #48191D;
+  --on-apricot: #401019;
   --on-sage:    #3C4126;
   --on-blue:    #1F3540;
   --on-berry:   #FFFFFF;
@@ -551,18 +564,6 @@ h1, h2, h3, h4 {
 }
 .skills-mini { display: grid; gap: 1.25rem; }
 @media (min-width: 640px) { .skills-mini { grid-template-columns: 1fr 1fr; } }
-.skills-mini__group {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.1rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.skills-mini__group:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-sm);
-  border-color: rgba(206, 134, 144, 0.3);
-}
 .skills-mini__label {
   display: block;
   font-family: var(--font-mono);
@@ -573,13 +574,6 @@ h1, h2, h3, h4 {
   margin-bottom: 0.55rem;
 }
 .skills-mini__pills { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.skills-mini__pills .pill {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.skills-mini__pills .pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
 
 
 /* ============================================================
@@ -869,20 +863,18 @@ h1, h2, h3, h4 {
   place-items: center;
   text-align: center;
   background: linear-gradient(150deg,
-    color-mix(in srgb, var(--a) 45%, var(--stage-base)),
-    color-mix(in srgb, var(--a) 14%, var(--stage-base)));
+    color-mix(in srgb, var(--a) 55%, #2a2730),
+    color-mix(in srgb, var(--a) 20%, #17161b));
 }
-.project-screen__label {
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  line-height: 1.2;
-  font-weight: 800;
-  color: var(--a-ink);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  max-width: 12ch;
+.device-screen__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.device-screen__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.82);
+  padding: 0 0.8rem;
 }
-.device-screen__img { display: none; }
+.device-screen__hint { color: rgba(255,255,255,0.5); font-size: 0.56rem; }
 
 /* --- Card wrapper + interactions --- */
 .device-card {
@@ -892,12 +884,12 @@ h1, h2, h3, h4 {
 }
 /* subtle hover movement (secondary cards only; featured is a grid) */
 .device-card:not(.device-card--featured):hover { transform: translateY(-5px); }
-.device-card .device-stage { transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+.device-card .device-stage { transition: box-shadow 0.3s ease, border-color 0.3s ease; }
 .device-card:hover .device-stage,
 .device-card:focus-within .device-stage,
 .device-card.is-open .device-stage {
   border-color: var(--a);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 18px 40px var(--glow-apricot);
 }
 
 /* Sliding detail panel (secondary cards) — slides in from the right */
@@ -1002,301 +994,6 @@ h1, h2, h3, h4 {
     pointer-events: none;
   }
   .device-card.is-open::after { display: none; }
-}
-
-/* Race page utility classes */
-.race-page {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-}
-.race-hero {
-  padding: clamp(2rem, 4vw, 3rem) 1.5rem 0;
-  max-width: 72rem;
-  margin: 0 auto;
-}
-.race-hero__inner {
-  display: grid;
-  gap: 1rem;
-}
-.race-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--apricot);
-}
-.race-hero__title {
-  margin: 0;
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  line-height: 1.02;
-}
-.race-hero__intro {
-  margin: 0;
-  max-width: 46rem;
-  line-height: 1.72;
-  color: var(--text-mut);
-}
-.race-timeline {
-  padding: clamp(1.5rem, 3vw, 2.25rem) 1.5rem 3rem;
-  max-width: 72rem;
-  margin: 0 auto;
-}
-.race-timeline .section__title {
-  margin-bottom: 0.5rem;
-}
-.race-timeline .section__lede {
-  max-width: 42rem;
-  margin-bottom: 1.5rem;
-}
-.motorsport-track {
-  position: relative;
-  margin: 2rem 0 1.5rem;
-  min-height: 68px;
-  overflow: hidden;
-}
-.motorsport-track::before {
-  content: "";
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 2px;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.14) 20%, transparent 20%, transparent 40%,
-    rgba(255,255,255,0.14) 40%, rgba(255,255,255,0.14) 60%, transparent 60%, transparent 80%,
-    rgba(255,255,255,0.14) 80%, rgba(255,255,255,0.14) 100%);
-}
-.f1-car {
-  position: absolute;
-  top: 50%;
-  left: -5.5rem;
-  width: 5rem;
-  height: 1.5rem;
-  background: linear-gradient(180deg, #DBD5D0 0%, #9B9591 100%);
-  border-radius: 0.45rem;
-  transform: translateY(-50%);
-  box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,0.1),
-    0 1px 0 rgba(255,255,255,0.16);
-  animation: car-drive 10s linear infinite;
-}
-.f1-car::before {
-  content: "";
-  position: absolute;
-  left: 0.4rem;
-  top: 0.2rem;
-  width: 2.7rem;
-  height: 0.7rem;
-  background: #1f1f1f;
-  border-radius: 0.25rem 0.25rem 0 0;
-}
-.f1-car::after {
-  content: "";
-  position: absolute;
-  right: 0.25rem;
-  bottom: -0.35rem;
-  width: 1.1rem;
-  height: 0.75rem;
-  background: #262626;
-  border-radius: 0.25rem;
-  box-shadow: -2.2rem 0 0 #262626, 0.7rem 0 0 #262626;
-}
-@keyframes car-drive {
-  0% { left: -5.5rem; }
-  50% { left: calc(100% - 5rem); }
-  100% { left: -5.5rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .f1-car { animation: none; }
-}
-.motorsport-grid {
-  display: grid;
-  gap: 1.5rem;
-  position: relative;
-}
-.motorsport-grid::before {
-  content: "";
-  position: absolute;
-  left: 1.2rem;
-  top: 1.5rem;
-  bottom: 1.5rem;
-  width: 2px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.12) 16.66%, transparent 16.66%,
-    transparent 33.33%, rgba(255,255,255,0.12) 33.33%, rgba(255,255,255,0.12) 50%,
-    transparent 50%, transparent 66.66%, rgba(255,255,255,0.12) 66.66%,
-    rgba(255,255,255,0.12) 83.33%, transparent 83.33%, transparent 100%);
-}
-.race-entry {
-  position: relative;
-  padding: 1rem 1rem 1rem 3.5rem;
-  background: var(--card-hi);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-.race-entry::before {
-  content: "";
-  position: absolute;
-  left: 1.15rem;
-  top: 1.55rem;
-  width: 0.9rem;
-  height: 0.9rem;
-  border-radius: 50%;
-  background: var(--apricot);
-  box-shadow: 0 0 0 6px rgba(255,255,255,0.05);
-}
-.race-entry__body {
-  display: grid;
-  gap: 0.8rem;
-}
-.race-entry__media {
-  min-height: 180px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.06));
-  position: relative;
-}
-.race-entry__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(45deg, rgba(255,255,255,0.08) 12.5%, transparent 12.5% 25%,
-      transparent 25% 50%, rgba(255,255,255,0.08) 50% 62.5%, transparent 62.5% 75%,
-      transparent 100%);
-}
-.race-entry__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.race-entry__name {
-  font-size: 1.1rem;
-  margin: 0;
-  color: var(--text);
-}
-.race-entry__date {
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-mut);
-}
-@media (min-width: 768px) {
-  .motorsport-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 1024px) {
-  .motorsport-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-.race-hero {
-  background: linear-gradient(180deg, rgba(28, 18, 22, 0.96) 0%, rgba(18, 10, 13, 0.98) 100%);
-  color: #fff;
-  padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
-  position: relative;
-  overflow: hidden;
-}
-.race-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(90deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.04) 75%, transparent 75%, transparent 100%);
-  background-size: 56px 56px;
-  opacity: 0.18;
-  pointer-events: none;
-}
-.race-hero__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-}
-.race-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.68rem;
-  color: #F5E8E4;
-  margin-bottom: 1.5rem;
-}
-.race-tag::before {
-  content: "🏁";
-}
-.race-hero__title {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  line-height: 0.95;
-  margin-bottom: 1rem;
-}
-.race-hero__intro {
-  max-width: 42rem;
-  color: rgba(255,255,255,0.84);
-  margin-bottom: 1.8rem;
-}
-.race-hero__cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.race-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-decoration: none;
-  color: #1B0E12;
-  background: #F4E6E2;
-  padding: 0.95em 1.4em;
-  border-radius: 999px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.race-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.16); }
-
-.race-timeline {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: clamp(2rem, 6vw, 4rem) 1.25rem 4rem;
-}
-.race-list { display: grid; gap: 1.75rem; }
-.race-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.race-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
-.race-card__content { padding: 1.5rem; }
-.race-card__meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; font-size: 0.9rem; color: var(--text-mut); margin-bottom: 1rem; }
-.race-card__meta span { display: block; }
-.race-card__title { font-size: 1.2rem; margin-bottom: 0.6rem; color: var(--text); }
-.race-card__desc { color: var(--text-2); line-height: 1.75; }
-.race-card__image {
-  background: var(--bg-soft);
-  min-height: 220px;
-  display: grid;
-  place-items: center;
-  color: var(--text-mut);
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  text-align: center;
-  padding: 1.2rem;
-}
-.race-card__image strong { color: var(--text); }
-
-@media (min-width: 768px) {
-  .race-list { gap: 2rem; }
-}
-@media (min-width: 1024px) {
-  .race-card__meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 
@@ -1568,3 +1265,593 @@ h1, h2, h3, h4 {
   .float-card { animation: none; }
   * { transition-duration: 0.001s !important; }
 }
+
+</style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="Leen Kharraz — home">
+      <span class="logo">LK<span class="logo__dot">.</span></span>
+    </a>
+
+    <div class="nav__right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/>
+            <line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/>
+            <line x1="5.3" y1="5.3" x2="7" y2="7"/><line x1="17" y1="17" x2="18.7" y2="18.7"/>
+            <line x1="18.7" y1="5.3" x2="17" y2="7"/><line x1="7" y1="17" x2="5.3" y2="18.7"/>
+          </g>
+        </svg>
+        <svg class="theme-toggle__icon icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path d="M20 14.2A8 8 0 0 1 9.8 4 8 8 0 1 0 20 14.2Z" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navTabs">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav__tabs" id="navTabs">
+        <li><a class="tab" href="#about">About</a></li>
+        <li><a class="tab" href="#experience">Experience</a></li>
+        <li><a class="tab tab--accent" href="#projects">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO / COVER ============ -->
+    <section class="hero" aria-label="Introduction">
+      <h2 class="hero__ghost" aria-hidden="true">Portfolio</h2>
+
+      <div class="hero__inner">
+        <div class="hero__copy reveal">
+          <p class="path-label">~/leen-kharraz</p>
+          <h1 class="hero__name">Leen Kharraz</h1>
+          <p class="hero__role">Software Engineering Student</p>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener">Contact Me</a>
+            <a class="btn btn--ghost" href="#skills">Skills</a>
+          </div>
+        </div>
+
+        <div class="hero__folder reveal" aria-hidden="true">
+          <div class="bigfolder">
+            <div class="bigfolder__tab">portfolio</div>
+            <div class="bigfolder__body">
+              <span class="bigfolder__line"></span>
+              <span class="bigfolder__line"></span>
+              <span class="bigfolder__line short"></span>
+            </div>
+          </div>
+          <span class="float-card float-card--1">Software Engineering</span>
+          <span class="float-card float-card--2">Project Management</span>
+          <span class="float-card float-card--3">GitHub Workflow</span>
+          <span class="float-card float-card--4">Team Coordination</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT — dusty blue ============ -->
+    <section class="section reveal" id="about" data-accent="blue" aria-labelledby="about-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">about</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">about/</p>
+        <h2 class="section__title" id="about-h">About Me</h2>
+        <div class="about__grid">
+          <div class="contentbox about__bio-box">
+            <p class="about__bio">
+              I'm a Software Engineering student at the <strong>University of Jeddah</strong>.
+              I enjoy building software and coordinating the plans and people around it —
+              pairing engineering with hands-on project management across campus clubs and
+              volunteer teams.
+            </p>
+          </div>
+          <div class="about__facts">
+            <div class="filecard">
+              <span class="filecard__label">University</span>
+              <span class="filecard__value">University of Jeddah — Software Engineering</span>
+            </div>
+            <div class="filecard">
+              <span class="filecard__label">Languages</span>
+              <span class="filecard__value">
+                <span class="pill pill--sage">Arabic</span>
+                <span class="pill pill--blue">English</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small skills block (hero "Skills" button scrolls here) -->
+        <div class="about__skills" id="skills">
+          <h3 class="about__skills-h">Skills</h3>
+          <div class="skills-mini">
+            <div class="skills-mini__group">
+              <span class="skills-mini__label">Technical</span>
+              <div class="skills-mini__pills">
+                <span class="pill pill--blue">HTML</span>
+                <span class="pill pill--blue">CSS</span>
+                <span class="pill pill--blue">JavaScript</span>
+                <span class="pill pill--blue">Node.js</span>
+                <span class="pill pill--blue">MySQL</span>
+                <span class="pill pill--mocha">Git &amp; GitHub</span>
+              </div>
+            </div>
+            <div class="skills-mini__group">
+              <span class="skills-mini__label">Tools &amp; Project Management</span>
+              <div class="skills-mini__pills">
+                <span class="pill pill--sage">Monday.com</span>
+                <span class="pill pill--sage">Google Workspace</span>
+                <span class="pill pill--sage">Microsoft Office</span>
+                <span class="pill pill--apricot">Project Management</span>
+                <span class="pill pill--apricot">Leadership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE — sage / olive ============ -->
+    <section class="section reveal" id="experience" data-accent="olive" aria-labelledby="exp-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">experience</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">experience/</p>
+        <h2 class="section__title" id="exp-h">Experience</h2>
+        <p class="section__lede">A timeline of my roles, most recent first. Click a card to reveal the details and top skills.</p>
+
+        <!-- Timeline is rendered from the EXPERIENCE data array in js/main.js.
+             To add/edit a role or paste a LinkedIn URL, edit that array. -->
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS — mocha / apricot / burgundy ============ -->
+    <section class="section reveal" id="projects" data-accent="mocha" aria-labelledby="proj-h">
+      <div class="foldertabs" aria-hidden="true">
+        <span class="foldertabs__tab foldertabs__tab--main">projects</span>
+        <span class="foldertabs__tab foldertabs__tab--ghost"></span>
+        <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
+      </div>
+      <div class="panel">
+        <p class="path-label">projects/</p>
+        <h2 class="section__title" id="proj-h">Projects</h2>
+        <p class="section__lede">Selected work, grouped by type. Applications are shown in iPhone mockups; websites in browser mockups. Hover (or tap on mobile) any project to reveal its details.</p>
+
+        <!-- Projects render from the PROJECTS data in js/main.js.
+             Each entry has: name, type, badge, frame ('phone'|'browser'),
+             accent, description, role, tags[], link, screenshot. Edit there. -->
+        <div class="showcase">
+          <section class="showcase__group" aria-labelledby="apps-h">
+            <h3 class="showcase__group-h" id="apps-h"><span class="showcase__group-kicker">Applications</span> Mobile Apps</h3>
+            <div class="showcase__grid showcase__grid--apps" id="appsGrid"></div>
+          </section>
+
+          <section class="showcase__group" aria-labelledby="sites-h">
+            <h3 class="showcase__group-h" id="sites-h"><span class="showcase__group-kicker">Websites</span> Web Projects</h3>
+            <div class="showcase__grid showcase__grid--sites" id="sitesGrid"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER — integrated bottom band ============ -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="logo footer__logo">LK<span class="logo__dot">.</span></span>
+        <span class="footer__tag">Software Engineering Student</span>
+      </div>
+      <div class="footer__icons">
+        <a class="iconbtn" href="https://github.com/leenkharraz" target="_blank" rel="noopener" aria-label="GitHub profile" data-tip="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/></svg>
+        </a>
+        <a class="iconbtn" href="https://www.linkedin.com/in/leen-kharraz-a57869280" target="_blank" rel="noopener" aria-label="LinkedIn profile" data-tip="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9Z" fill="currentColor"/></svg>
+        </a>
+        <a class="iconbtn" href="https://x.com/leenkh7" target="_blank" rel="noopener" aria-label="X (Twitter) profile" data-tip="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3H20.5l-6.49 7.42L21.75 21h-6l-4.7-6.15L5.67 21H2.7l6.94-7.94L2.5 3h6.15l4.25 5.62L17.53 3Zm-1.05 16.2h1.64L7.6 4.72H5.84L16.48 19.2Z" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Leen Kharraz. All rights reserved.</p>
+  </footer>
+
+  <script>
+/* ============================================================
+   LEEN KHARRAZ — PORTFOLIO SCRIPTS
+   Content lives in two data arrays below (EXPERIENCE, PROJECTS)
+   so everything is editable from one place.
+   ------------------------------------------------------------
+   1. EXPERIENCE data  → rendered into #timeline
+   2. PROJECTS data    → rendered into #appsGrid / #sitesGrid
+   3. Theme toggle (default light) · nav · reveals · interactions
+   ============================================================ */
+
+/* ============================================================
+   1. EXPERIENCE — edit here to add roles or paste LinkedIn URLs.
+   accent : "berry" | "blue" | "olive" | "apricot" | "mocha" | "sage"
+            (controls the dot, border, and both category tags)
+   tags   : short category labels (match the card accent automatically)
+   orgUrl : leave "" for now; paste the LinkedIn org URL later and the
+            organization name becomes a clickable link automatically.
+   skills : keep to 2–3 specific, non-duplicated skills.
+   ============================================================ */
+const EXPERIENCE = [
+  {
+    role: "Software Engineering Intern — Backend",
+    org: "Ting",
+    orgUrl: "", // [LEEN: paste LinkedIn org URL here later]
+    date: "Jun 2026 – Present",
+    location: "Jeddah, Makkah, Saudi Arabia · Hybrid",
+    accent: "berry",
+    tags: ["Internship", "Backend"],
+    desc: "Supporting backend development work, API-related tasks, branch management, and technical coordination within the project.",
+    skills: ["Backend Operations", "Branch Management", "API Integration"],
+  },
+  {
+    role: "Software Engineer",
+    org: "Numu for Research & Innovation | نمو للبحث والابتكار",
+    orgUrl: "",
+    date: "May 2026 – Present",
+    location: "",
+    accent: "blue",
+    tags: ["Software Engineering", "Project Management"],
+    desc: "Working on software project planning, requirements analysis, and coordination for research and innovation-focused initiatives.",
+    skills: ["Software Project Management", "Requirements Analysis", "Technical Coordination"],
+  },
+  {
+    role: "Event Experience Specialist",
+    org: "Local Organising Committee",
+    orgUrl: "",
+    date: "Apr 2026 – May 2026",
+    location: "",
+    accent: "apricot",
+    tags: ["Sports Volunteering", "Event Operations"],
+    desc: "Volunteered in event operations and support activities for a major football event, contributing to event experience and coordination.",
+    skills: ["Event Operations", "Crowd Support", "Communication"],
+  },
+  {
+    role: "Artificial Intelligence Club",
+    org: "Artificial Intelligence Club",
+    orgUrl: "",
+    date: "Jan 2026 – Present",
+    location: "",
+    accent: "mocha",
+    tags: ["University Club", "Student"],
+    desc: "Contributing to AI club activities and project management work within student-led initiatives.",
+    skills: ["Project Management", "AI Awareness", "Teamwork"],
+  },
+  {
+    role: "Project Management Coordinator",
+    org: "Google Developer Group on Campus — University of Jeddah",
+    orgUrl: "",
+    date: "Nov 2025 – Present",
+    location: "",
+    accent: "olive",
+    tags: ["University Club", "Project Management"],
+    desc: "Driving planning and ideation for developer-focused campus events, shaping event concepts, timelines, and task ownership across the team.",
+    skills: ["Event Planning", "Project Coordination", "Team Collaboration"],
+  },
+  {
+    role: "EG&VR Club",
+    org: "Electronic Games and Virtual Reality Club",
+    orgUrl: "",
+    date: "Sep 2025 – Present",
+    location: "",
+    accent: "blue",
+    tags: ["University Club", "Project Management"],
+    desc: "Contributed to project management activities and supported club initiatives related to electronic games and virtual reality.",
+    skills: ["Project Management", "Event Coordination", "Communication"],
+  },
+  {
+    role: "Drone Club",
+    org: "Drone Club",
+    orgUrl: "",
+    date: "Sep 2025 – Present",
+    location: "",
+    accent: "sage",
+    tags: ["University Club", "Leadership"],
+    desc: "Led committee-level planning and supported club activities through coordination, task management, and team communication.",
+    skills: ["Committee Leadership", "Planning", "Team Coordination"],
+  },
+  {
+    role: "Scrutineer Marshal",
+    org: "Saudi Automobile & Motorcycle Federation",
+    orgUrl: "",
+    date: "[LEEN: date]",
+    location: "",
+    accent: "berry",
+    tags: ["Sports Volunteering", "Motorsport"],
+    desc: "Volunteered as a Scrutineer Marshal in motorsport events, supporting technical inspection processes, compliance checks, and event operations.",
+    skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
+  },
+  {
+    role: "Bashosh Volunteering Team",
+    org: "Bashosh Volunteering Team",
+    orgUrl: "",
+    date: "[LEEN: date]",
+    location: "",
+    accent: "olive",
+    tags: ["Volunteering", "Leadership"],
+    desc: "Supported planning and management activities within the volunteering team, contributing to event organization, internal coordination, and leadership work.",
+    skills: ["Volunteer Management", "Planning", "Leadership"],
+  },
+];
+
+/* ============================================================
+   2. PROJECTS — grouped into apps (iPhone) and sites (browser).
+   frame  : "phone" | "browser"
+   accent : palette accent used for the badge + stage tint
+   link   : full URL, or "#" for a placeholder (button auto-disables)
+   image  : screenshot path; if missing, a clean placeholder shows
+   tags   : meaningful, no duplicated "Tech Tech"
+   ============================================================ */
+const PROJECTS = {
+  apps: [
+    {
+      name: "Schoolo",
+      type: "Mobile App · Startup Concept",
+      badge: "App",
+      accent: "berry",
+      role: "Co-founder / Software Engineering Student",
+      desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
+      tags: ["App", "Product Thinking", "UI/UX"],
+      link: "#", // [LEEN: add link when available]
+      image: "assets/images/projects/schoolo.jpg",
+    },
+    {
+      name: "Lume",
+      type: "Mobile App · UI/UX Project",
+      badge: "App",
+      accent: "apricot",
+      role: "UI/UX Designer",
+      desc: "A UI/UX prototype designed in Figma for an event-planning mobile app — helping users organize events, manage tasks, and coordinate details through a clean, structured interface.",
+      tags: ["UI/UX", "Figma", "Mobile Design"],
+      link: "https://www.figma.com/design/zTjzMQZaucXDS3mLRmfJbc/Lume-Prototype?node-id=0-1",
+      image: "assets/images/projects/lume.jpg",
+    },
+  ],
+  sites: [
+    {
+      name: "Portfolio",
+      type: "Website",
+      badge: "Website",
+      accent: "blue",
+      role: "Developer / Designer",
+      desc: "A personal portfolio presenting my projects, technical skills, and experience — a central hub for my web development, UI/UX, and software work, built with clean responsive design.",
+      tags: ["Website", "HTML/CSS", "Responsive"],
+      link: "https://leenkharraz.github.io/MyProtfolio/",
+      image: "assets/images/projects/portfolio.jpg",
+    },
+    {
+      name: "Card Magic",
+      type: "Website",
+      badge: "Website",
+      accent: "mocha",
+      role: "Web Developer",
+      desc: "A collaborative web app (group project) for creating and customizing digital greeting cards for celebrations, anniversaries, birthdays, and special events — demonstrating teamwork and interactive functionality.",
+      tags: ["Website", "JavaScript", "Teamwork"],
+      link: "https://leenkharraz.github.io/CardMagic/",
+      image: "assets/images/projects/cardmagic.jpg",
+    },
+    {
+      name: "F1 Driver Lookup",
+      type: "Website · API Project",
+      badge: "Website",
+      accent: "olive",
+      role: "Frontend Developer",
+      desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
+      tags: ["Website", "API", "JavaScript"],
+      link: "https://leenkharraz.github.io/Assignment2/",
+      image: "assets/images/projects/f1lookup.jpg",
+    },
+  ],
+};
+
+(function () {
+  "use strict";
+
+  const root = document.documentElement;
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  /* ---------- Render EXPERIENCE timeline ---------- */
+  function renderExperience() {
+    const ol = document.getElementById("timeline");
+    if (!ol) return;
+    ol.innerHTML = EXPERIENCE.map((x) => {
+      const tags = x.tags.map((t, i) =>
+        `<span class="tl-card__badge tl-card__badge--${i === 0 ? "solid" : "soft"}">${esc(t)}</span>`
+      ).join("");
+      const org = x.orgUrl
+        ? `<a class="tl-card__org tl-card__org--link" href="${esc(x.orgUrl)}" target="_blank" rel="noopener">${esc(x.org)}</a>`
+        : `<span class="tl-card__org">${esc(x.org)}</span>`;
+      const loc = x.location ? `<span class="tl-card__loc">${esc(x.location)}</span>` : "";
+      const skills = x.skills.map((s) => `<span class="pill pill--soft">${esc(s)}</span>`).join("");
+      return `
+      <li class="tl-item tl-item--${x.accent}">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <article class="tl-card">
+          <button class="tl-card__head" aria-expanded="false">
+            <div class="tl-card__tags">${tags}</div>
+            <span class="tl-card__dates">${esc(x.date)}</span>
+            <h3 class="tl-card__role">${esc(x.role)}</h3>
+            ${org}${loc}
+          </button>
+          <div class="tl-card__body">
+            <p class="tl-card__desc">${esc(x.desc)}</p>
+            <div class="tl-card__skills">
+              <span class="tl-card__skills-label">Top skills</span>
+              <div class="tl-card__skills-pills">${skills}</div>
+            </div>
+          </div>
+        </article>
+      </li>`;
+    }).join("");
+  }
+
+  /* ---------- Render PROJECTS (apps + sites) ---------- */
+  function projectCard(p) {
+    const frameClass = p.frame === "browser" || p.badge === "Website" ? "device-card--browser" : "device-card--phone";
+    const isBrowser = frameClass === "device-card--browser";
+    const disabled = (!p.link || p.link === "#") ? ' aria-disabled="true"' : ' target="_blank" rel="noopener"';
+    const cta = isBrowser ? "Visit Site →" : (p.link && p.link !== "#" ? "View Prototype →" : "View Project →");
+    const tags = p.tags.map((t) => `<span class="pill pill--${p.accent}">${esc(t)}</span>`).join("");
+    const screen = `
+      <div class="device-screen">
+        <img class="device-screen__img" src="${esc(p.image)}" alt="${esc(p.name)} screenshot" loading="lazy" onerror="this.style.display='none'">
+        <span class="device-screen__label">${esc(p.name)}<br><span class="device-screen__hint">add screenshot → ${esc(p.image)}</span></span>
+      </div>`;
+    const frame = isBrowser
+      ? `<div class="browser">
+           <div class="browser__bar" aria-hidden="true">
+             <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
+             <span class="browser__url">${esc((p.link && p.link !== "#") ? p.link.replace(/^https?:\/\//, "") : "…")}</span>
+           </div>${screen}
+         </div>`
+      : `<div class="iphone">${screen}</div>`;
+    return `
+      <article class="device-card ${frameClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(p.type)}, tap to reveal details">
+        <div class="device-stage">
+          <span class="device-badge${isBrowser ? " device-badge--alt" : ""}">${esc(p.badge)}</span>
+          ${frame}
+          <div class="device-overlay">
+            <p class="device-overlay__type">${esc(p.type)}</p>
+            <h3 class="device-overlay__name">${esc(p.name)}</h3>
+            <p class="device-overlay__desc">${esc(p.desc)}</p>
+            <div class="device-overlay__meta">
+              <span class="k">Tech</span><span class="device-tags">${tags}</span>
+              <span class="k">Role</span><span>${esc(p.role)}</span>
+            </div>
+            <a class="btn btn--small btn--solid" href="${esc(p.link || "#")}"${disabled}>${cta}</a>
+          </div>
+        </div>
+      </article>`;
+  }
+  function renderProjects() {
+    const apps = document.getElementById("appsGrid");
+    const sites = document.getElementById("sitesGrid");
+    if (apps) apps.innerHTML = PROJECTS.apps.map(projectCard).join("");
+    if (sites) sites.innerHTML = PROJECTS.sites.map(projectCard).join("");
+  }
+
+  renderExperience();
+  renderProjects();
+
+  /* ---------- Theme toggle (default light) ---------- */
+  const toggle = document.getElementById("themeToggle");
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    const nowDark = theme === "dark";
+    toggle.setAttribute("aria-pressed", String(!nowDark));
+    toggle.setAttribute("aria-label", nowDark ? "Switch to light mode" : "Switch to dark mode");
+  }
+  let saved = null;
+  try { saved = sessionStorage.getItem("theme"); } catch (e) {}
+  applyTheme(saved === "dark" ? "dark" : "light");
+  toggle.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { sessionStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  /* ---------- Mobile hamburger ---------- */
+  const burger = document.getElementById("navBurger");
+  const tabs = document.getElementById("navTabs");
+  burger.addEventListener("click", () => {
+    const open = tabs.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  tabs.addEventListener("click", (e) => {
+    if (e.target.matches("a") && tabs.classList.contains("is-open")) {
+      tabs.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  /* ---------- Scroll reveals ---------- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+  /* ---------- Timeline items animate one by one ---------- */
+  const tlItems = document.querySelectorAll(".tl-item");
+  tlItems.forEach((item, i) => item.style.setProperty("--d", Math.min(i * 0.06, 0.4) + "s"));
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); tlObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.2 });
+  tlItems.forEach((el) => tlObserver.observe(el));
+
+  /* ---------- Expand a timeline card on click (desc + skills) ---------- */
+  document.querySelectorAll(".tl-card__head").forEach((head) => {
+    head.addEventListener("click", () => {
+      const card = head.closest(".tl-card");
+      const open = card.classList.toggle("is-open");
+      head.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  /* ---------- Project device cards — tap to reveal on touch ---------- */
+  document.querySelectorAll(".device-card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return; // let the CTA link work
+      card.classList.toggle("is-open");
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        if (e.target.closest("a")) return;
+        e.preventDefault();
+        card.classList.toggle("is-open");
+      }
+    });
+  });
+
+  /* ---------- Active nav tab highlighting ---------- */
+  const navLinks = Array.from(tabs.querySelectorAll("a[href^='#']"));
+  const sectionsById = {};
+  navLinks.forEach((link) => {
+    const id = link.getAttribute("href").slice(1);
+    const section = document.getElementById(id);
+    if (section) sectionsById[id] = link;
+  });
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const link = sectionsById[entry.target.id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("is-active"));
+        link.classList.add("is-active");
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  Object.keys(sectionsById).forEach((id) => activeObserver.observe(document.getElementById(id)));
+})();
+
+</script>
+</body>
+</html>

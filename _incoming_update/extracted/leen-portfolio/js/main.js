@@ -21,9 +21,9 @@ const EXPERIENCE = [
   {
     role: "Software Engineering Intern — Backend",
     org: "Ting",
-    orgUrl: "https://www.linkedin.com/company/tingsaudi/about/",
+    orgUrl: "", // [LEEN: paste LinkedIn org URL here later]
     date: "Jun 2026 – Present",
-    location: "",
+    location: "Jeddah, Makkah, Saudi Arabia · Hybrid",
     accent: "berry",
     tags: ["Internship", "Backend"],
     desc: "Supporting backend development work, API-related tasks, branch management, and technical coordination within the project.",
@@ -32,7 +32,7 @@ const EXPERIENCE = [
   {
     role: "Software Engineer",
     org: "Numu for Research & Innovation | نمو للبحث والابتكار",
-    orgUrl: "https://www.linkedin.com/company/numu-npo/posts/?feedView=all",
+    orgUrl: "",
     date: "May 2026 – Present",
     location: "",
     accent: "blue",
@@ -43,8 +43,8 @@ const EXPERIENCE = [
   {
     role: "Event Experience Specialist",
     org: "Local Organising Committee",
-    orgUrl: "https://www.linkedin.com/company/saudiloc/",
-    date: "Apr 2026",
+    orgUrl: "",
+    date: "Apr 2026 – May 2026",
     location: "",
     accent: "apricot",
     tags: ["Sports Volunteering", "Event Operations"],
@@ -54,7 +54,7 @@ const EXPERIENCE = [
   {
     role: "Artificial Intelligence Club",
     org: "Artificial Intelligence Club",
-    orgUrl: "https://www.linkedin.com/company/ai-club-at-ujj/",
+    orgUrl: "",
     date: "Jan 2026 – Present",
     location: "",
     accent: "mocha",
@@ -65,7 +65,7 @@ const EXPERIENCE = [
   {
     role: "Project Management Coordinator",
     org: "Google Developer Group on Campus — University of Jeddah",
-    orgUrl: "https://www.linkedin.com/company/google-developer-student-club-uj/posts/?feedView=all",
+    orgUrl: "",
     date: "Nov 2025 – Present",
     location: "",
     accent: "olive",
@@ -76,7 +76,7 @@ const EXPERIENCE = [
   {
     role: "EG&VR Club",
     org: "Electronic Games and Virtual Reality Club",
-    orgUrl: "https://www.linkedin.com/company/egvruj/posts/?feedView=all",
+    orgUrl: "",
     date: "Sep 2025 – Present",
     location: "",
     accent: "blue",
@@ -87,7 +87,7 @@ const EXPERIENCE = [
   {
     role: "Drone Club",
     org: "Drone Club",
-    orgUrl: "https://www.linkedin.com/company/drone-club-uj/posts/?feedView=all",
+    orgUrl: "",
     date: "Sep 2025 – Present",
     location: "",
     accent: "sage",
@@ -98,59 +98,33 @@ const EXPERIENCE = [
   {
     role: "Scrutineer Marshal",
     org: "Saudi Automobile & Motorcycle Federation",
-    orgUrl: "https://www.linkedin.com/company/samfgov/posts/?feedView=all",
-    date: "Mar 2024",
+    orgUrl: "",
+    date: "[LEEN: date]",
     location: "",
     accent: "berry",
-    tags: ["Sports Volunteering", "Motorsport", "Technical Inspection"],
-    desc: "Marshal since March 2024 across multiple motorsport events, part of a top-3 global Formula E technical inspection team while supporting inspection and compliance work.",
+    tags: ["Sports Volunteering", "Motorsport"],
+    desc: "Volunteered as a Scrutineer Marshal in motorsport events, supporting technical inspection processes, compliance checks, and event operations.",
     skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
-    detailsUrl: "scrutineer-races.html",
   },
   {
-    role: "Vice Team Leader",
-    org: "فريق بشوش التطوعي | Bashosh Volunteer Team",
-    orgUrl: "https://www.linkedin.com/company/%D9%81%D8%B1%D9%8A%D9%82-%D8%A8%D8%B4%D9%88%D8%B4-%D8%A7%D9%84%D8%AA%D8%B7%D9%88%D8%B9%D9%8A/posts/?feedView=all",
-    date: "Jul 2025 - Nov 2025 · 5 mos",
+    role: "Bashosh Volunteering Team",
+    org: "Bashosh Volunteering Team",
+    orgUrl: "",
+    date: "[LEEN: date]",
     location: "",
     accent: "olive",
-    tags: ["Contract", "Volunteering"],
-    desc: "Contracted as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
+    tags: ["Volunteering", "Leadership"],
+    desc: "Supported planning and management activities within the volunteering team, contributing to event organization, internal coordination, and leadership work.",
     skills: ["Volunteer Management", "Planning", "Leadership"],
   },
 ];
-
-const MOTORSPORT_RACES = [
-  { name: "Formula E", date: "Feb 2026", image: "" },
-  { name: "F4", date: "Dec 2025", image: "" },
-  { name: "WRC", date: "Nov 2025", image: "" },
-  { name: "Formula 1", date: "Apr 2025", image: "" },
-  { name: "Saudi Arabia Rally", date: "Apr 2025", image: "" },
-  { name: "GT Fanatec", date: "Nov 2024", image: "" },
-  { name: "Formula 2", date: "Mar 2024", image: "" },
-];
-
-const esc = (s) => String(s).replace(/[&<>\"]/g, (c) =>
-  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-function renderMotorsportTimeline() {
-  const wrapper = document.getElementById("motorsportTimeline");
-  if (!wrapper) return;
-  wrapper.innerHTML = MOTORSPORT_RACES.map((race) => `
-    <article class="race-entry">
-      <div class="race-entry__media" ${race.image ? "" : 'aria-hidden="true"'}>${race.image ? `<img src="${esc(race.image)}" alt="${esc(race.name)} race image" loading="lazy">` : ""}</div>
-      <div class="race-entry__body">
-        <span class="race-entry__date">${esc(race.date)}</span>
-        <h3 class="race-entry__name">${esc(race.name)}</h3>
-      </div>
-    </article>`).join("");
-}
 
 /* ============================================================
    2. PROJECTS — grouped into apps (iPhone) and sites (browser).
    frame  : "phone" | "browser"
    accent : palette accent used for the badge + stage tint
    link   : full URL, or "#" for a placeholder (button auto-disables)
+   image  : screenshot path; if missing, a clean placeholder shows
    tags   : meaningful, no duplicated "Tech Tech"
    ============================================================ */
 const PROJECTS = {
@@ -160,22 +134,22 @@ const PROJECTS = {
       type: "Mobile App · Startup Concept",
       badge: "App",
       accent: "berry",
-      frame: "phone",
       role: "Co-founder / Software Engineering Student",
       desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
       tags: ["App", "Product Thinking", "UI/UX"],
       link: "#", // [LEEN: add link when available]
+      image: "assets/images/projects/schoolo.jpg",
     },
     {
       name: "Lume",
       type: "Mobile App · UI/UX Project",
       badge: "App",
       accent: "apricot",
-      frame: "phone",
       role: "UI/UX Designer",
       desc: "A UI/UX prototype designed in Figma for an event-planning mobile app — helping users organize events, manage tasks, and coordinate details through a clean, structured interface.",
       tags: ["UI/UX", "Figma", "Mobile Design"],
       link: "https://www.figma.com/design/zTjzMQZaucXDS3mLRmfJbc/Lume-Prototype?node-id=0-1",
+      image: "assets/images/projects/lume.jpg",
     },
   ],
   sites: [
@@ -184,41 +158,42 @@ const PROJECTS = {
       type: "Website",
       badge: "Website",
       accent: "blue",
-      frame: "browser",
       role: "Developer / Designer",
       desc: "A personal portfolio presenting my projects, technical skills, and experience — a central hub for my web development, UI/UX, and software work, built with clean responsive design.",
       tags: ["Website", "HTML/CSS", "Responsive"],
       link: "https://leenkharraz.github.io/MyProtfolio/",
+      image: "assets/images/projects/portfolio.jpg",
     },
     {
       name: "Card Magic",
       type: "Website",
       badge: "Website",
       accent: "mocha",
-      frame: "browser",
       role: "Web Developer",
       desc: "A collaborative web app (group project) for creating and customizing digital greeting cards for celebrations, anniversaries, birthdays, and special events — demonstrating teamwork and interactive functionality.",
       tags: ["Website", "JavaScript", "Teamwork"],
       link: "https://leenkharraz.github.io/CardMagic/",
+      image: "assets/images/projects/cardmagic.jpg",
     },
     {
       name: "F1 Driver Lookup",
       type: "Website · API Project",
       badge: "Website",
       accent: "olive",
-      frame: "browser",
       role: "Frontend Developer",
       desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
       tags: ["Website", "API", "JavaScript"],
       link: "https://leenkharraz.github.io/Assignment2/",
+      image: "assets/images/projects/f1lookup.jpg",
     },
   ],
 };
 
-(() => {
+(function () {
   "use strict";
+
   const root = document.documentElement;
-  const esc = (s) => String(s).replace(/[&<>\"]/g, (c) =>
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   /* ---------- Render EXPERIENCE timeline ---------- */
@@ -226,16 +201,14 @@ const PROJECTS = {
     const ol = document.getElementById("timeline");
     if (!ol) return;
     ol.innerHTML = EXPERIENCE.map((x) => {
-      const firstTag = x.tags[0] || "";
-      const tags = firstTag
-        ? `<span class="tl-card__badge tl-card__badge--solid">${esc(firstTag)}</span>`
-        : "";
+      const tags = x.tags.map((t, i) =>
+        `<span class="tl-card__badge tl-card__badge--${i === 0 ? "solid" : "soft"}">${esc(t)}</span>`
+      ).join("");
       const org = x.orgUrl
-        ? `<a class="tl-card__org tl-card__org--link" href="${esc(x.orgUrl)}" target="_blank" rel="noopener noreferrer">${esc(x.org)}</a>`
+        ? `<a class="tl-card__org tl-card__org--link" href="${esc(x.orgUrl)}" target="_blank" rel="noopener">${esc(x.org)}</a>`
         : `<span class="tl-card__org">${esc(x.org)}</span>`;
       const loc = x.location ? `<span class="tl-card__loc">${esc(x.location)}</span>` : "";
       const skills = x.skills.map((s) => `<span class="pill pill--soft">${esc(s)}</span>`).join("");
-      const racesButton = x.detailsUrl ? `<div class="tl-card__actions"><a class="btn btn--small btn--solid" href="${esc(x.detailsUrl)}">View Races</a></div>` : "";
       return `
       <li class="tl-item tl-item--${x.accent}">
         <div class="tl-dot" aria-hidden="true"></div>
@@ -252,7 +225,6 @@ const PROJECTS = {
               <span class="tl-card__skills-label">Top skills</span>
               <div class="tl-card__skills-pills">${skills}</div>
             </div>
-            ${racesButton}
           </div>
         </article>
       </li>`;
@@ -261,14 +233,15 @@ const PROJECTS = {
 
   /* ---------- Render PROJECTS (apps + sites) ---------- */
   function projectCard(p) {
-    const frameClass = p.frame === "browser" ? "device-card--browser" : "device-card--phone";
+    const frameClass = p.frame === "browser" || p.badge === "Website" ? "device-card--browser" : "device-card--phone";
     const isBrowser = frameClass === "device-card--browser";
     const disabled = (!p.link || p.link === "#") ? ' aria-disabled="true"' : ' target="_blank" rel="noopener"';
     const cta = isBrowser ? "Visit Site →" : (p.link && p.link !== "#" ? "View Prototype →" : "View Project →");
     const tags = p.tags.map((t) => `<span class="pill pill--${p.accent}">${esc(t)}</span>`).join("");
     const screen = `
-      <div class="device-screen project-screen">
-        <span class="project-screen__label">${esc(p.name)}</span>
+      <div class="device-screen">
+        <img class="device-screen__img" src="${esc(p.image)}" alt="${esc(p.name)} screenshot" loading="lazy" onerror="this.style.display='none'">
+        <span class="device-screen__label">${esc(p.name)}<br><span class="device-screen__hint">add screenshot → ${esc(p.image)}</span></span>
       </div>`;
     const frame = isBrowser
       ? `<div class="browser">
@@ -304,45 +277,39 @@ const PROJECTS = {
   }
 
   renderExperience();
-  renderMotorsportTimeline();
   renderProjects();
 
-  /* ---------- Theme toggle (default dark) ---------- */
+  /* ---------- Theme toggle (default light) ---------- */
   const toggle = document.getElementById("themeToggle");
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
-    if (!toggle) return;
     const nowDark = theme === "dark";
     toggle.setAttribute("aria-pressed", String(!nowDark));
     toggle.setAttribute("aria-label", nowDark ? "Switch to light mode" : "Switch to dark mode");
   }
   let saved = null;
   try { saved = sessionStorage.getItem("theme"); } catch (e) {}
-  applyTheme(saved === "light" ? "light" : "dark");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try { sessionStorage.setItem("theme", next); } catch (e) {}
-    });
-  }
+  applyTheme(saved === "dark" ? "dark" : "light");
+  toggle.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { sessionStorage.setItem("theme", next); } catch (e) {}
+  });
 
   /* ---------- Mobile hamburger ---------- */
   const burger = document.getElementById("navBurger");
   const tabs = document.getElementById("navTabs");
-  if (burger && tabs) {
-    burger.addEventListener("click", () => {
-      const open = tabs.classList.toggle("is-open");
-      burger.setAttribute("aria-expanded", String(open));
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
-    tabs.addEventListener("click", (e) => {
-      if (e.target.matches("a") && tabs.classList.contains("is-open")) {
-        tabs.classList.remove("is-open");
-        burger.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
+  burger.addEventListener("click", () => {
+    const open = tabs.classList.toggle("is-open");
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  tabs.addEventListener("click", (e) => {
+    if (e.target.matches("a") && tabs.classList.contains("is-open")) {
+      tabs.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    }
+  });
 
   /* ---------- Scroll reveals ---------- */
   const revealObserver = new IntersectionObserver((entries) => {
@@ -387,24 +354,22 @@ const PROJECTS = {
   });
 
   /* ---------- Active nav tab highlighting ---------- */
-  if (tabs) {
-    const navLinks = Array.from(tabs.querySelectorAll("a[href^='#']"));
-    const sectionsById = {};
-    navLinks.forEach((link) => {
-      const id = link.getAttribute("href").slice(1);
-      const section = document.getElementById(id);
-      if (section) sectionsById[id] = link;
+  const navLinks = Array.from(tabs.querySelectorAll("a[href^='#']"));
+  const sectionsById = {};
+  navLinks.forEach((link) => {
+    const id = link.getAttribute("href").slice(1);
+    const section = document.getElementById(id);
+    if (section) sectionsById[id] = link;
+  });
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const link = sectionsById[entry.target.id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("is-active"));
+        link.classList.add("is-active");
+      }
     });
-    const activeObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const link = sectionsById[entry.target.id];
-        if (!link) return;
-        if (entry.isIntersecting) {
-          navLinks.forEach((l) => l.classList.remove("is-active"));
-          link.classList.add("is-active");
-        }
-      });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-    Object.keys(sectionsById).forEach((id) => activeObserver.observe(document.getElementById(id)));
-  }
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  Object.keys(sectionsById).forEach((id) => activeObserver.observe(document.getElementById(id)));
 })();
