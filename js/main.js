@@ -23,6 +23,7 @@ const EXPERIENCE = [
     org: "Ting",
     orgUrl: "https://www.linkedin.com/company/tingsaudi/about/",
     date: "Jun 2026 – Present",
+    sortDate: "2026-06",
     location: "",
     accent: "berry",
     tags: ["Internship", "Backend"],
@@ -34,6 +35,7 @@ const EXPERIENCE = [
     org: "Numu for Research & Innovation | نمو للبحث والابتكار",
     orgUrl: "https://www.linkedin.com/company/numu-npo/posts/?feedView=all",
     date: "May 2026 – Present",
+    sortDate: "2026-05",
     location: "",
     accent: "blue",
     tags: ["Software Engineering", "Project Management"],
@@ -45,6 +47,7 @@ const EXPERIENCE = [
     org: "Local Organising Committee",
     orgUrl: "https://www.linkedin.com/company/saudiloc/",
     date: "Apr 2026",
+    sortDate: "2026-04",
     location: "",
     accent: "apricot",
     tags: ["Sports Volunteering", "Event Operations"],
@@ -52,10 +55,11 @@ const EXPERIENCE = [
     skills: ["Event Operations", "Crowd Support", "Communication"],
   },
   {
-    role: "Artificial Intelligence Club",
+    role: "Project Management Co-Lead",
     org: "Artificial Intelligence Club",
     orgUrl: "https://www.linkedin.com/company/ai-club-at-ujj/",
     date: "Jan 2026 – Present",
+    sortDate: "2026-01",
     location: "",
     accent: "mocha",
     tags: ["University Club", "Student"],
@@ -67,6 +71,7 @@ const EXPERIENCE = [
     org: "Google Developer Group on Campus — University of Jeddah",
     orgUrl: "https://www.linkedin.com/company/google-developer-student-club-uj/posts/?feedView=all",
     date: "Nov 2025 – Present",
+    sortDate: "2025-11",
     location: "",
     accent: "olive",
     tags: ["University Club", "Project Management"],
@@ -74,10 +79,11 @@ const EXPERIENCE = [
     skills: ["Event Planning", "Project Coordination", "Team Collaboration"],
   },
   {
-    role: "EG&VR Club",
+    role: "Project Manager",
     org: "Electronic Games and Virtual Reality Club",
     orgUrl: "https://www.linkedin.com/company/egvruj/posts/?feedView=all",
     date: "Sep 2025 – Present",
+    sortDate: "2025-09",
     location: "",
     accent: "blue",
     tags: ["University Club", "Project Management"],
@@ -85,10 +91,11 @@ const EXPERIENCE = [
     skills: ["Project Management", "Event Coordination", "Communication"],
   },
   {
-    role: "Drone Club",
+    role: "Project Management Leader",
     org: "Drone Club",
     orgUrl: "https://www.linkedin.com/company/drone-club-uj/posts/?feedView=all",
     date: "Sep 2025 – Present",
+    sortDate: "2025-09",
     location: "",
     accent: "sage",
     tags: ["University Club", "Leadership"],
@@ -96,54 +103,54 @@ const EXPERIENCE = [
     skills: ["Committee Leadership", "Planning", "Team Coordination"],
   },
   {
-    role: "Scrutineer Marshal",
-    org: "Saudi Automobile & Motorcycle Federation",
-    orgUrl: "https://www.linkedin.com/company/samfgov/posts/?feedView=all",
-    date: "Mar 2024",
-    location: "",
-    accent: "berry",
-    tags: ["Sports Volunteering", "Motorsport", "Technical Inspection"],
-    desc: "Marshal since March 2024 across multiple motorsport events, part of a top-3 global Formula E technical inspection team while supporting inspection and compliance work.",
-    skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
-    detailsUrl: "scrutineer-races.html",
-  },
-  {
     role: "Vice Team Leader",
     org: "فريق بشوش التطوعي | Bashosh Volunteer Team",
     orgUrl: "https://www.linkedin.com/company/%D9%81%D8%B1%D9%8A%D9%82-%D8%A8%D8%B4%D9%88%D8%B4-%D8%A7%D9%84%D8%AA%D8%B7%D9%88%D8%B9%D9%8A/posts/?feedView=all",
     date: "Jul 2025 - Nov 2025 · 5 mos",
+    sortDate: "2025-07",
     location: "",
     accent: "olive",
     tags: ["Contract", "Volunteering"],
     desc: "Contracted as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
     skills: ["Volunteer Management", "Planning", "Leadership"],
   },
+  {
+    role: "Scrutineer Marshal",
+    org: "Saudi Automobile & Motorcycle Federation",
+    orgUrl: "https://www.linkedin.com/company/samfgov/posts/?feedView=all",
+    date: "Mar 2024",
+    sortDate: "2024-03",
+    location: "",
+    accent: "berry",
+    tags: ["Sports Volunteering", "Motorsport", "Technical Inspection"],
+    desc: "Marshal since March 2024 across multiple motorsport events, part of a top-3 global Formula E technical inspection team while supporting inspection and compliance work.",
+    skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
+    hasRaces: true,
+  },
 ];
 
 const MOTORSPORT_RACES = [
-  { name: "Formula E", date: "Feb 2026", image: "" },
-  { name: "F4", date: "Dec 2025", image: "" },
-  { name: "WRC", date: "Nov 2025", image: "" },
-  { name: "Formula 1", date: "Apr 2025", image: "" },
-  { name: "Saudi Arabia Rally", date: "Apr 2025", image: "" },
-  { name: "GT Fanatec", date: "Nov 2024", image: "" },
-  { name: "Formula 2", date: "Mar 2024", image: "" },
+  { name: "Formula E", date: "Feb 2026" },
+  { name: "F4", date: "Dec 2025" },
+  { name: "WRC", date: "Nov 2025" },
+  { name: "Formula 1", date: "Apr 2025" },
+  { name: "Saudi Arabia Rally", date: "Apr 2025" },
+  { name: "GT Fanatec", date: "Nov 2024" },
+  { name: "Formula 2", date: "Mar 2024" },
 ];
 
 const esc = (s) => String(s).replace(/[&<>\"]/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function renderMotorsportTimeline() {
-  const wrapper = document.getElementById("motorsportTimeline");
-  if (!wrapper) return;
-  wrapper.innerHTML = MOTORSPORT_RACES.map((race) => `
-    <article class="race-entry">
-      <div class="race-entry__media" ${race.image ? "" : 'aria-hidden="true"'}>${race.image ? `<img src="${esc(race.image)}" alt="${esc(race.name)} race image" loading="lazy">` : ""}</div>
-      <div class="race-entry__body">
-        <span class="race-entry__date">${esc(race.date)}</span>
-        <h3 class="race-entry__name">${esc(race.name)}</h3>
-      </div>
-    </article>`).join("");
+  const list = document.getElementById("motorsportTimeline");
+  if (!list) return;
+  list.innerHTML = MOTORSPORT_RACES.map((race) => `
+    <li class="race-strip__item">
+      <span class="race-strip__dot" aria-hidden="true"></span>
+      <span class="race-strip__date">${esc(race.date)}</span>
+      <span class="race-strip__name">${esc(race.name)}</span>
+    </li>`).join("");
 }
 
 /* ============================================================
@@ -220,12 +227,17 @@ const PROJECTS = {
   const root = document.documentElement;
   const esc = (s) => String(s).replace(/[&<>\"]/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Render EXPERIENCE timeline ---------- */
-  function renderExperience() {
+  /* ---------- Render EXPERIENCE timeline (sortable newest/oldest) ---------- */
+  function sortedExperience(order) {
+    return EXPERIENCE.slice().sort((a, b) =>
+      order === "asc" ? a.sortDate.localeCompare(b.sortDate) : b.sortDate.localeCompare(a.sortDate));
+  }
+  function renderExperience(order) {
     const ol = document.getElementById("timeline");
     if (!ol) return;
-    ol.innerHTML = EXPERIENCE.map((x) => {
+    ol.innerHTML = sortedExperience(order).map((x) => {
       const firstTag = x.tags[0] || "";
       const tags = firstTag
         ? `<span class="tl-card__badge tl-card__badge--solid">${esc(firstTag)}</span>`
@@ -235,7 +247,9 @@ const PROJECTS = {
         : `<span class="tl-card__org">${esc(x.org)}</span>`;
       const loc = x.location ? `<span class="tl-card__loc">${esc(x.location)}</span>` : "";
       const skills = x.skills.map((s) => `<span class="pill pill--soft">${esc(s)}</span>`).join("");
-      const racesButton = x.detailsUrl ? `<div class="tl-card__actions"><a class="btn btn--small btn--solid" href="${esc(x.detailsUrl)}">View Races</a></div>` : "";
+      const racesButton = x.hasRaces
+        ? `<div class="tl-card__actions"><button type="button" class="btn btn--small btn--solid" id="viewRacesBtn" aria-expanded="false" aria-controls="raceStrip">View Races</button></div>`
+        : "";
       return `
       <li class="tl-item tl-item--${x.accent}">
         <div class="tl-dot" aria-hidden="true"></div>
@@ -259,12 +273,58 @@ const PROJECTS = {
     }).join("");
   }
 
+  /* ---------- (Re)bind interactions that live inside the re-rendered timeline ---------- */
+  function bindTimelineInteractions() {
+    document.querySelectorAll(".tl-card__head").forEach((head) => {
+      head.addEventListener("click", () => {
+        const card = head.closest(".tl-card");
+        const open = card.classList.toggle("is-open");
+        head.setAttribute("aria-expanded", String(open));
+      });
+    });
+
+    const raceBtn = document.getElementById("viewRacesBtn");
+    const raceStrip = document.getElementById("raceStrip");
+    if (raceBtn && raceStrip) {
+      raceBtn.setAttribute("aria-expanded", String(!raceStrip.hidden));
+      raceBtn.addEventListener("click", () => {
+        raceStrip.hidden = false;
+        raceBtn.setAttribute("aria-expanded", "true");
+        raceStrip.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "nearest" });
+      });
+    }
+
+    const tlItems = document.querySelectorAll(".tl-item");
+    tlItems.forEach((item, i) => item.style.setProperty("--d", Math.min(i * 0.06, 0.4) + "s"));
+    const tlObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); tlObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.2 });
+    tlItems.forEach((el) => tlObserver.observe(el));
+  }
+
+  /* ---------- Experience sort control ---------- */
+  function bindExperienceSort() {
+    const sortBtns = document.querySelectorAll(".exp-sort__btn");
+    sortBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("is-active")) return;
+        sortBtns.forEach((b) => { b.classList.remove("is-active"); b.setAttribute("aria-pressed", "false"); });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-pressed", "true");
+        renderExperience(btn.dataset.sort);
+        bindTimelineInteractions();
+      });
+    });
+  }
+
   /* ---------- Render PROJECTS (apps + sites) ---------- */
   function projectCard(p) {
     const frameClass = p.frame === "browser" ? "device-card--browser" : "device-card--phone";
     const isBrowser = frameClass === "device-card--browser";
-    const disabled = (!p.link || p.link === "#") ? ' aria-disabled="true"' : ' target="_blank" rel="noopener"';
-    const cta = isBrowser ? "Visit Site →" : (p.link && p.link !== "#" ? "View Prototype →" : "View Project →");
+    const hasLink = !!(p.link && p.link !== "#");
+    const cta = isBrowser ? "Visit Site →" : "View Prototype →";
     const tags = p.tags.map((t) => `<span class="pill pill--${p.accent}">${esc(t)}</span>`).join("");
     const screen = `
       <div class="device-screen project-screen">
@@ -274,10 +334,13 @@ const PROJECTS = {
       ? `<div class="browser">
            <div class="browser__bar" aria-hidden="true">
              <span class="browser__dot"></span><span class="browser__dot"></span><span class="browser__dot"></span>
-             <span class="browser__url">${esc((p.link && p.link !== "#") ? p.link.replace(/^https?:\/\//, "") : "…")}</span>
+             <span class="browser__url">${esc(hasLink ? p.link.replace(/^https?:\/\//, "") : "…")}</span>
            </div>${screen}
          </div>`
       : `<div class="iphone">${screen}</div>`;
+    const ctaHtml = hasLink
+      ? `<a class="btn btn--small btn--solid" href="${esc(p.link)}" target="_blank" rel="noopener">${cta}</a>`
+      : "";
     return `
       <article class="device-card ${frameClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(p.type)}, tap to reveal details">
         <div class="device-stage">
@@ -291,7 +354,7 @@ const PROJECTS = {
               <span class="k">Tech</span><span class="device-tags">${tags}</span>
               <span class="k">Role</span><span>${esc(p.role)}</span>
             </div>
-            <a class="btn btn--small btn--solid" href="${esc(p.link || "#")}"${disabled}>${cta}</a>
+            ${ctaHtml}
           </div>
         </div>
       </article>`;
@@ -303,11 +366,51 @@ const PROJECTS = {
     if (sites) sites.innerHTML = PROJECTS.sites.map(projectCard).join("");
   }
 
-  renderExperience();
+  /* ---------- Hero code-editor typing animation ---------- */
+  function typeHeroCode() {
+    const codeEl = document.getElementById("typedCode");
+    if (!codeEl) return;
+    const tokens = [
+      { t: "const ", c: "kw" }, { t: "leen", c: "var" }, { t: " = {\n  ", c: "" },
+      { t: "name", c: "key" }, { t: ": ", c: "" }, { t: '"Leen Kharraz"', c: "str" }, { t: ",\n  ", c: "" },
+      { t: "role", c: "key" }, { t: ": ", c: "" }, { t: '"Software Engineering Student"', c: "str" }, { t: ",\n  ", c: "" },
+      { t: "openTo", c: "key" }, { t: ": [", c: "" },
+      { t: '"Internships"', c: "str" }, { t: ", ", c: "" },
+      { t: '"Projects"', c: "str" }, { t: ", ", c: "" },
+      { t: '"Learning Opportunities"', c: "str" }, { t: "],\n  ", c: "" },
+      { t: "focus", c: "key" }, { t: ": [", c: "" },
+      { t: '"Software Development"', c: "str" }, { t: ", ", c: "" },
+      { t: '"Project Management"', c: "str" }, { t: ", ", c: "" },
+      { t: '"Backend & API Integration"', c: "str" }, { t: "]\n};", c: "" },
+    ];
+    if (prefersReducedMotion) {
+      codeEl.innerHTML = tokens.map((tok) => tok.c ? `<span class="tok tok--${tok.c}">${esc(tok.t)}</span>` : esc(tok.t)).join("");
+      return;
+    }
+    let ti = 0, ci = 0, span = null;
+    (function step() {
+      if (ti >= tokens.length) return;
+      const tok = tokens[ti];
+      if (ci === 0) {
+        span = tok.c ? document.createElement("span") : null;
+        if (span) { span.className = `tok tok--${tok.c}`; codeEl.appendChild(span); }
+      }
+      const ch = tok.t[ci];
+      if (span) span.textContent += ch; else codeEl.appendChild(document.createTextNode(ch));
+      ci++;
+      if (ci >= tok.t.length) { ti++; ci = 0; }
+      setTimeout(step, 16 + Math.random() * 22);
+    })();
+  }
+
+  renderExperience("desc");
+  bindTimelineInteractions();
+  bindExperienceSort();
   renderMotorsportTimeline();
   renderProjects();
+  setTimeout(typeHeroCode, 350);
 
-  /* ---------- Theme toggle (default dark) ---------- */
+  /* ---------- Theme toggle (default dark, persisted) ---------- */
   const toggle = document.getElementById("themeToggle");
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
@@ -317,13 +420,26 @@ const PROJECTS = {
     toggle.setAttribute("aria-label", nowDark ? "Switch to light mode" : "Switch to dark mode");
   }
   let saved = null;
-  try { saved = sessionStorage.getItem("theme"); } catch (e) {}
+  try { saved = localStorage.getItem("theme"); } catch (e) {}
   applyTheme(saved === "light" ? "light" : "dark");
   if (toggle) {
     toggle.addEventListener("click", () => {
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       applyTheme(next);
-      try { sessionStorage.setItem("theme", next); } catch (e) {}
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  }
+
+  /* ---------- Logo — always acts as a home button ----------
+     href="#top" alone is unreliable here: the header is the anchor
+     target AND position:sticky, so the browser's fragment-scroll math
+     uses the header's stuck (already-at-top) position and can land
+     mid-page instead of at the hero. Scroll explicitly instead. */
+  const brand = document.querySelector(".nav__brand");
+  if (brand) {
+    brand.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
     });
   }
 
@@ -351,25 +467,6 @@ const PROJECTS = {
     });
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
-
-  /* ---------- Timeline items animate one by one ---------- */
-  const tlItems = document.querySelectorAll(".tl-item");
-  tlItems.forEach((item, i) => item.style.setProperty("--d", Math.min(i * 0.06, 0.4) + "s"));
-  const tlObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add("is-visible"); tlObserver.unobserve(entry.target); }
-    });
-  }, { threshold: 0.2 });
-  tlItems.forEach((el) => tlObserver.observe(el));
-
-  /* ---------- Expand a timeline card on click (desc + skills) ---------- */
-  document.querySelectorAll(".tl-card__head").forEach((head) => {
-    head.addEventListener("click", () => {
-      const card = head.closest(".tl-card");
-      const open = card.classList.toggle("is-open");
-      head.setAttribute("aria-expanded", String(open));
-    });
-  });
 
   /* ---------- Project device cards — tap to reveal on touch ---------- */
   document.querySelectorAll(".device-card").forEach((card) => {

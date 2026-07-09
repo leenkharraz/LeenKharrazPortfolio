@@ -61,25 +61,23 @@
           <p class="path-label">~/leen-kharraz</p>
           <h1 class="hero__name">Leen Kharraz</h1>
           <p class="hero__role">Software Engineering Student</p>
-          <div class="hero__cta">
-            <a class="btn btn--solid" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener">Contact Me</a>
-            <a class="btn btn--ghost" href="#skills">Skills</a>
+        </div>
+
+        <div class="hero__editor reveal" aria-hidden="true">
+          <div class="codewin">
+            <div class="codewin__bar">
+              <span class="codewin__dot codewin__dot--r"></span>
+              <span class="codewin__dot codewin__dot--y"></span>
+              <span class="codewin__dot codewin__dot--g"></span>
+              <span class="codewin__file">leen_kharraz.js</span>
+            </div>
+            <pre class="codewin__body"><code id="typedCode"></code><span class="codewin__cursor"></span></pre>
           </div>
         </div>
 
-        <div class="hero__folder reveal" aria-hidden="true">
-          <div class="bigfolder">
-            <div class="bigfolder__tab">portfolio</div>
-            <div class="bigfolder__body">
-              <span class="bigfolder__line"></span>
-              <span class="bigfolder__line"></span>
-              <span class="bigfolder__line short"></span>
-            </div>
-          </div>
-          <span class="float-card float-card--1">Software Engineering</span>
-          <span class="float-card float-card--2">Project Management</span>
-          <span class="float-card float-card--3">GitHub Workflow</span>
-          <span class="float-card float-card--4">Team Coordination</span>
+        <div class="hero__cta reveal">
+          <a class="btn btn--solid" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener">Contact Me</a>
+          <a class="btn btn--ghost" href="#skills">Skills</a>
         </div>
       </div>
     </section>
@@ -97,11 +95,18 @@
         <div class="about__grid">
           <div class="contentbox about__bio-box">
             <p class="about__bio">
-              I'm a Software Engineering student at the <strong>University of Jeddah</strong>.
-              I enjoy building software and coordinating the plans and people around it —
-              pairing engineering with hands-on project management across campus clubs and
-              volunteer teams.
+              I'm Leen Kharraz, a Software Engineering student at the <strong>University of Jeddah</strong>.
+              I enjoy building software and coordinating the plans, people, and details that
+              help projects move forward.
             </p>
+            <div class="about__whyme">
+              <span class="about__whyme-label">Why me?</span>
+              <p class="about__whyme-text">
+                Because I bring both technical curiosity and organized execution. I care about
+                understanding the problem, building practical solutions, and keeping the work
+                clear, structured, and useful.
+              </p>
+            </div>
           </div>
           <div class="about__facts">
             <div class="filecard">
@@ -156,13 +161,32 @@
         <span class="foldertabs__tab foldertabs__tab--ghost2"></span>
       </div>
       <div class="panel">
-        <p class="path-label">experience/</p>
-        <h2 class="section__title" id="exp-h">Experience</h2>
-        <p class="section__lede">A timeline of my roles, most recent first. Click a card to reveal the details and top skills.</p>
+        <div class="exp-head">
+          <div>
+            <p class="path-label">experience/</p>
+            <h2 class="section__title" id="exp-h">Experience</h2>
+          </div>
+          <div class="exp-sort" role="group" aria-label="Sort experience by date">
+            <button type="button" class="exp-sort__btn is-active" data-sort="desc" aria-pressed="true">Newest first</button>
+            <button type="button" class="exp-sort__btn" data-sort="asc" aria-pressed="false">Oldest first</button>
+          </div>
+        </div>
+        <p class="section__lede">A timeline of my roles. Click a card to reveal the details and top skills.</p>
 
         <!-- Timeline is rendered from the EXPERIENCE data array in js/main.js.
              To add/edit a role or paste a LinkedIn URL, edit that array. -->
         <ol class="timeline" id="timeline"></ol>
+
+        <!-- Race timeline panel, revealed by the Scrutineer Marshal card's "View Races" button. -->
+        <div class="race-strip" id="raceStrip" hidden>
+          <div class="race-strip__head">
+            <p class="path-label">experience/scrutineer/races</p>
+            <h3 class="race-strip__title">Scrutineer Marshal — Race Timeline</h3>
+            <p class="race-strip__lede">Motorsport events supported since March 2024, newest first.</p>
+          </div>
+          <div class="race-strip__track" aria-hidden="true"><div class="race-strip__car"></div></div>
+          <ol class="race-strip__list" id="motorsportTimeline"></ol>
+        </div>
       </div>
     </section>
 
