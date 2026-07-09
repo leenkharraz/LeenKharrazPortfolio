@@ -1,6 +1,77 @@
 # Portfolio Change Audit
 
-Tracks what changed since the last commit (`bc3a982`) and why. This commit bundles two rounds of targeted fixes/cleanup — no full redesign.
+Tracks what changed since the initial commit and why. Each round below is a bundle of targeted fixes/cleanup — no full redesign.
+
+---
+
+# Round 3 — Hero desktop layout, experience data fixes, project detail responsiveness
+
+## Summary
+
+- Hero now uses a left/right layout on desktop/laptop (name, role, buttons on the left; the existing code-editor animation on the right), while staying a clean single-column stack on mobile.
+- Bashosh Volunteer Team experience corrected from a misleading 5-month range to the real Mar 2025 – Nov 2025 (9 months), and a small nested role-progression timeline was added inside the expanded card.
+- Artificial Intelligence Club role wording corrected to "Project Management Co-Leader" (was "Project Management Co-Lead", inconsistent with Drone Club's "Project Management Leader" phrasing).
+- Scrutineer Marshal / SAMF date corrected from a single "Mar 2024" (read as if it had ended) to "Mar 2024 – Present".
+- Fixed a real mobile bug where the project detail overlay's "View Project"/"Visit Site" button could be clipped and unreachable on short (16:10 browser-mockup) cards.
+
+## Files changed
+
+- `css/style.css` — hero grid-area layout + desktop breakpoint, mini role-progression timeline styles, project detail overlay overflow/height fixes.
+- `js/main.js` — Bashosh date/sortDate/roleSteps, AI Club role text, SAMF date, `renderExperience` extended to render an optional role-progression list.
+- `PORTFOLIO_CHANGE_AUDIT.md` — this round appended.
+- `index.html` — **not touched this round**; the desktop left/right hero layout was achieved purely with CSS Grid on the existing markup (see below), so no HTML changes were needed.
+
+## Hero desktop/laptop layout
+
+Implemented with CSS Grid `grid-template-areas` on `.hero__inner` — no change to the HTML nesting (`.hero__copy`, `.hero__editor`, `.hero__cta` remain three sibling blocks), so behavior/animation logic in JS needed no changes:
+
+- **Mobile (default):** `"copy" "editor" "cta"` — single column, same stacked order approved previously (name/role → code card → buttons).
+- **Desktop, 900px+:** `"copy editor" "cta editor"` with two columns — name/role top-left, buttons bottom-left, and the code-editor card fills the right column across both rows. This is the requested "name/role/buttons on the left, animated card on the right, not stacked."
+
+The existing typing animation (`typeHeroCode` in `js/main.js`) and its typed content (`const leen = {...}`) were **not** touched — only where its container sits in the grid changed.
+
+## Bashosh Volunteer Team
+
+- `date`: `"Jul 2025 - Nov 2025 · 5 mos"` → `"Mar 2025 – Nov 2025 · 9 mos"`
+- `sortDate`: `"2025-07"` → `"2025-03"` (keeps newest/oldest sorting accurate)
+- Added `roleSteps` array rendered as a small nested timeline inside the expanded card, under "Top skills":
+  1. Co-Leader of Planning and Management Department
+  2. Leader of Planning and Management Department
+  3. Senior Management Member
+  4. Vice Team Leader (bolded — the current/final title, matching the card's main role field)
+
+Styled as compact dots-on-a-line steps (`.mini-steps`), tinted with the card's own accent color, deliberately smaller and quieter than the main experience timeline — no dates, no big cards per step, no separate section.
+
+Also increased `.tl-card.is-open .tl-card__body`'s `max-height` from `22rem` to `30rem` so the added role-progression content isn't clipped by the existing collapse/expand transition on any card (verified Bashosh's expanded content is ~468px, comfortably under the new 480px cap).
+
+## Artificial Intelligence Club
+
+`role`: `"Project Management Co-Lead"` → `"Project Management Co-Leader"`. Organization field (`"Artificial Intelligence Club"`) unchanged; role and organization remain visually distinct fields, not duplicated.
+
+## SAMF / Scrutineer Marshal
+
+`date`: `"Mar 2024"` → `"Mar 2024 – Present"`. Role, organization, description, skills, and the "View Races" button/behavior were not touched — the race timeline reveal still works (verified by clicking through to it).
+
+## Project detail responsiveness (View Project / Visit Site button)
+
+**Root cause found:** `.device-overlay` (the sliding project-detail panel) is `position: absolute; inset: 0`, sized to exactly match `.device-stage`. For "browser" mockup cards (the three website projects), the stage's height is driven by a 16:10 aspect-ratio box that becomes quite short on narrow phone widths. The overlay's content (type, name, description, tags, role, button) was taller than that box, and because `.device-stage` has `overflow: hidden`, the bottom of the overlay — including the CTA button — was silently clipped with no way to reach it.
+
+**Fix:**
+- `.device-overlay` now scrolls internally (`overflow-y: auto`) and is top-aligned (`justify-content: flex-start` instead of `center`), so if content doesn't fit, the user can scroll to reach the button instead of it being permanently hidden.
+- `.device-stage` gets a taller `min-height: 385px` under 640px viewports, which in practice makes all five project cards' detail panels fit without needing to scroll at all (verified: Portfolio, Card Magic, F1 Driver Lookup, and Lume's CTA buttons all render fully inside the stage bounds on a 375px-wide viewport).
+- Schoolo's card still renders zero buttons (verified) — the "no CTA unless a real link exists" rule from the previous round was not touched.
+
+## Intentionally not changed (Round 3)
+
+- About section text/layout — not touched this round.
+- Project links, tags, and grouping (Applications vs Websites) — unchanged.
+- The typing animation's typed content — unchanged, only its container moved.
+- Every other experience entry not named above (Ting, Numu, LOC, GDG, EG&VR, Drone Club) — dates and roles untouched, already correct from the previous round.
+- Footer, theme toggle/persistence, nav/mobile menu — untouched and re-verified working.
+
+---
+
+# Round 1–2 (previous session)
 
 ## Files changed
 

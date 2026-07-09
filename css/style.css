@@ -333,7 +333,11 @@ h1, h2, h3, h4 {
   margin: 0 auto;
   display: grid;
   gap: clamp(1.5rem, 4vw, 2.25rem);
+  grid-template-areas: "copy" "editor" "cta";
 }
+.hero__copy { grid-area: copy; }
+.hero__editor { grid-area: editor; }
+.hero__cta { grid-area: cta; }
 .hero__name {
   font-size: clamp(2.8rem, 9vw, 6rem);
   font-weight: 900;
@@ -353,6 +357,7 @@ h1, h2, h3, h4 {
 .hero__editor {
   position: relative;
   width: 100%;
+  align-self: center;
 }
 .codewin {
   width: 100%;
@@ -406,6 +411,20 @@ h1, h2, h3, h4 {
 }
 
 @keyframes cursor-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* Desktop/laptop: name + role + buttons on the left, code card on the right */
+@media (min-width: 900px) {
+  .hero__inner {
+    max-width: 68rem;
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas: "copy   editor" "cta    editor";
+    column-gap: clamp(2.5rem, 5vw, 4rem);
+    row-gap: 1.75rem;
+    align-items: center;
+  }
+  .hero__copy { align-self: end; }
+  .hero__cta { align-self: start; }
+}
 
 
 /* ============================================================
@@ -711,7 +730,7 @@ h1, h2, h3, h4 {
   transition: max-height 0.35s ease;
   padding: 0 1.3rem; color: var(--text-2); font-size: 0.95rem;
 }
-.tl-card.is-open .tl-card__body { max-height: 22rem; padding-bottom: 1.1rem; }
+.tl-card.is-open .tl-card__body { max-height: 30rem; padding-bottom: 1.1rem; }
 .tl-card__desc { margin-bottom: 0.8rem; }
 .tl-card__skills-label {
   display: block;
@@ -729,6 +748,47 @@ h1, h2, h3, h4 {
   color: var(--text);
   border: 1px solid color-mix(in srgb, var(--ca, var(--mocha)) 40%, transparent);
 }
+
+/* Tiny role-progression steps inside an expanded card (e.g. Bashosh) —
+   deliberately smaller/quieter than the main experience timeline. */
+.tl-card__roles { margin-top: 1rem; }
+.tl-card__roles-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mut);
+  margin-bottom: 0.5rem;
+}
+.mini-steps {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1.1rem;
+}
+.mini-steps::before {
+  content: "";
+  position: absolute;
+  left: 3px; top: 0.35em; bottom: 0.35em;
+  width: 2px;
+  background: color-mix(in srgb, var(--ca, var(--mocha)) 40%, transparent);
+}
+.mini-steps__item {
+  position: relative;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+.mini-steps__item::before {
+  content: "";
+  position: absolute;
+  left: -1.1rem; top: 0.4em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ca, var(--mocha));
+}
+.mini-steps__item:last-child { color: var(--text); font-weight: 600; }
 
 @media (min-width: 1024px) {
   .timeline { padding-left: 0; }
@@ -1046,14 +1106,21 @@ h1, h2, h3, h4 {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Sliding detail panel (secondary cards) — slides in from the right */
+/* Sliding detail panel (secondary cards) — slides in from the right.
+   overflow-y:auto + flex-start (instead of center) means that if the
+   panel's content is taller than the stage (common for the short
+   16:10 browser mockups on narrow screens), it scrolls internally
+   instead of having its bottom — including the CTA button — clipped
+   by the stage's own overflow:hidden. */
 .device-overlay {
   position: absolute;
   inset: 0;
   z-index: 5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   gap: 0.5rem;
   padding: clamp(1.2rem, 3vw, 1.8rem);
   color: #F4EFE7;
@@ -1130,6 +1197,12 @@ h1, h2, h3, h4 {
     align-items: center;
   }
   .device-info { padding-top: 0; }
+}
+
+/* Give the browser-mockup stage (short 16:10 box) more room on narrow
+   screens so most project detail panels fit without needing to scroll. */
+@media (max-width: 639px) {
+  .device-stage { min-height: 385px; }
 }
 
 /* Touch devices: show a subtle "tap for details" affordance */

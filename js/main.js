@@ -55,7 +55,7 @@ const EXPERIENCE = [
     skills: ["Event Operations", "Crowd Support", "Communication"],
   },
   {
-    role: "Project Management Co-Lead",
+    role: "Project Management Co-Leader",
     org: "Artificial Intelligence Club",
     orgUrl: "https://www.linkedin.com/company/ai-club-at-ujj/",
     date: "Jan 2026 – Present",
@@ -106,19 +106,25 @@ const EXPERIENCE = [
     role: "Vice Team Leader",
     org: "فريق بشوش التطوعي | Bashosh Volunteer Team",
     orgUrl: "https://www.linkedin.com/company/%D9%81%D8%B1%D9%8A%D9%82-%D8%A8%D8%B4%D9%88%D8%B4-%D8%A7%D9%84%D8%AA%D8%B7%D9%88%D8%B9%D9%8A/posts/?feedView=all",
-    date: "Jul 2025 - Nov 2025 · 5 mos",
-    sortDate: "2025-07",
+    date: "Mar 2025 – Nov 2025 · 9 mos",
+    sortDate: "2025-03",
     location: "",
     accent: "olive",
     tags: ["Contract", "Volunteering"],
     desc: "Contracted as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
     skills: ["Volunteer Management", "Planning", "Leadership"],
+    roleSteps: [
+      "Co-Leader of Planning and Management Department",
+      "Leader of Planning and Management Department",
+      "Senior Management Member",
+      "Vice Team Leader",
+    ],
   },
   {
     role: "Scrutineer Marshal",
     org: "Saudi Automobile & Motorcycle Federation",
     orgUrl: "https://www.linkedin.com/company/samfgov/posts/?feedView=all",
-    date: "Mar 2024",
+    date: "Mar 2024 – Present",
     sortDate: "2024-03",
     location: "",
     accent: "berry",
@@ -247,6 +253,12 @@ const PROJECTS = {
         : `<span class="tl-card__org">${esc(x.org)}</span>`;
       const loc = x.location ? `<span class="tl-card__loc">${esc(x.location)}</span>` : "";
       const skills = x.skills.map((s) => `<span class="pill pill--soft">${esc(s)}</span>`).join("");
+      const roleTimeline = x.roleSteps && x.roleSteps.length
+        ? `<div class="tl-card__roles">
+            <span class="tl-card__roles-label">Role progression</span>
+            <ol class="mini-steps">${x.roleSteps.map((r) => `<li class="mini-steps__item">${esc(r)}</li>`).join("")}</ol>
+          </div>`
+        : "";
       const racesButton = x.hasRaces
         ? `<div class="tl-card__actions"><button type="button" class="btn btn--small btn--solid" id="viewRacesBtn" aria-expanded="false" aria-controls="raceStrip">View Races</button></div>`
         : "";
@@ -266,6 +278,7 @@ const PROJECTS = {
               <span class="tl-card__skills-label">Top skills</span>
               <div class="tl-card__skills-pills">${skills}</div>
             </div>
+            ${roleTimeline}
             ${racesButton}
           </div>
         </article>
