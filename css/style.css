@@ -166,6 +166,14 @@ h1, h2, h3, h4 {
 .pill--sage    { background: var(--sage);    color: var(--on-sage); }
 .pill--mocha   { background: var(--mocha);   color: var(--on-mocha); }
 .pill--blue    { background: var(--blue);    color: var(--on-blue); }
+/* Soft, section-accent-tinted pill — same hue family as the section's own
+   --a, one shade quieter than a solid pill. Used to keep related pill
+   groups (e.g. Skills) visually unified rather than each a different hue. */
+.pill--soft-a {
+  background: color-mix(in srgb, var(--a, var(--blue)) 16%, transparent);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--a, var(--blue)) 40%, transparent);
+}
 
 /* Buttons */
 .btn {
@@ -180,6 +188,11 @@ h1, h2, h3, h4 {
 }
 .btn--solid { background: var(--apricot); color: var(--on-apricot); }
 .btn--solid:hover { transform: translateY(-2px); box-shadow: 0 8px 26px var(--glow-apricot); }
+/* Accent-matched CTA — used where a button should follow its own card's
+   accent (--a/--a-ink) instead of the site-wide apricot, e.g. project
+   "Visit Site" buttons, so each project's button matches its own theme. */
+.btn--accent { background: var(--a, var(--apricot)); color: var(--a-ink, var(--on-apricot)); }
+.btn--accent:hover { transform: translateY(-2px); box-shadow: 0 8px 26px color-mix(in srgb, var(--a, var(--apricot)) 35%, transparent); }
 .btn--ghost { border: 1.5px solid var(--border); color: var(--text); }
 .btn--ghost:hover { border-color: var(--apricot); color: var(--apricot); transform: translateY(-2px); }
 .btn--small { font-size: 0.78rem; padding: 0.5em 1.15em; }
@@ -287,7 +300,6 @@ h1, h2, h3, h4 {
 }
 .tab:hover { color: var(--text); border-color: var(--apricot); transform: translateY(-2px); }
 .tab.is-active { background: var(--apricot); color: var(--on-apricot); border-color: var(--apricot); }
-.tab--accent { background: var(--apricot); color: var(--on-apricot); border-color: var(--apricot); }
 
 /* Hamburger */
 .nav__burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
@@ -312,6 +324,14 @@ h1, h2, h3, h4 {
   background:
     radial-gradient(1000px 500px at 78% -10%, var(--glow-apricot), transparent 60%),
     radial-gradient(800px 420px at 5% 110%, var(--glow-blue), transparent 60%);
+}
+/* Light mode: the blue glow reads as a greenish-gray wash against the warm
+   cream background at full strength, so it's dialed back — apricot stays
+   the dominant hero tone and blue becomes a much quieter second accent. */
+[data-theme="light"] .hero {
+  background:
+    radial-gradient(1000px 500px at 78% -10%, var(--glow-apricot), transparent 60%),
+    radial-gradient(800px 420px at 5% 110%, color-mix(in srgb, var(--glow-blue) 45%, transparent), transparent 60%);
 }
 /* Giant ghost "Portfolio" behind everything */
 .hero__ghost {
@@ -350,6 +370,10 @@ h1, h2, h3, h4 {
   color: var(--blue);
   margin-top: 0.8rem;
 }
+/* --blue fails contrast as text on the light cream background (2.4:1) —
+   swap to --on-blue, a darker shade already defined in the same blue
+   family, purpose-built for readable text use. */
+[data-theme="light"] .hero__role { color: var(--on-blue); }
 .hero__pipe { color: var(--text-mut); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
@@ -507,6 +531,15 @@ h1, h2, h3, h4 {
 }
 [data-theme="light"] { --panel-base: #FFFFFF; }
 [data-theme="dark"]  { --panel-base: var(--card); }
+/* Light mode: a lighter per-section tint than the base rule so About,
+   Experience, and Projects read as one consistent white/cream card system
+   with a quiet accent hint, instead of three differently-colored blocks. */
+[data-theme="light"] .panel {
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--a) 5%, var(--panel-base)) 0%,
+      var(--panel-base) 55%);
+}
 [data-theme="dark"] .panel {
   background:
     linear-gradient(180deg,
@@ -595,7 +628,7 @@ h1, h2, h3, h4 {
 .skills-mini__group:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-sm);
-  border-color: rgba(206, 134, 144, 0.3);
+  border-color: color-mix(in srgb, var(--a, var(--blue)) 30%, transparent);
 }
 .skills-mini__label {
   display: block;

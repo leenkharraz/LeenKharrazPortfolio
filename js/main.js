@@ -110,8 +110,8 @@ const EXPERIENCE = [
     sortDate: "2025-03",
     location: "",
     accent: "olive",
-    tags: ["Contract", "Volunteering"],
-    desc: "Contracted as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
+    tags: ["Volunteering", "Leadership"],
+    desc: "Served as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
     skills: ["Volunteer Management", "Planning", "Leadership"],
     roleSteps: [
       "Co-Leader of Planning and Management Department",
@@ -320,7 +320,7 @@ const PROJECTS = {
       name: "Card Magic",
       type: "Website",
       badge: "Website",
-      accent: "mocha",
+      accent: "berry",
       frame: "browser",
       role: "Web Developer",
       desc: "A collaborative web app (group project) for creating and customizing digital greeting cards for celebrations, anniversaries, birthdays, and special events — demonstrating teamwork and interactive functionality.",
@@ -465,7 +465,7 @@ const PROJECTS = {
          </div>`
       : `<div class="iphone">${screen}</div>`;
     const ctaHtml = hasLink
-      ? `<a class="btn btn--small btn--solid" href="${esc(p.link)}" target="_blank" rel="noopener">${cta}</a>`
+      ? `<a class="btn btn--small btn--accent" href="${esc(p.link)}" target="_blank" rel="noopener">${cta}</a>`
       : "";
     return `
       <article class="device-card ${frameClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(p.type)}, tap to reveal details">

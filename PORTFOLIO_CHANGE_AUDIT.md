@@ -4,6 +4,47 @@ Tracks what changed since the initial commit and why. Each round below is a bund
 
 ---
 
+# Round 5 — Light mode color consistency + visual polish
+
+Scope: targeted color fixes only, driven by `COLOR_PALETTE_AUDIT.md` §9 ("Implemented Visual Fixes"). No layout changes, no new sections, no new colors — every fix reuses an existing palette token. Full rationale, before/after values, and contrast measurements live in that document; this entry summarizes what changed and where.
+
+## Summary of visual fixes
+
+- **Navbar:** removed the `.tab--accent` modifier that permanently painted the "Projects" tab apricot regardless of scroll state — all three nav tabs (desktop and mobile menu) now share one base/hover/active color system.
+- **Hero (light mode):** "Software Engineering Student" text color changed from `--blue` (2.40:1 contrast, failed WCAG) to `--on-blue` (11.39:1) — same blue family, now actually readable. Hero background's blue radial glow toned down ~55% in light mode to remove the greenish-gray wash it produced against the cream background; apricot stays the dominant hero tone.
+- **Skills section:** all pills unified into one blue family — "Technical" pills are solid blue (previously mixed blue + mocha/brown), "Tools & Project Management" pills use a new soft-blue-tint style (previously mixed sage + apricot). Also replaced a hardcoded apricot hover-border literal with a token-driven one.
+- **Project buttons:** "Visit Site"/"View Prototype" buttons now use each card's own accent color (new `.btn--accent` class reading `--a`/`--a-ink`) instead of a hardcoded apricot `.btn--solid`, so Portfolio's button is blue, Card Magic's is berry, F1 Driver Lookup's is olive.
+- **Card Magic:** accent changed from `mocha` (muddy brown, `#AA7864`) to `berry` (deep burgundy, `#6E2236`) — an existing palette token, not a new color.
+- **Section backgrounds (light mode):** reduced the per-section accent tint in `.panel`'s background gradient from 9% to 5% in light mode only, so About/Experience/Projects read as one connected white/cream card system instead of three differently-tinted blocks (most noticeable previously on the mocha-tinted Projects panel).
+- **Bashosh Volunteer Team:** tag changed from "Contract" to "Volunteering" (the first tag is what renders as the card's visible badge), and the description reworded from "Contracted as…" to "Served as…" to remove all contract framing.
+
+## What changed in colors (exact diffs)
+
+- `index.html` — Projects nav link: `class="tab tab--accent"` → `class="tab"`. Skills pills: Technical group's "Git & GitHub" `pill--mocha` → `pill--blue`; Tools & Project Management group's 5 pills `pill--sage`/`pill--apricot` → `pill--soft-a`.
+- `css/style.css` — removed `.tab--accent` rule; added `[data-theme="light"] .hero` (dimmed blue glow) and `[data-theme="light"] .hero__role` (on-blue text) overrides; added `.pill--soft-a`; changed `.skills-mini__group:hover`'s border from a hardcoded `rgba(206,134,144,0.3)` to `color-mix(in srgb, var(--a, var(--blue)) 30%, transparent)`; added `.btn--accent` + `.btn--accent:hover`; added `[data-theme="light"] .panel` override (9% → 5% accent tint).
+- `js/main.js` — Card Magic's `accent: "mocha"` → `"berry"`; `projectCard()`'s CTA class `btn--solid` → `btn--accent`; Bashosh's `tags` and `desc` fields reworded (see above).
+- `COLOR_PALETTE_AUDIT.md` — added §9 "Implemented Visual Fixes" documenting every change above with before/after values and reasoning.
+- `PORTFOLIO_CHANGE_AUDIT.md` — this round appended.
+
+## What was intentionally not changed
+
+- **Footer** — left exactly as-is (its own explicit instruction); still hardcoded/"always dark" in both themes, by design.
+- **Project-card hover-overlay gradient and iPhone/browser device-mockup chrome colors** — already flagged as hardcoded/theme-invariant in the audit, but no complaint was raised about them and they were out of scope for a color-consistency pass.
+- **Experience card accents** (`tl-item--{berry|blue|olive|apricot|mocha|sage}`) — the varied per-card colors are unchanged (explicitly requested to keep the timeline as-is); verified that each card's tags/badges already derive from that card's own accent variable, so no fix was needed there.
+- **Application project colors** (Schoolo = berry, Lume = apricot) — unchanged, per "I like the application colors generally."
+- **`--olive`/`--on-olive` borderline contrast** (4.22:1 vs the 4.5:1 AA threshold) — a pre-existing, universal, hairline gap not introduced by this round; left alone as out of scope (fixing it would mean retuning a shared token used across pills/badges/the Experience section, a larger change than requested).
+- Race timeline, About/Experience layout, project grouping (Applications vs Websites), and all copy other than the Bashosh tag/description — untouched.
+
+## Verified
+
+- Scripted Playwright pass across dark and light mode, at 1440px (desktop) and 375px (mobile): no console/page errors, no horizontal overflow at either width.
+- Computed CTA button colors confirmed programmatically to match each project card's own accent in both themes (Portfolio → blue `rgb(141,172,186)`, Card Magic → berry `rgb(110,34,54)`, F1 Driver Lookup → olive `rgb(119,127,93)`, Lume → apricot; Schoolo still renders no button).
+- Hero role text contrast measured at 11.39:1 in light mode (was 2.40:1).
+- Bashosh card confirmed showing "VOLUNTEERING" badge, not "Contract", in the rendered timeline.
+- Mobile menu, Skills section, and Projects section visually checked at 375px width in both themes — no cropped text, no overlapping elements.
+
+---
+
 # Round 4 — Race timeline redesigned into a premium motorsport showcase
 
 Scope: only the Scrutineer Marshal / Race Timeline section inside `#experience`. No other section touched.
