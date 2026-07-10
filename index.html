@@ -184,8 +184,35 @@
             <h3 class="race-strip__title">Scrutineer Marshal — Race Timeline</h3>
             <p class="race-strip__lede">Motorsport events supported since March 2024, newest first.</p>
           </div>
-          <div class="race-strip__track" aria-hidden="true"><div class="race-strip__car"></div></div>
-          <ol class="race-strip__list" id="motorsportTimeline"></ol>
+          <div class="race-strip__track" aria-hidden="true">
+            <svg class="race-strip__car" id="raceCar" viewBox="0 0 220 70" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <g transform="scale(-1,1) translate(-220,0)">
+                <ellipse class="car-shadow" cx="110" cy="66" rx="96" ry="4"/>
+                <circle class="car-tire" cx="174" cy="52" r="16"/>
+                <circle class="car-rim" cx="174" cy="52" r="6.5"/>
+                <circle class="car-tire" cx="46" cy="52" r="16"/>
+                <circle class="car-rim" cx="46" cy="52" r="6.5"/>
+                <path class="car-body" d="M6,46 C6,42 14,40 24,39 L54,31 C66,25 82,20 100,19 C116,18 130,20 142,25 C158,31 172,34 182,37 C190,39 196,42 198,45 L198,47 C198,49 192,50 182,50 L22,50 C12,50 6,49 6,46 Z"/>
+                <path class="car-stripe" d="M58,34 L172,41 L172,44.5 L58,37.5 Z"/>
+                <path class="car-cockpit" d="M78,29 C82,20 96,17 106,18 C114,19 118,23 115,27 L82,29 Z"/>
+                <path class="car-halo" d="M84,28 C88,15 104,13 113,22" fill="none" stroke-width="3" stroke-linecap="round"/>
+                <path class="car-nose-tip" d="M6,44 C10,43.5 14,44 16,46 C14,48 9,49 6,47.5 Z"/>
+                <rect class="car-wing-plane" x="0" y="52" width="30" height="5" rx="1.5"/>
+                <rect class="car-endplate" x="1" y="55" width="3" height="9" rx="1"/>
+                <rect class="car-endplate" x="25" y="55" width="3" height="9" rx="1"/>
+                <rect class="car-wing-strut" x="195" y="30" width="6" height="20" rx="1.5"/>
+                <rect class="car-wing-plane" x="187" y="23" width="27" height="6" rx="1.5"/>
+                <rect class="car-endplate" x="186" y="19" width="3" height="13" rx="1"/>
+                <rect class="car-endplate" x="212" y="19" width="3" height="13" rx="1"/>
+              </g>
+            </svg>
+          </div>
+          <ol class="race-strip__list" id="motorsportTimeline" aria-label="Select a race event"></ol>
+
+          <div class="race-strip__connector" id="raceConnector" aria-hidden="true"></div>
+
+          <!-- Selected event detail card, rendered from MOTORSPORT_RACES in js/main.js -->
+          <div class="race-detail" id="raceDetail"></div>
         </div>
       </div>
     </section>

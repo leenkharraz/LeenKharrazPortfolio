@@ -135,28 +135,141 @@ const EXPERIENCE = [
   },
 ];
 
+/* ============================================================
+   MOTORSPORT_RACES — Scrutineer Marshal race timeline.
+   Newest → oldest, same order/content as before.
+   role/type/location/desc are shared, honest, non-invented copy
+   (matches the Scrutineer Marshal experience card above); nothing
+   race-specific was fabricated.
+
+   images: [] — drop real photos in later. Add file paths like:
+     images: [
+       "assets/images/motorsport/formula-e-2026-1.jpg",
+       "assets/images/motorsport/formula-e-2026-2.jpg",
+     ]
+   The gallery renders automatically for 0, 1, 2, 3, or 4+ images —
+   no layout code needs to change when photos are added.
+   ============================================================ */
 const MOTORSPORT_RACES = [
-  { name: "Formula E", date: "Feb 2026" },
-  { name: "F4", date: "Dec 2025" },
-  { name: "WRC", date: "Nov 2025" },
-  { name: "Formula 1", date: "Apr 2025" },
-  { name: "Saudi Arabia Rally", date: "Apr 2025" },
-  { name: "GT Fanatec", date: "Nov 2024" },
-  { name: "Formula 2", date: "Mar 2024" },
-];
+  { id: "formula-e-2026", name: "Formula E", date: "Feb 2026", images: [] },
+  { id: "f4-2025", name: "F4", date: "Dec 2025", images: [] },
+  { id: "wrc-2025", name: "WRC", date: "Nov 2025", images: [] },
+  { id: "formula-1-2025", name: "Formula 1", date: "Apr 2025", images: [] },
+  { id: "saudi-rally-2025", name: "Saudi Arabia Rally", date: "Apr 2025", images: [] },
+  { id: "gt-fanatec-2024", name: "GT Fanatec", date: "Nov 2024", images: [] },
+  { id: "formula-2-2024", name: "Formula 2", date: "Mar 2024", images: [] },
+].map((race) => ({
+  role: "Scrutineer Marshal",
+  type: "Race Weekend",
+  location: "International Circuit",
+  desc: "Supporting technical inspection and race operations.",
+  ...race,
+}));
 
 const esc = (s) => String(s).replace(/[&<>\"]/g, (c) =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+let selectedRaceIndex = 0;
+
 function renderMotorsportTimeline() {
   const list = document.getElementById("motorsportTimeline");
   if (!list) return;
-  list.innerHTML = MOTORSPORT_RACES.map((race) => `
+  list.innerHTML = MOTORSPORT_RACES.map((race, i) => `
     <li class="race-strip__item">
-      <span class="race-strip__dot" aria-hidden="true"></span>
-      <span class="race-strip__date">${esc(race.date)}</span>
-      <span class="race-strip__name">${esc(race.name)}</span>
+      <button type="button" class="race-strip__node${i === 0 ? " is-selected" : ""}"
+        data-index="${i}" aria-pressed="${i === 0 ? "true" : "false"}" aria-controls="raceDetail">
+        <span class="race-strip__dot" aria-hidden="true"></span>
+        <span class="race-strip__date">${esc(race.date)}</span>
+        <span class="race-strip__name">${esc(race.name)}</span>
+      </button>
     </li>`).join("");
+  positionRaceIndicators(0);
+  renderRaceDetail(0);
+
+  list.querySelectorAll(".race-strip__node").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      selectRace(Number(btn.dataset.index));
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      btn.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
+    });
+  });
+}
+
+/* Car + connector both sit at the same proportional position along the
+   track/list (index / count), so no scroll-position measuring is
+   needed — it stays correct on resize, on scroll, at any width. */
+function positionRaceIndicators(index) {
+  const total = MOTORSPORT_RACES.length;
+  const pct = total > 1 ? (index / (total - 1)) * 100 : 50;
+  const car = document.getElementById("raceCar");
+  const connector = document.getElementById("raceConnector");
+  if (car) car.style.left = pct + "%";
+  if (connector) connector.style.left = pct + "%";
+}
+
+function renderRaceGallery(images, raceName) {
+  const count = images.length;
+  if (count === 0) {
+    return `
+      <div class="race-gallery" data-count="0">
+        <div class="race-gallery__placeholder">
+          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+            <rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="8.5" cy="10" r="1.6" fill="currentColor"/>
+            <path d="M4 16.5 9 12l3.5 3.2L16 12l4.5 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Race photos coming soon</span>
+        </div>
+      </div>`;
+  }
+  const alt = (n) => esc(`${raceName} — Scrutineer Marshal, photo ${n}`);
+  const img = (src, n) => `<div class="race-gallery__item"><img src="${esc(src)}" alt="${alt(n)}" loading="lazy"></div>`;
+  if (count <= 3) {
+    return `<div class="race-gallery" data-count="${count}">${images.map((src, i) => img(src, i + 1)).join("")}</div>`;
+  }
+  const extra = count - 3;
+  return `
+    <div class="race-gallery" data-count="4">
+      ${img(images[0], 1)}
+      ${img(images[1], 2)}
+      <div class="race-gallery__item race-gallery__item--more">
+        <img src="${esc(images[2])}" alt="${alt(3)}" loading="lazy">
+        <span class="race-gallery__more">+${extra}</span>
+      </div>
+    </div>`;
+}
+
+function renderRaceDetail(index) {
+  const el = document.getElementById("raceDetail");
+  if (!el) return;
+  const race = MOTORSPORT_RACES[index];
+  el.innerHTML = `
+    <div class="race-detail__card">
+      ${renderRaceGallery(race.images, race.name)}
+      <div class="race-detail__info">
+        <span class="race-detail__eyebrow">Selected Event</span>
+        <h4 class="race-detail__name">${esc(race.name)}</h4>
+        <p class="race-detail__role">${esc(race.role)}</p>
+        <p class="race-detail__desc">${esc(race.desc)}</p>
+        <div class="race-detail__chips">
+          <span class="chip">${esc(race.location)}</span>
+          <span class="chip">${esc(race.date)}</span>
+          <span class="chip">${esc(race.type)}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function selectRace(index) {
+  if (index === selectedRaceIndex) return;
+  selectedRaceIndex = index;
+  document.querySelectorAll(".race-strip__node").forEach((btn) => {
+    const isSel = Number(btn.dataset.index) === index;
+    btn.classList.toggle("is-selected", isSel);
+    btn.setAttribute("aria-pressed", String(isSel));
+  });
+  positionRaceIndicators(index);
+  renderRaceDetail(index);
 }
 
 /* ============================================================

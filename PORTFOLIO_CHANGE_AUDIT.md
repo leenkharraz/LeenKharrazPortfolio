@@ -4,6 +4,59 @@ Tracks what changed since the initial commit and why. Each round below is a bund
 
 ---
 
+# Round 4 — Race timeline redesigned into a premium motorsport showcase
+
+Scope: only the Scrutineer Marshal / Race Timeline section inside `#experience`. No other section touched.
+
+## Summary
+
+- Replaced the static "name + date" row with a **selectable** horizontal node strip (native `<button>`s, keyboard-operable). Clicking/pressing Enter on a node highlights it and updates a detail card below.
+- The inline SVG car and a new connector line no longer loop on a timer — both **align to the selected event**, computed as `index / (count - 1)` of the track width (no scroll-position math), and glide there with a `left` transition. `prefers-reduced-motion` makes that transition instant instead of removing the feature.
+- Checkered-flag texture recolored to true black/white (was tinted with `var(--text)`, i.e. theme-neutral gray, not pink — but not literally black/white either). Added a second, thinner black/white checker strip as a "starting line" flourish at the very top of the section.
+- Added a **selected-event detail card**: rounded dark card with a subtle apricot-tinted border/glow, gallery on the left, event info (name, role, description, metadata chips) on the right; stacks vertically under 720px.
+- Added a **photo gallery component** that renders a different, deliberately-designed layout for 0 / 1 / 2 / 3 / 4+ images per race, driven entirely by `images.length` — see "Adding real race photos" below.
+- Extended each race's data with `role`, `type`, `location`, `desc`, `images: []` — event names and dates are unchanged from before.
+
+## Files changed
+
+- `index.html` — race-strip markup: nodes are now buttons; added `#raceConnector` and `#raceDetail` containers; added `id="raceCar"` to the SVG.
+- `css/style.css` — full rewrite of the `.race-strip*` block (see inline comments at that section for the reasoning behind the index-based, scroll-independent positioning).
+- `js/main.js` — `MOTORSPORT_RACES` extended with new fields; `renderMotorsportTimeline`, `renderRaceDetail`, `renderRaceGallery`, `positionRaceIndicators`, and `selectRace` added.
+- `PORTFOLIO_CHANGE_AUDIT.md` — this round appended.
+
+## Adding real race photos later
+
+Edit the `images` array on any entry in `MOTORSPORT_RACES` (top of `js/main.js`):
+
+```js
+{ id: "formula-e-2026", name: "Formula E", date: "Feb 2026", images: [
+  "assets/images/motorsport/formula-e-2026-1.jpg",
+  "assets/images/motorsport/formula-e-2026-2.jpg",
+] },
+```
+
+Drop the actual image files into `assets/images/motorsport/` (already exists, currently empty). No CSS or layout code needs to change — the gallery automatically switches layout based on how many paths are in the array (tested with 0, 1, 2, 3, and 5 images).
+
+## Metadata honesty note
+
+`role`, `type`, `location`, and `desc` are shared across all seven races and intentionally generic/truthful ("Scrutineer Marshal", "Race Weekend", "International Circuit", "Supporting technical inspection and race operations.") rather than inventing per-race specifics (exact venues, unique descriptions) that aren't confirmed. Only the name and date, which were already in the project, are event-specific.
+
+## Verified
+
+- Selecting each of the 7 nodes updates the detail card, moves the car, and moves the connector — checked at desktop (1440px), laptop (1024px), tablet (768px), and mobile/iPhone SE (375px), no horizontal overflow at any width.
+- Gallery layouts checked with 0 (placeholder), 1, 2, 3, and 5 (main + 2 + "+2" overlay) images.
+- Reduced motion: car/connector position updates instantly (transition duration collapses via the site's existing global reduced-motion rule); no console errors.
+- Keyboard: tabbing to a node and pressing Enter selects it, same as a click.
+- Checked in both dark (default) and light mode.
+
+## Intentionally not changed
+
+- Race names, dates, and their newest→oldest order.
+- Every other section of the site (About, Projects, Footer, Experience cards themselves, nav, theme system).
+- No official F1/team branding, logos, or liveries were used anywhere in the SVG car.
+
+---
+
 # Round 3 — Hero desktop layout, experience data fixes, project detail responsiveness
 
 ## Summary

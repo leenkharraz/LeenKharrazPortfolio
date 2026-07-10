@@ -832,61 +832,97 @@ h1, h2, h3, h4 {
 .exp-sort__btn:hover { color: var(--text); }
 .exp-sort__btn.is-active { background: var(--a, var(--olive)); color: var(--a-ink, #fff); }
 
-/* --- Race timeline: horizontal course-style strip, revealed by "View Races" ---
-   Only race name + start month/year per item, newest → oldest, a subtle
-   checkered-flag texture, and a small car drifting along the line. */
+/* --- Race timeline: premium horizontal motorsport showcase, revealed
+   by "View Races". A selectable node strip; a small F1-style car and a
+   connector line both align to the selected node via simple index-based
+   percentages (index / (count-1) of the track/card width) rather than
+   scroll-position math, so they stay correct on resize or when the
+   node list is scrolled. Below, an expanded detail card renders a
+   photo gallery that adapts to however many images a race has. */
 .race-strip {
+  position: relative;
   margin-top: 2.5rem;
   padding-top: 1.75rem;
   border-top: 1px solid var(--border);
   scroll-margin-top: 6rem;
 }
-.race-strip__head { margin-bottom: 1rem; }
+/* Thin black/white checkered "starting line" flourish — a deliberate
+   motorsport accent that is never tinted with the pink/apricot palette. */
+.race-strip::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 5px;
+  background-image: linear-gradient(90deg, #fff 50%, #000 50%);
+  background-size: 10px 5px;
+  background-repeat: repeat-x;
+  opacity: 0.55;
+}
+.race-strip__head { margin-bottom: 1.25rem; }
 .race-strip__title { font-size: 1.1rem; color: var(--text); margin: 0.2rem 0 0.3rem; }
 .race-strip__lede { font-size: 0.88rem; color: var(--text-2); }
+
+/* --- Track + car --- */
 .race-strip__track {
   position: relative;
-  height: 22px;
-  margin-bottom: 0.5rem;
+  height: 46px;
+  margin-bottom: 0.25rem;
   border-radius: 6px;
   overflow: hidden;
+  background-color: var(--card-hi);
+  /* True black/white checkered-flag texture — intentionally not tinted
+     with the site accent, per the "no pink checker flag" rule. */
   background-image:
-    linear-gradient(45deg, color-mix(in srgb, var(--text) 7%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--text) 7%, transparent) 75%),
-    linear-gradient(45deg, color-mix(in srgb, var(--text) 7%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--text) 7%, transparent) 75%);
+    linear-gradient(45deg, rgba(255,255,255,0.09) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.09) 75%),
+    linear-gradient(45deg, rgba(0,0,0,0.32) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.32) 75%);
   background-size: 14px 14px;
   background-position: 0 0, 7px 7px;
 }
+/* Inline SVG F1-style silhouette — a generic motorsport shape (front
+   wing, rear wing, exposed wheels, low body), not a real team livery —
+   tinted with the site's own accent palette. JS sets `left` to
+   index/(count-1) * 100% of the track width on selection; it glides
+   there via this transition (reduced-motion users get the global
+   transition-duration override in §16, so it jumps instead). */
 .race-strip__car {
   position: absolute;
   top: 50%;
-  left: -3rem;
-  width: 2.6rem;
-  height: 0.85rem;
-  transform: translateY(-50%);
-  background: linear-gradient(180deg, var(--apricot) 0%, var(--berry) 100%);
-  border-radius: 0.4rem;
-  box-shadow: -1.3rem 0.35rem 0 -0.3rem var(--text-mut), 0.9rem 0.35rem 0 -0.3rem var(--text-mut);
-  animation: race-car-drive 9s linear infinite;
+  left: 0%;
+  width: 4.6rem;
+  height: auto;
+  transform: translate(-50%, -50%);
+  transition: left 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.28));
 }
-@keyframes race-car-drive {
-  0%   { left: -3rem; }
-  50%  { left: calc(100% - 2.6rem); }
-  100% { left: -3rem; }
-}
+.race-strip__car .car-body      { fill: var(--apricot); }
+.race-strip__car .car-stripe    { fill: color-mix(in srgb, var(--berry) 85%, black); }
+.race-strip__car .car-cockpit   { fill: var(--card-hi); }
+.race-strip__car .car-halo      { stroke: var(--text-mut); }
+.race-strip__car .car-nose-tip,
+.race-strip__car .car-wing-plane,
+.race-strip__car .car-wing-strut,
+.race-strip__car .car-endplate  { fill: var(--berry); }
+.race-strip__car .car-tire      { fill: #1b1a1d; }
+.race-strip__car .car-rim       { fill: var(--blue); }
+.race-strip__car .car-shadow    { fill: rgba(0, 0, 0, 0.18); }
+
+/* --- Selectable node list --- */
 .race-strip__list {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   overflow-x: auto;
-  padding: 0.5rem 0.25rem 1rem;
+  padding: 0.6rem 0.25rem 1.1rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
+.race-strip__list::-webkit-scrollbar { height: 5px; }
+.race-strip__list::-webkit-scrollbar-track { background: transparent; }
+.race-strip__list::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-pill); }
 .race-strip__item {
   position: relative;
   flex: 0 0 auto;
-  min-width: 8.5rem;
-  padding-top: 1.1rem;
-  text-align: center;
+  min-width: 8rem;
 }
 .race-strip__item::before {
   content: "";
@@ -899,15 +935,31 @@ h1, h2, h3, h4 {
 }
 .race-strip__item:first-child::before { left: 100%; width: 200%; }
 .race-strip__item:last-child::before { left: 0; width: 200%; }
+.race-strip__node {
+  position: relative;
+  width: 100%;
+  padding-top: 1.1rem;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  border-radius: var(--radius-sm);
+  transition: transform 0.2s ease;
+}
+.race-strip__node:hover { transform: translateY(-2px); }
+.race-strip__node:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 .race-strip__dot {
   position: absolute;
   top: -5px; left: 50%;
   width: 12px; height: 12px;
   border-radius: 50%;
   transform: translateX(-50%);
-  background: var(--apricot);
+  background: var(--border);
   box-shadow: 0 0 0 4px var(--panel-base, var(--card));
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
+.race-strip__node:hover .race-strip__dot { background: color-mix(in srgb, var(--apricot) 55%, var(--border)); }
 .race-strip__date {
   display: block;
   font-family: var(--font-mono);
@@ -922,12 +974,130 @@ h1, h2, h3, h4 {
   font-weight: 600;
   color: var(--text);
   margin-top: 0.2rem;
+  transition: color 0.2s ease;
 }
+.race-strip__node.is-selected .race-strip__dot {
+  background: var(--apricot);
+  transform: translateX(-50%) scale(1.25);
+  box-shadow: 0 0 0 4px var(--panel-base, var(--card)), 0 0 0 7px color-mix(in srgb, var(--apricot) 35%, transparent);
+}
+.race-strip__node.is-selected .race-strip__name { color: var(--apricot); }
 @media (min-width: 1024px) {
   .race-strip__list { justify-content: space-between; }
 }
+
+/* --- Connector: a small pointer linking the selected node to the card --- */
+.race-strip__connector {
+  position: relative;
+  width: 2px;
+  height: 20px;
+  left: 0%;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--apricot) 70%, transparent), transparent);
+  transition: left 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.race-strip__connector::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -4px;
+  width: 8px; height: 8px;
+  transform: translateX(-50%) rotate(45deg);
+  background: color-mix(in srgb, var(--apricot) 70%, transparent);
+  border-radius: 2px;
+}
+
+/* --- Selected event detail card --- */
+.race-detail__card {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--card-hi);
+  border: 1px solid color-mix(in srgb, var(--apricot) 30%, var(--border));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--apricot) 8%, transparent),
+    0 24px 48px rgba(0, 0, 0, 0.28),
+    0 0 60px -24px color-mix(in srgb, var(--apricot) 55%, transparent);
+}
+@media (min-width: 720px) {
+  .race-detail__card { grid-template-columns: 1.1fr 1fr; gap: 2rem; }
+}
+
+/* Gallery — layout adapts automatically to 0 / 1 / 2 / 3 / 4+ images. */
+.race-gallery {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.race-gallery__item { position: relative; overflow: hidden; background: var(--bg-soft); min-height: 140px; }
+.race-gallery__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.race-gallery__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 220px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-mut);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 1rem;
+}
+.race-gallery[data-count="1"] .race-gallery__item { min-height: 220px; }
+.race-gallery[data-count="2"] { grid-template-columns: 1fr 1fr; }
+.race-gallery[data-count="3"],
+.race-gallery[data-count="4"] {
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.race-gallery[data-count="3"] .race-gallery__item:first-child,
+.race-gallery[data-count="4"] .race-gallery__item:first-child {
+  grid-row: 1 / 3;
+  min-height: 220px;
+}
+.race-gallery__item--more { position: relative; }
+.race-gallery__more {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+/* Event info */
+.race-detail__info { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.race-detail__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--apricot);
+}
+.race-detail__name { font-size: clamp(1.3rem, 2.5vw, 1.7rem); color: var(--text); margin: 0.1rem 0 0.15rem; }
+.race-detail__role { font-family: var(--font-mono); font-size: 0.82rem; color: var(--blue); }
+.race-detail__desc { color: var(--text-2); font-size: 0.95rem; margin-top: 0.3rem; }
+.race-detail__chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--text-2);
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 0.35em 0.8em;
+  border-radius: var(--radius-pill);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .race-strip__car { animation: none; left: 0.5rem; }
+  .race-strip__car,
+  .race-strip__connector { transition: none; }
+  .race-strip__node:hover { transform: none; }
 }
 
 
