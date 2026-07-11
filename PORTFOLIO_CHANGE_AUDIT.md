@@ -4,6 +4,48 @@ Tracks what changed since the initial commit and why. Each round below is a bund
 
 ---
 
+# Round 6 — Hero colors, navbar accents, and project title consistency
+
+Scope: five targeted visual fixes requested directly. No redesign, no layout changes, no new palette colors — every fix reuses an existing token (`--apricot`, `--berry`, `--blue`, `--olive`, `--mocha`, or a dark-theme literal already used elsewhere for the code panel). Dark mode stays the default and was re-verified working; light mode was the primary target of two of the five fixes.
+
+## Summary of visual fixes
+
+- **Hero "Software Engineering Student" color:** was `--blue` (fixed to `--on-blue` for light-mode contrast in Round 5, but still the wrong hue family per new feedback — read as random/unrelated to the hero). Changed to `--apricot` (dark mode) / `--on-apricot` (light mode) — the hero's own signature accent, already used for its ghost-title glow, the typing cursor, and the codewin's yellow dot, so the role line now ties back into the hero's existing identity instead of an unrelated blue.
+- **Contact Me button:** was `.btn--solid` (apricot). Now a new `.btn--footer` class using `--berry`/`--on-berry` — the same deep-burgundy family as the footer band (the footer's own gradient is a custom-darkened burgundy; `--berry` is the closest existing token to that family). Applied only to the hero's Contact Me link — `.btn--solid` itself is untouched, so the "View Races" button (which also uses it) is unaffected. Same simple hover treatment as the other buttons (`translateY` + a `--berry`-tinted glow), no new hover behavior invented.
+- **Light-mode code panel:** the editor card (`.codewin`, bar, and body) previously used the theme's own near-white tokens (`--card-hi`, `--card`, `--border`), which sit almost flush against the equally light cream hero background — reading as a flat, undefined, washed-out blob. Fixed by pinning the panel to the exact literal values dark mode already uses for it (`#292A2E`/`#202124`/`#3A3A3F`/`#C9C1B7`/`#8E8982`), so it now reads as a permanently "dark" floating editor regardless of site theme — dark mode itself was not touched. Caught and fixed a follow-on bug this introduced: `.tok--var` (the "leen" variable name) reads the page's `--text` token, which is dark charcoal in light mode and became invisible against the new dark panel — pinned it to dark theme's cream `--text` value alongside the other token colors.
+- **Navbar active-section color:** every active tab previously turned the same apricot regardless of which section was open. Each nav `<a>` now carries a `data-accent` attribute mirroring its target section's own `data-accent` (About→blue, Experience→olive, Projects→mocha), and `.tab[data-accent="…"].is-active` reads that section's own accent token — so the navbar visually echoes wherever you are on the page, in both the desktop tab bar and the mobile dropdown menu. Base/hover states are untouched.
+- **Project title consistency:** `.project-screen__label` (the title shown inside each closed device mockup — Schoolo, Lume, Portfolio, Card Magic, F1 Driver Lookup) previously used `--a-ink`, which is *per-project-accent* and therefore inconsistent (Schoolo/Card Magic's berry ink → white, Lume's apricot ink → dark maroon, Portfolio's blue ink → dark navy, F1 Driver Lookup's olive ink → white — a visibly random mix). Changed to the page's own `--text` token (cream in dark mode, charcoal in light mode) for every title, plus a small drop-shadow so it stays legible over each project's own accent-tinted stage background regardless of which accent that is. Project-specific accents are untouched everywhere else (stage tint, badge, pills, CTA button) — only the title color was unified.
+
+## What changed in colors (exact diffs)
+
+- `index.html` — nav tabs: added `data-accent="blue"`/`"olive"`/`"mocha"` to the About/Experience/Projects `<a>` tags. Hero Contact Me link: `class="btn btn--solid"` → `class="btn btn--footer"`.
+- `css/style.css`:
+  - `.hero__role` color `var(--blue)` → `var(--apricot)`; `[data-theme="light"] .hero__role` → `var(--on-apricot)`.
+  - Added `.btn--footer` + `.btn--footer:hover` (berry family), left `.btn--solid` untouched.
+  - Added `[data-theme="light"] .codewin`, `.codewin__bar`, `.codewin__file`, `.codewin__body`, and `.codewin .tok--var` overrides (literal dark-theme hex values).
+  - Added `.tab[data-accent="blue"].is-active`, `.tab[data-accent="olive"].is-active`, `.tab[data-accent="mocha"].is-active`, alongside the existing generic `.tab.is-active` fallback.
+  - `.project-screen__label` color `var(--a-ink)` → `var(--text)`, plus `text-shadow: 0 2px 6px rgba(0,0,0,0.25)`.
+- `PORTFOLIO_CHANGE_AUDIT.md` — this round appended.
+
+## What was intentionally not changed
+
+- Dark mode's code panel — re-verified visually, not touched by the light-mode-only override.
+- `.btn--solid` itself and every button still using it (e.g. "View Races") — a new `.btn--footer` class was added instead of repurposing the shared one, so nothing else using `.btn--solid` shifted color.
+- Nav tab hover/focus states — only the active state now varies per section; hover stays the existing uniform apricot-border treatment site-wide, per "don't make the navbar chaotic."
+- Project card accents (stage tint, badge, pills, CTA button color) — every project still has its own accent everywhere except the title, exactly as requested ("keep project-specific accents in smaller details... not inconsistent title colors").
+- Footer — untouched (explicitly the thing being drawn *from*, not changed).
+- No new colors added to `:root` — every fix reuses an existing accent token or, for the code panel, dark mode's own already-defined literal values.
+
+## Verified
+
+- Headless-Chromium screenshot pass (Puppeteer) across dark and light mode, at 1440px desktop and 390px mobile (including the mobile hamburger menu, opened and screenshotted): 0px horizontal overflow at every combination.
+- Hero: confirmed "Software Engineering Student" renders apricot (dark) / dark-maroon on-apricot (light), no more blue; Contact Me renders solid berry with a berry-tinted hover glow in both themes.
+- Code panel: confirmed dark in both themes now; confirmed the "leen" variable name (previously invisible in light mode after the panel was darkened) is visible in cream.
+- Navbar: confirmed About/Experience/Projects tabs turn blue/olive/mocha respectively when their section is active, in both the desktop bar and the mobile dropdown, in both themes.
+- Projects: confirmed all five closed-card titles (Schoolo, Lume, Portfolio, Card Magic, F1 Driver Lookup) render in the same color in a given theme (cream in dark, charcoal in light) — previously a visibly inconsistent mix of white/dark-maroon/dark-navy per project's own accent.
+
+---
+
 # Round 5 — Light mode color consistency + visual polish
 
 Scope: targeted color fixes only, driven by `COLOR_PALETTE_AUDIT.md` §9 ("Implemented Visual Fixes"). No layout changes, no new sections, no new colors — every fix reuses an existing palette token. Full rationale, before/after values, and contrast measurements live in that document; this entry summarizes what changed and where.

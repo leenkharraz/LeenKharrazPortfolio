@@ -188,6 +188,17 @@ h1, h2, h3, h4 {
 }
 .btn--solid { background: var(--apricot); color: var(--on-apricot); }
 .btn--solid:hover { transform: translateY(-2px); box-shadow: 0 8px 26px var(--glow-apricot); }
+/* Footer-inspired CTA — the hero's "Contact Me" button, pulled into the same
+   deep-berry family as the footer band (the footer's own gradient is a
+   custom-darkened burgundy; --berry is the closest existing token to that
+   family, so no new color is introduced). --on-berry is white in both
+   themes, since berry is dark enough on its own that it never needs a
+   theme-swapped ink the way apricot/blue do. */
+.btn--footer { background: var(--berry); color: var(--on-berry); }
+.btn--footer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--berry) 40%, transparent);
+}
 /* Accent-matched CTA — used where a button should follow its own card's
    accent (--a/--a-ink) instead of the site-wide apricot, e.g. project
    "Visit Site" buttons, so each project's button matches its own theme. */
@@ -300,6 +311,13 @@ h1, h2, h3, h4 {
 }
 .tab:hover { color: var(--text); border-color: var(--apricot); transform: translateY(-2px); }
 .tab.is-active { background: var(--apricot); color: var(--on-apricot); border-color: var(--apricot); }
+/* Active tab matches the accent of the section it links to (data-accent
+   mirrors the same attribute/value already set on each <section>), so the
+   navbar visually echoes wherever you are on the page instead of every
+   active tab turning the same apricot regardless of section. */
+.tab[data-accent="blue"].is-active   { background: var(--blue);   color: var(--on-blue);   border-color: var(--blue); }
+.tab[data-accent="olive"].is-active  { background: var(--olive);  color: var(--on-olive);  border-color: var(--olive); }
+.tab[data-accent="mocha"].is-active  { background: var(--mocha);  color: var(--on-mocha);  border-color: var(--mocha); }
 
 /* Hamburger */
 .nav__burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
@@ -367,13 +385,16 @@ h1, h2, h3, h4 {
 .hero__role {
   font-family: var(--font-mono);
   font-size: clamp(0.85rem, 2.2vw, 1.1rem);
-  color: var(--blue);
+  color: var(--apricot);
   margin-top: 0.8rem;
 }
-/* --blue fails contrast as text on the light cream background (2.4:1) —
-   swap to --on-blue, a darker shade already defined in the same blue
-   family, purpose-built for readable text use. */
-[data-theme="light"] .hero__role { color: var(--on-blue); }
+/* Apricot is the hero's own signature accent (ghost glow, cursor, codewin
+   dot) — using it here ties the role line back into the hero's existing
+   identity instead of the unrelated blue it had before. In light mode the
+   raw pastel apricot fails contrast against the cream background, so it
+   swaps to --on-apricot, the darker ink already defined in the same
+   apricot family, purpose-built for readable text use. */
+[data-theme="light"] .hero__role { color: var(--on-apricot); }
 .hero__pipe { color: var(--text-mut); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 
@@ -435,6 +456,32 @@ h1, h2, h3, h4 {
 }
 
 @keyframes cursor-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* Light mode only: the code window's own tokens (--card-hi, --card, --border,
+   --text-2, --text-mut) sit almost flush with the light cream hero background
+   in this theme, so the "editor" reads as a flat, washed-out, undefined blob
+   rather than a code panel. Rather than invent new colors, this pins the
+   panel to the exact same literal values dark mode already uses for it
+   (proven to look good, left untouched) — so it now reads as a permanently
+   "dark" floating editor card regardless of site theme, a common and
+   intentional pattern for code snippets. The syntax-highlight token colors
+   (.tok--kw/--key/--str) are theme-invariant already, so they continue to
+   read exactly as they do in dark mode. */
+[data-theme="light"] .codewin {
+  background: #292A2E; /* dark theme's --card-hi */
+  border-color: #3A3A3F; /* dark theme's --border */
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); /* dark theme's --shadow */
+}
+[data-theme="light"] .codewin__bar {
+  background: #202124; /* dark theme's --card */
+  border-bottom-color: #3A3A3F;
+}
+[data-theme="light"] .codewin__file { color: #8E8982; } /* dark theme's --text-mut */
+[data-theme="light"] .codewin__body { color: #C9C1B7; } /* dark theme's --text-2 */
+/* .tok--var reads the page's --text token, which is dark charcoal in light
+   mode -- invisible against this panel's now-dark background. Pin it to
+   dark theme's --text (cream) like the other token colors above. */
+[data-theme="light"] .codewin .tok--var { color: #F4EFE7; }
 
 /* Desktop/laptop: name + role + buttons on the left, code card on the right */
 @media (min-width: 900px) {
@@ -1285,7 +1332,16 @@ h1, h2, h3, h4 {
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   line-height: 1.2;
   font-weight: 800;
-  color: var(--a-ink);
+  /* Unified title treatment: every project title uses the same page --text
+     color (previously --a-ink, which changed per-project since each card
+     has its own accent — Schoolo/Card Magic's berry ink, Lume's apricot ink,
+     Portfolio's blue ink, F1 Driver Lookup's olive ink — reading as random,
+     inconsistent title colors). Project-specific accents stay exactly where
+     they were: the stage background tint, badge, pills, and CTA button. A
+     small shadow keeps the title readable over every project's own
+     accent-tinted stage background regardless of which accent it is. */
+  color: var(--text);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   max-width: 12ch;
