@@ -52,7 +52,7 @@ const EXPERIENCE = [
     skills: ["Event Operations", "Crowd Support", "Communication"],
   },
   {
-    role: "Artificial Intelligence Club",
+    role: "Project Management Co-Leader",
     org: "Artificial Intelligence Club",
     orgUrl: "",
     date: "Jan 2026 – Present",

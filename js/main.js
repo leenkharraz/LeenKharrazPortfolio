@@ -32,13 +32,13 @@ const EXPERIENCE = [
   },
   {
     role: "Software Engineer",
-    org: "Numu for Research & Innovation | نمو للبحث والابتكار",
+    org: "Numu for Research & Innovation",
     orgUrl: "https://www.linkedin.com/company/numu-npo/posts/?feedView=all",
     date: "May 2026 – Present",
     sortDate: "2026-05",
     location: "",
     accent: "blue",
-    tags: ["Software Engineering", "Project Management"],
+    tags: ["Volunteering", "Project Management"],
     desc: "Working on software project planning, requirements analysis, and coordination for research and innovation-focused initiatives.",
     skills: ["Software Project Management", "Requirements Analysis", "Technical Coordination"],
   },
@@ -68,7 +68,7 @@ const EXPERIENCE = [
   },
   {
     role: "Project Management Coordinator",
-    org: "Google Developer Group on Campus — University of Jeddah",
+    org: "Google Developer Group on Campus",
     orgUrl: "https://www.linkedin.com/company/google-developer-student-club-uj/posts/?feedView=all",
     date: "Nov 2025 – Present",
     sortDate: "2025-11",
@@ -104,7 +104,7 @@ const EXPERIENCE = [
   },
   {
     role: "Vice Team Leader",
-    org: "فريق بشوش التطوعي | Bashosh Volunteer Team",
+    org: "Bashosh Volunteer Team",
     orgUrl: "https://www.linkedin.com/company/%D9%81%D8%B1%D9%8A%D9%82-%D8%A8%D8%B4%D9%88%D8%B4-%D8%A7%D9%84%D8%AA%D8%B7%D9%88%D8%B9%D9%8A/posts/?feedView=all",
     date: "Mar 2025 – Nov 2025 · 9 mos",
     sortDate: "2025-03",
@@ -137,12 +137,12 @@ const EXPERIENCE = [
 
 /* ============================================================
    MOTORSPORT_RACES — Scrutineer Marshal race timeline.
-   Newest → oldest, same order/content as before.
-   role/type/location/desc are shared, honest, non-invented copy
-   (matches the Scrutineer Marshal experience card above); nothing
-   race-specific was fabricated.
+   Newest → oldest. The selected-race card shows only: the
+   "Selected Race" eyebrow, the race name, the Scrutineer Marshal
+   role, and the race photo gallery.
 
-   images: [] — drop real photos in later. Add file paths like:
+   images: [] — drop real photos into assets/images/motorsport/
+   and list their paths here, e.g.:
      images: [
        "assets/images/motorsport/formula-e-2026-1.jpg",
        "assets/images/motorsport/formula-e-2026-2.jpg",
@@ -151,18 +151,16 @@ const EXPERIENCE = [
    no layout code needs to change when photos are added.
    ============================================================ */
 const MOTORSPORT_RACES = [
-  { id: "formula-e-2026", name: "Formula E", date: "Feb 2026", images: [] },
-  { id: "f4-2025", name: "F4", date: "Dec 2025", images: [] },
-  { id: "wrc-2025", name: "WRC", date: "Nov 2025", images: [] },
-  { id: "formula-1-2025", name: "Formula 1", date: "Apr 2025", images: [] },
-  { id: "saudi-rally-2025", name: "Saudi Arabia Rally", date: "Apr 2025", images: [] },
-  { id: "gt-fanatec-2024", name: "GT Fanatec", date: "Nov 2024", images: [] },
-  { id: "formula-2-2024", name: "Formula 2", date: "Mar 2024", images: [] },
+  { id: "formula-e-2026", name: "Formula E", date: "Feb 2026", images: ["assets/images/motorsport/formula-e-2026-1.JPG"] },
+  { id: "f4-2025", name: "F4", date: "Dec 2025", images: ["assets/images/motorsport/f4-2025-1.jpeg"] },
+  { id: "wrc-2025", name: "WRC", date: "Nov 2025", images: ["assets/images/motorsport/wrc-2025-1.jpeg"] },
+  { id: "formula-1-2025", name: "Formula 1", date: "Apr 2025", images: ["assets/images/motorsport/formula-1-2025-1.jpeg"] },
+  { id: "saudi-rally-2025", name: "Saudi Arabia Rally", date: "Apr 2025", images: ["assets/images/motorsport/saudi-rally-2025-1.jpeg"] },
+  { id: "formula-e-2025", name: "Formula E", date: "Feb 2025", images: ["assets/images/motorsport/formula-e-2025-1.jpeg"] },
+  { id: "gt-fanatec-2024", name: "GT Fanatec", date: "Nov 2024", images: ["assets/images/motorsport/gt-fanatec-2024-1.jpeg"] },
+  { id: "formula-2-2024", name: "Formula 2", date: "Mar 2024", images: ["assets/images/motorsport/formula-2-2024-1.jpeg"] },
 ].map((race) => ({
   role: "Scrutineer Marshal",
-  type: "Race Weekend",
-  location: "International Circuit",
-  desc: "Supporting technical inspection and race operations.",
   ...race,
 }));
 
@@ -243,19 +241,15 @@ function renderRaceDetail(index) {
   const el = document.getElementById("raceDetail");
   if (!el) return;
   const race = MOTORSPORT_RACES[index];
+  /* Replacing innerHTML recreates .race-detail__card, so its CSS
+     entrance animation (a subtle fade + rise) replays on each selection. */
   el.innerHTML = `
     <div class="race-detail__card">
       ${renderRaceGallery(race.images, race.name)}
       <div class="race-detail__info">
-        <span class="race-detail__eyebrow">Selected Event</span>
+        <span class="race-detail__eyebrow">Selected Race</span>
         <h4 class="race-detail__name">${esc(race.name)}</h4>
         <p class="race-detail__role">${esc(race.role)}</p>
-        <p class="race-detail__desc">${esc(race.desc)}</p>
-        <div class="race-detail__chips">
-          <span class="chip">${esc(race.location)}</span>
-          <span class="chip">${esc(race.date)}</span>
-          <span class="chip">${esc(race.type)}</span>
-        </div>
       </div>
     </div>`;
 }
@@ -278,6 +272,8 @@ function selectRace(index) {
    accent : palette accent used for the badge + stage tint
    link   : full URL, or "#" for a placeholder (button auto-disables)
    tags   : meaningful, no duplicated "Tech Tech"
+   screen : optional path to a real screenshot shown inside the
+            device mockup; omit it to show the name-label preview.
    ============================================================ */
 const PROJECTS = {
   apps: [
@@ -306,15 +302,15 @@ const PROJECTS = {
   ],
   sites: [
     {
-      name: "Portfolio",
-      type: "Website",
+      name: "F1 Driver Lookup",
+      type: "Website · API Project",
       badge: "Website",
-      accent: "blue",
+      accent: "olive",
       frame: "browser",
-      role: "Developer / Designer",
-      desc: "A personal portfolio presenting my projects, technical skills, and experience — a central hub for my web development, UI/UX, and software work, built with clean responsive design.",
-      tags: ["Website", "HTML/CSS", "Responsive"],
-      link: "https://leenkharraz.github.io/MyProtfolio/",
+      role: "Frontend Developer",
+      desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
+      tags: ["Website", "API", "JavaScript"],
+      link: "https://leenkharraz.github.io/Assignment2/",
     },
     {
       name: "Card Magic",
@@ -328,15 +324,28 @@ const PROJECTS = {
       link: "https://leenkharraz.github.io/CardMagic/",
     },
     {
-      name: "F1 Driver Lookup",
-      type: "Website · API Project",
+      name: "Personal Portfolio",
+      type: "Website",
       badge: "Website",
-      accent: "olive",
+      accent: "blue",
       frame: "browser",
-      role: "Frontend Developer",
-      desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
-      tags: ["Website", "API", "JavaScript"],
-      link: "https://leenkharraz.github.io/Assignment2/",
+      role: "Developer / Designer",
+      desc: "My original personal portfolio project, built to present my background, skills, experience, and early software projects.",
+      tags: ["Website", "HTML/CSS", "Responsive"],
+      link: "https://leenkharraz.github.io/MyProtfolio/",
+    },
+    {
+      name: "Portfolio Redesign",
+      type: "Website",
+      badge: "Website",
+      /* Shares Lume's exact accent (see PROJECTS.apps above) so the
+         redesign reuses the same theme tokens instead of a new color. */
+      accent: "apricot",
+      frame: "browser",
+      role: "Developer / Designer",
+      desc: "A redesigned and improved portfolio with a stronger visual identity, cleaner structure, better responsiveness, and a more refined presentation of my experience and projects.",
+      tags: ["Website", "UI/UX", "Responsive"],
+      link: "https://leenkharraz.github.io/LeenPortfolio/",
     },
   ],
 };
@@ -452,8 +461,11 @@ const PROJECTS = {
     const hasLink = !!(p.link && p.link !== "#");
     const cta = isBrowser ? "Visit Site →" : "View Prototype →";
     const tags = p.tags.map((t) => `<span class="pill pill--${p.accent}">${esc(t)}</span>`).join("");
-    const screen = `
-      <div class="device-screen project-screen">
+    const screen = p.screen
+      ? `<div class="device-screen project-screen">
+          <img class="device-screen__img" src="${esc(p.screen)}" alt="${esc(p.name)} — site preview" loading="lazy">
+        </div>`
+      : `<div class="device-screen project-screen">
         <span class="project-screen__label">${esc(p.name)}</span>
       </div>`;
     const frame = isBrowser
