@@ -90,9 +90,13 @@
 }
 
 :root {
-  --font-display: 'Archivo', sans-serif;
-  --font-body:    'Figtree', sans-serif;
-  --font-mono:    'Space Mono', monospace;
+  /* Archivo/Figtree/Space Mono have no Arabic glyphs, so Tajawal is
+     appended as a per-character fallback: Latin text keeps rendering in
+     the original English fonts untouched, and only Arabic runs pick up
+     Tajawal automatically — nothing to switch per-language in JS/CSS. */
+  --font-display: 'Archivo', 'Tajawal', sans-serif;
+  --font-body:    'Figtree', 'Tajawal', sans-serif;
+  --font-mono:    'Space Mono', 'Tajawal', monospace;
   --radius-lg: 26px;
   --radius-md: 16px;
   --radius-sm: 10px;
@@ -326,7 +330,10 @@ h1, h2, h3, h4 {
 .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-@media (min-width: 1024px) {
+/* Full desktop-style nav (tabs visible, burger hidden) from tablet widths
+   up — iPad mini/Air/Pro portrait (768-834px) and landscape all land above
+   this, so only genuinely small phone screens get the collapsed menu. */
+@media (min-width: 640px) {
   .nav__burger { display: none; }
   .nav__tabs { display: flex; }
 }
@@ -1514,6 +1521,9 @@ h1, h2, h3, h4 {
     border-radius: var(--radius-pill);
     pointer-events: none;
   }
+  :root[dir="rtl"] .device-card[tabindex]:not(.device-card--featured)::after {
+    content: "اضغط لعرض التفاصيل";
+  }
   .device-card.is-open::after { display: none; }
 }
 
@@ -1756,6 +1766,83 @@ h1, h2, h3, h4 {
 @media (max-width: 560px) {
   .footer__inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
+
+/* ============================================================
+   15b. ARABIC / RTL — text flows RTL, layout order never does.
+   ------------------------------------------------------------
+   CSS `direction` affects two things browsers don't separate on their
+   own: (1) paragraph/word flow — which we WANT to flip for Arabic
+   prose — and (2) which physical side is "start" for flex-row main-axis
+   and CSS Grid column placement — which we do NOT want to flip, or
+   About's bio/facts columns, the nav tabs, and the Website project
+   grid (CARD1 | CARD2) would silently swap sides in Arabic.
+
+   Fix: force `direction: ltr` back on every structural flex/grid
+   container that arranges more than one distinct item side by side
+   (so physical left-to-right order is pinned regardless of language),
+   then re-assert `direction: rtl` on that container's actual
+   text-bearing child so its own prose still reads correctly RTL —
+   `direction` is inherited, so resetting it at that one point is
+   enough for everything nested further inside to flow RTL again.
+
+   Tag/skill-pill rows and label→value meta rows are deliberately left
+   alone: a badge cloud or "Tech: React, Node" row has no fixed reading
+   order the way "About | Experience | Projects" or "Card 1 | Card 2"
+   does, so letting them flow naturally RTL is correct, not a bug.
+   ============================================================ */
+:root[dir="rtl"] .nav,
+:root[dir="rtl"] .nav__right,
+:root[dir="rtl"] .nav__tabs,
+:root[dir="rtl"] .hero__inner,
+:root[dir="rtl"] .hero__cta,
+:root[dir="rtl"] .about__grid,
+:root[dir="rtl"] .skills-mini,
+:root[dir="rtl"] .exp-head,
+:root[dir="rtl"] .exp-sort,
+:root[dir="rtl"] .race-strip__list,
+:root[dir="rtl"] .race-detail__card,
+:root[dir="rtl"] .showcase__group-h,
+:root[dir="rtl"] .showcase__grid,
+:root[dir="rtl"] .device-overlay__actions,
+:root[dir="rtl"] .browser__bar,
+:root[dir="rtl"] .footer__inner,
+:root[dir="rtl"] .footer__brand,
+:root[dir="rtl"] .footer__icons {
+  direction: ltr;
+}
+:root[dir="rtl"] .tab,
+:root[dir="rtl"] .exp-head__title,
+:root[dir="rtl"] .exp-sort__btn,
+:root[dir="rtl"] .showcase__group-kicker,
+:root[dir="rtl"] .showcase__group-title,
+:root[dir="rtl"] .device-card,
+:root[dir="rtl"] .about__bio-box,
+:root[dir="rtl"] .about__facts,
+:root[dir="rtl"] .skills-mini__group,
+:root[dir="rtl"] .race-strip__node,
+:root[dir="rtl"] .race-detail__info,
+:root[dir="rtl"] .footer__tag,
+:root[dir="rtl"] .btn {
+  direction: rtl;
+}
+/* Code-styled path labels and the browser-chrome URL bar stay LTR in
+   both languages — they display literal paths/URLs, not prose. */
+.path-label,
+.browser__url {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+/* Bashosh's role-progression steps keep their connector dot/line
+   pinned to the physical left (position:absolute, unaffected by
+   direction); left-align the step text too so it stays flush against
+   its own dot instead of drifting to the right. */
+:root[dir="rtl"] .mini-steps__item { text-align: left; }
+/* device-card's own reset above makes its heading/tags/description
+   read RTL correctly; the CTA/GitHub button row was already forced ltr
+   via .device-overlay__actions above, and its .btn children are reset
+   rtl again, so button LABEL text still reads correctly too. */
 
 
 /* ============================================================

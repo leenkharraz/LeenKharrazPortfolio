@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Leen Kharraz — Software Engineering Student. Portfolio: experience timeline and projects.">
+  <meta name="description" content="Leen Kharraz — Software Engineering Student. Portfolio: experience timeline and projects." id="metaDescription">
   <title>Leen Kharraz — Software Engineering Student</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600&family=Space+Mono:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,11 +16,20 @@
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="top">
-    <a class="nav__brand" href="#top" aria-label="Leen Kharraz — home">
+    <a class="nav__brand" href="#top" aria-label="Leen Kharraz — home" data-i18n-aria-label="nav.brandAria">
       <span class="logo">LK<span class="logo__dot">.</span></span>
     </a>
 
     <div class="nav__right">
+      <button class="theme-toggle lang-toggle" id="langToggle" aria-label="Switch to Arabic" data-i18n-aria-label="nav.langToArabic" title="Switch language" data-i18n-title="nav.langToArabic">
+        <svg class="lang-toggle__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M4.5 7.5C6.7 8.8 9.2 9.5 12 9.5s5.3-.7 7.5-2M4.5 16.5C6.7 15.2 9.2 14.5 12 14.5s5.3.7 7.5 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" aria-pressed="false">
         <svg class="theme-toggle__icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
           <circle cx="12" cy="12" r="4.2" fill="currentColor"/>
@@ -41,11 +50,11 @@
       </button>
     </div>
 
-    <nav aria-label="Main">
+    <nav aria-label="Main" data-i18n-aria-label="nav.mainAria">
       <ul class="nav__tabs" id="navTabs">
-        <li><a class="tab" href="#about" data-accent="blue">About</a></li>
-        <li><a class="tab" href="#experience" data-accent="olive">Experience</a></li>
-        <li><a class="tab" href="#projects" data-accent="mocha">Projects</a></li>
+        <li><a class="tab" href="#about" data-accent="blue" data-i18n="nav.about">About</a></li>
+        <li><a class="tab" href="#experience" data-accent="olive" data-i18n="nav.experience">Experience</a></li>
+        <li><a class="tab" href="#projects" data-accent="mocha" data-i18n="nav.projects">Projects</a></li>
       </ul>
     </nav>
   </header>
@@ -53,14 +62,14 @@
   <main>
 
     <!-- ============ HERO / COVER ============ -->
-    <section class="hero" aria-label="Introduction">
-      <h2 class="hero__ghost" aria-hidden="true">Portfolio</h2>
+    <section class="hero" aria-label="Introduction" data-i18n-aria-label="hero.introAria">
+      <h2 class="hero__ghost" aria-hidden="true" data-i18n="hero.ghost">Portfolio</h2>
 
       <div class="hero__inner">
         <div class="hero__copy reveal">
           <p class="path-label">~/leen-kharraz</p>
           <h1 class="hero__name">Leen Kharraz</h1>
-          <p class="hero__role">Software Engineering Student</p>
+          <p class="hero__role" data-i18n="hero.role">Software Engineering Student</p>
         </div>
 
         <div class="hero__editor reveal" aria-hidden="true">
@@ -76,8 +85,8 @@
         </div>
 
         <div class="hero__cta reveal">
-          <a class="btn btn--footer" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener">Contact Me</a>
-          <a class="btn btn--ghost" href="#projects">Projects</a>
+          <a class="btn btn--footer" href="https://linktr.ee/LeenKharraz" target="_blank" rel="noopener" data-i18n="hero.contact">Contact Me</a>
+          <a class="btn btn--ghost" href="#projects" data-i18n="hero.projects">Projects</a>
         </div>
       </div>
     </section>
@@ -91,17 +100,17 @@
       </div>
       <div class="panel">
         <p class="path-label">about/</p>
-        <h2 class="section__title" id="about-h">About Me</h2>
+        <h2 class="section__title" id="about-h" data-i18n="about.title">About Me</h2>
         <div class="about__grid">
           <div class="contentbox about__bio-box">
-            <p class="about__bio">
+            <p class="about__bio" id="aboutBio">
               I'm Leen Kharraz, a Software Engineering student at the <strong>University of Jeddah</strong>.
               I enjoy building software and coordinating the plans, people, and details that
               help projects move forward.
             </p>
             <div class="about__whyme">
-              <span class="about__whyme-label">Why me?</span>
-              <p class="about__whyme-text">
+              <span class="about__whyme-label" data-i18n="about.whyMeLabel">Why me?</span>
+              <p class="about__whyme-text" data-i18n="about.whyMeText">
                 Because I bring both technical curiosity and organized execution. I care about
                 understanding the problem, building practical solutions, and keeping the work
                 clear, structured, and useful.
@@ -110,14 +119,14 @@
           </div>
           <div class="about__facts">
             <div class="filecard">
-              <span class="filecard__label">University</span>
-              <span class="filecard__value">University of Jeddah — Software Engineering</span>
+              <span class="filecard__label" data-i18n="about.universityLabel">University</span>
+              <span class="filecard__value" data-i18n="about.universityValue">University of Jeddah — Software Engineering</span>
             </div>
             <div class="filecard">
-              <span class="filecard__label">Languages</span>
+              <span class="filecard__label" data-i18n="about.languagesLabel">Languages</span>
               <span class="filecard__value">
-                <span class="pill pill--sage">Arabic</span>
-                <span class="pill pill--blue">English</span>
+                <span class="pill pill--sage" data-i18n="about.langArabic">Arabic</span>
+                <span class="pill pill--blue" data-i18n="about.langEnglish">English</span>
               </span>
             </div>
           </div>
@@ -125,10 +134,10 @@
 
         <!-- Small skills block (hero "Skills" button scrolls here) -->
         <div class="about__skills" id="skills">
-          <h3 class="about__skills-h">Skills</h3>
+          <h3 class="about__skills-h" data-i18n="about.skillsHeading">Skills</h3>
           <div class="skills-mini">
             <div class="skills-mini__group">
-              <span class="skills-mini__label">Technical</span>
+              <span class="skills-mini__label" data-i18n="about.technicalLabel">Technical</span>
               <div class="skills-mini__pills">
                 <span class="pill pill--blue">HTML</span>
                 <span class="pill pill--blue">CSS</span>
@@ -139,13 +148,13 @@
               </div>
             </div>
             <div class="skills-mini__group">
-              <span class="skills-mini__label">Tools &amp; Project Management</span>
+              <span class="skills-mini__label" data-i18n="about.toolsLabel">Tools &amp; Project Management</span>
               <div class="skills-mini__pills">
                 <span class="pill pill--soft-a">Monday.com</span>
                 <span class="pill pill--soft-a">Google Workspace</span>
                 <span class="pill pill--soft-a">Microsoft Office</span>
-                <span class="pill pill--soft-a">Project Management</span>
-                <span class="pill pill--soft-a">Leadership</span>
+                <span class="pill pill--soft-a" data-i18n="about.pill.projectManagement">Project Management</span>
+                <span class="pill pill--soft-a" data-i18n="about.pill.leadership">Leadership</span>
               </div>
             </div>
           </div>
@@ -162,16 +171,16 @@
       </div>
       <div class="panel">
         <div class="exp-head">
-          <div>
+          <div class="exp-head__title">
             <p class="path-label">experience/</p>
-            <h2 class="section__title" id="exp-h">Experience</h2>
+            <h2 class="section__title" id="exp-h" data-i18n="experience.title">Experience</h2>
           </div>
-          <div class="exp-sort" role="group" aria-label="Sort experience by date">
-            <button type="button" class="exp-sort__btn is-active" data-sort="desc" aria-pressed="true">Newest first</button>
-            <button type="button" class="exp-sort__btn" data-sort="asc" aria-pressed="false">Oldest first</button>
+          <div class="exp-sort" role="group" aria-label="Sort experience by date" data-i18n-aria-label="experience.sortAria">
+            <button type="button" class="exp-sort__btn is-active" data-sort="desc" aria-pressed="true" data-i18n="experience.sortNewest">Newest first</button>
+            <button type="button" class="exp-sort__btn" data-sort="asc" aria-pressed="false" data-i18n="experience.sortOldest">Oldest first</button>
           </div>
         </div>
-        <p class="section__lede">A timeline of my roles. Click a card to reveal the details and top skills.</p>
+        <p class="section__lede" data-i18n="experience.lede">A timeline of my roles. Click a card to reveal the details and top skills.</p>
 
         <!-- Timeline is rendered from the EXPERIENCE data array in js/main.js.
              To add/edit a role or paste a LinkedIn URL, edit that array. -->
@@ -181,8 +190,8 @@
         <div class="race-strip" id="raceStrip" hidden>
           <div class="race-strip__head">
             <p class="path-label">experience/scrutineer/races</p>
-            <h3 class="race-strip__title">Scrutineer Marshal — Race Timeline</h3>
-            <p class="race-strip__lede">Motorsport events supported since March 2024, newest first.</p>
+            <h3 class="race-strip__title" data-i18n="motorsport.title">Scrutineer Marshal — Race Timeline</h3>
+            <p class="race-strip__lede" data-i18n="motorsport.lede">Motorsport events supported since March 2024, newest first.</p>
           </div>
           <div class="race-strip__track" aria-hidden="true">
             <svg class="race-strip__car" id="raceCar" viewBox="0 0 220 70" preserveAspectRatio="xMidYMid meet" focusable="false">
@@ -226,20 +235,21 @@
       </div>
       <div class="panel">
         <p class="path-label">projects/</p>
-        <h2 class="section__title" id="proj-h">Projects</h2>
-        <p class="section__lede">A showcase of my projects. Click a card to reveal the details and top skills.</p>
+        <h2 class="section__title" id="proj-h" data-i18n="projects.title">Projects</h2>
+        <p class="section__lede" data-i18n="projects.lede">A showcase of my projects. Click a card to reveal the details and top skills.</p>
 
         <!-- Projects render from the PROJECTS data in js/main.js.
              Each entry has: name, type, badge, frame ('phone'|'browser'),
-             accent, description, role, tags[], link. Edit there. -->
+             accent, description, role, tags[], link. Edit there. Arabic
+             overrides live in js/i18n.js (PROJECTS_AR), keyed by name. -->
         <div class="showcase">
           <section class="showcase__group" aria-labelledby="apps-h">
-            <h3 class="showcase__group-h" id="apps-h"><button type="button" class="showcase__group-kicker" data-scroll-to="apps-h" aria-label="Jump to Application projects">Applications</button> Mobile Apps</h3>
+            <h3 class="showcase__group-h" id="apps-h"><button type="button" class="showcase__group-kicker" data-scroll-to="apps-h" aria-label="Jump to Application projects" data-i18n-aria-label="projects.applicationsJumpAria" data-i18n="projects.applicationsKicker">Applications</button> <span class="showcase__group-title" data-i18n="projects.mobileAppsTitle">Mobile Apps</span></h3>
             <div class="showcase__grid showcase__grid--apps" id="appsGrid"></div>
           </section>
 
           <section class="showcase__group" aria-labelledby="sites-h">
-            <h3 class="showcase__group-h" id="sites-h"><button type="button" class="showcase__group-kicker" data-scroll-to="sites-h" aria-label="Jump to Website projects">Websites</button> Web Projects</h3>
+            <h3 class="showcase__group-h" id="sites-h"><button type="button" class="showcase__group-kicker" data-scroll-to="sites-h" aria-label="Jump to Website projects" data-i18n-aria-label="projects.websitesJumpAria" data-i18n="projects.websitesKicker">Websites</button> <span class="showcase__group-title" data-i18n="projects.webProjectsTitle">Web Projects</span></h3>
             <div class="showcase__grid showcase__grid--sites" id="sitesGrid"></div>
           </section>
         </div>
@@ -253,23 +263,24 @@
     <div class="footer__inner">
       <div class="footer__brand">
         <span class="logo footer__logo">LK<span class="logo__dot">.</span></span>
-        <span class="footer__tag">Software Engineering Student</span>
+        <span class="footer__tag" data-i18n="footer.tag">Software Engineering Student</span>
       </div>
       <div class="footer__icons">
-        <a class="iconbtn" href="https://github.com/leenkharraz" target="_blank" rel="noopener" aria-label="GitHub profile" data-tip="GitHub">
+        <a class="iconbtn" href="https://github.com/leenkharraz" target="_blank" rel="noopener" aria-label="GitHub profile" data-i18n-aria-label="footer.githubAria" data-tip="GitHub">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" fill="currentColor"/></svg>
         </a>
-        <a class="iconbtn" href="https://www.linkedin.com/in/leen-kharraz-a57869280" target="_blank" rel="noopener" aria-label="LinkedIn profile" data-tip="LinkedIn">
+        <a class="iconbtn" href="https://www.linkedin.com/in/leen-kharraz-a57869280" target="_blank" rel="noopener" aria-label="LinkedIn profile" data-i18n-aria-label="footer.linkedinAria" data-tip="LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3Zm6 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9Z" fill="currentColor"/></svg>
         </a>
-        <a class="iconbtn" href="https://x.com/leenkh7" target="_blank" rel="noopener" aria-label="X (Twitter) profile" data-tip="X">
+        <a class="iconbtn" href="https://x.com/leenkh7" target="_blank" rel="noopener" aria-label="X (Twitter) profile" data-i18n-aria-label="footer.xAria" data-tip="X">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3H20.5l-6.49 7.42L21.75 21h-6l-4.7-6.15L5.67 21H2.7l6.94-7.94L2.5 3h6.15l4.25 5.62L17.53 3Zm-1.05 16.2h1.64L7.6 4.72H5.84L16.48 19.2Z" fill="currentColor"/></svg>
         </a>
       </div>
     </div>
-    <p class="footer__copy">© 2026 Leen Kharraz. All rights reserved.</p>
+    <p class="footer__copy" data-i18n="footer.copy">© 2026 Leen Kharraz. All rights reserved.</p>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
