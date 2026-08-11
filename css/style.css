@@ -644,7 +644,7 @@ h1, h2, h3, h4 {
 
 @media (min-width: 768px) { .about__grid { grid-template-columns: 1.4fr 1fr; } }
 
-/* Small skills block under About (hero "Skills" button target) */
+/* Small skills block under About */
 .about__skills {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -1206,19 +1206,43 @@ h1, h2, h3, h4 {
   border: 1px solid color-mix(in srgb, var(--a, var(--mocha)) 40%, transparent);
   padding: 0.3em 0.8em;
   border-radius: var(--radius-pill);
+  /* Now a <button> that jumps to this group's first card — reset the
+     native button chrome so it stays pixel-identical to the old <span>. */
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  cursor: pointer;
+  line-height: normal;
+  transition: background 0.18s ease, border-color 0.18s ease;
 }
+.showcase__group-kicker:hover {
+  background: color-mix(in srgb, var(--a, var(--mocha)) 24%, transparent);
+  border-color: color-mix(in srgb, var(--a, var(--mocha)) 60%, transparent);
+}
+.showcase__group-kicker:focus-visible { outline: 2px solid var(--a, var(--mocha)); outline-offset: 2px; }
 .showcase__grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: minmax(0, 1fr);
 }
 @media (min-width: 640px) { .showcase__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* Apps: keep two side by side (Schoolo + Lume). Sites: a balanced
-   2×2 square of the four website cards — two per row, equal widths,
-   capped so the cards don't stretch on wide screens. */
+/* Apps: two per row, capped so cards don't stretch on wide screens.
+   Sites: same two-per-row cap, but the 3rd (.device-card--wide) card
+   spans both columns underneath — see the featured-card rules below. */
 @media (min-width: 980px) {
   .showcase__grid--apps  { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
   .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; }
+}
+
+/* Featured 3rd Website card only (.device-card--wide, set via p.wide in
+   PROJECTS.sites): spans both site columns on large screens, growing in
+   WIDTH only — .device-stage keeps the same min-height as every other
+   card, and the browser mockup gets an explicit height (instead of its
+   usual 16:10 aspect-ratio) so widening it doesn't also make it taller.
+   Scoped to .showcase__grid--sites so it never affects Application cards. */
+@media (min-width: 980px) {
+  .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
+  .showcase__grid--sites .device-card--wide .browser { max-width: 760px; height: 230px; }
 }
 
 /* --- The stage that holds a device, tinted with the section accent --- */
@@ -1431,6 +1455,8 @@ h1, h2, h3, h4 {
   color: rgba(244,239,231,0.6);
 }
 .device-overlay .btn { align-self: flex-start; margin-top: 0.3rem; }
+.device-overlay__actions { display: flex; flex-wrap: wrap; align-self: flex-start; gap: 0.6rem; margin-top: 0.3rem; }
+.device-overlay__actions .btn { margin-top: 0; }
 .device-tags { display: inline-flex; flex-wrap: wrap; gap: 0.2rem; }
 
 /* --- Featured card: device beside always-visible info --- */

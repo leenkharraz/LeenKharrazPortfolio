@@ -268,12 +268,16 @@ function selectRace(index) {
 
 /* ============================================================
    2. PROJECTS — grouped into apps (iPhone) and sites (browser).
-   frame  : "phone" | "browser"
-   accent : palette accent used for the badge + stage tint
-   link   : full URL, or "#" for a placeholder (button auto-disables)
-   tags   : meaningful, no duplicated "Tech Tech"
-   screen : optional path to a real screenshot shown inside the
-            device mockup; omit it to show the name-label preview.
+   frame     : "phone" | "browser"
+   accent    : palette accent used for the badge + stage tint
+   link      : full URL, or "#" for a placeholder (button auto-disables)
+   github    : optional repo URL; adds a secondary source-code button
+   hackathon : optional hackathon name; adds a "Hackathon" pill in the meta row
+   wide      : optional; spans both grid columns on large screens
+               (used for the 3rd Website card only — see .device-card--wide)
+   tags      : meaningful, no duplicated "Tech Tech"
+   screen    : optional path to a real screenshot shown inside the
+               device mockup; omit it to show the name-label preview.
    ============================================================ */
 const PROJECTS = {
   apps: [
@@ -298,6 +302,19 @@ const PROJECTS = {
       desc: "A UI/UX prototype designed in Figma for an event-planning mobile app — helping users organize events, manage tasks, and coordinate details through a clean, structured interface.",
       tags: ["UI/UX", "Figma", "Mobile Design"],
       link: "https://www.figma.com/design/zTjzMQZaucXDS3mLRmfJbc/Lume-Prototype?node-id=0-1",
+    },
+    {
+      name: "SANAD",
+      type: "Mobile App · KSCDR Hackathon",
+      badge: "App",
+      accent: "sage",
+      frame: "phone",
+      role: "Solo Developer & Designer",
+      hackathon: "KSCDR Hackathon",
+      desc: "Independently designed and developed for the KSCDR Hackathon, SANAD is an accessibility-focused companion app for people who are Deaf or hard of hearing, blind or low vision, or speech-impaired — built end-to-end by me, from live captioning and text-to-speech to an emergency SOS flow.",
+      tags: ["Accessibility", "Next.js", "PWA"],
+      link: "https://sanad-coral.vercel.app/",
+      github: "https://github.com/leenkharraz/Sanad",
     },
   ],
   sites: [
@@ -324,28 +341,18 @@ const PROJECTS = {
       link: "https://leenkharraz.github.io/CardMagic/",
     },
     {
-      name: "Personal Portfolio",
-      type: "Website",
+      name: "FAHEEM",
+      type: "Website · Tuwaiq × Google Hackathon",
       badge: "Website",
       accent: "blue",
       frame: "browser",
-      role: "Developer / Designer",
-      desc: "My original personal portfolio project, built to present my background, skills, experience, and early software projects.",
-      tags: ["Website", "HTML/CSS", "Responsive"],
-      link: "https://leenkharraz.github.io/MyProtfolio/",
-    },
-    {
-      name: "Portfolio Redesign",
-      type: "Website",
-      badge: "Website",
-      /* Shares Lume's exact accent (see PROJECTS.apps above) so the
-         redesign reuses the same theme tokens instead of a new color. */
-      accent: "apricot",
-      frame: "browser",
-      role: "Developer / Designer",
-      desc: "A redesigned and improved portfolio with a stronger visual identity, cleaner structure, better responsiveness, and a more refined presentation of my experience and projects.",
-      tags: ["Website", "UI/UX", "Responsive"],
-      link: "https://leenkharraz.github.io/LeenPortfolio/",
+      role: "Web Developer",
+      hackathon: "Tuwaiq × Google Hackathon",
+      desc: "Built for the Tuwaiq × Google Hackathon, FAHEEM is an AI-powered classroom analytics platform that turns raw assessment scores into learning-gap insights, student groupings, and prioritized intervention plans for teachers, with a fully Arabic, RTL-first interface.",
+      tags: ["Website", "Next.js", "AI Integration"],
+      link: "https://faheem-nine.vercel.app/",
+      github: "https://github.com/leenkharraz/Faheem",
+      wide: true,
     },
   ],
 };
@@ -457,10 +464,14 @@ const PROJECTS = {
   /* ---------- Render PROJECTS (apps + sites) ---------- */
   function projectCard(p) {
     const frameClass = p.frame === "browser" ? "device-card--browser" : "device-card--phone";
+    const wideClass = p.wide ? " device-card--wide" : "";
     const isBrowser = frameClass === "device-card--browser";
     const hasLink = !!(p.link && p.link !== "#");
     const cta = isBrowser ? "Visit Site →" : "View Prototype →";
     const tags = p.tags.map((t) => `<span class="pill pill--${p.accent}">${esc(t)}</span>`).join("");
+    const hackathonRow = p.hackathon
+      ? `<span class="k">Hackathon</span><span class="device-tags"><span class="pill pill--${p.accent}">${esc(p.hackathon)}</span></span>`
+      : "";
     const screen = p.screen
       ? `<div class="device-screen project-screen">
           <img class="device-screen__img" src="${esc(p.screen)}" alt="${esc(p.name)} — site preview" loading="lazy">
@@ -479,8 +490,14 @@ const PROJECTS = {
     const ctaHtml = hasLink
       ? `<a class="btn btn--small btn--accent" href="${esc(p.link)}" target="_blank" rel="noopener">${cta}</a>`
       : "";
+    const githubHtml = p.github
+      ? `<a class="btn btn--small btn--ghost" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub →</a>`
+      : "";
+    const actionsHtml = (ctaHtml || githubHtml)
+      ? `<div class="device-overlay__actions">${ctaHtml}${githubHtml}</div>`
+      : "";
     return `
-      <article class="device-card ${frameClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(p.type)}, tap to reveal details">
+      <article class="device-card ${frameClass}${wideClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(p.type)}, tap to reveal details">
         <div class="device-stage">
           <span class="device-badge${isBrowser ? " device-badge--alt" : ""}">${esc(p.badge)}</span>
           ${frame}
@@ -491,8 +508,9 @@ const PROJECTS = {
             <div class="device-overlay__meta">
               <span class="k">Tech</span><span class="device-tags">${tags}</span>
               <span class="k">Role</span><span>${esc(p.role)}</span>
+              ${hackathonRow}
             </div>
-            ${ctaHtml}
+            ${actionsHtml}
           </div>
         </div>
       </article>`;
@@ -502,6 +520,22 @@ const PROJECTS = {
     const sites = document.getElementById("sitesGrid");
     if (apps) apps.innerHTML = PROJECTS.apps.map(projectCard).join("");
     if (sites) sites.innerHTML = PROJECTS.sites.map(projectCard).join("");
+  }
+
+  /* ---------- "Applications" / "Websites" pills: jump straight to that
+     group's first card, clearing the sticky nav (both groups always stay
+     rendered — this is navigation, not filtering). ---------- */
+  function bindProjectGroupJumps() {
+    document.querySelectorAll(".showcase__group-kicker[data-scroll-to]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const heading = document.getElementById(btn.dataset.scrollTo);
+        if (!heading) return;
+        const nav = document.querySelector(".nav");
+        const navH = nav ? nav.getBoundingClientRect().height : 0;
+        const top = heading.getBoundingClientRect().top + window.scrollY - navH - 16;
+        window.scrollTo({ top: Math.max(top, 0), behavior: prefersReducedMotion ? "auto" : "smooth" });
+      });
+    });
   }
 
   /* ---------- Hero code-editor typing animation ---------- */
@@ -546,6 +580,7 @@ const PROJECTS = {
   bindExperienceSort();
   renderMotorsportTimeline();
   renderProjects();
+  bindProjectGroupJumps();
   setTimeout(typeHeroCode, 350);
 
   /* ---------- Theme toggle (default dark, persisted) ---------- */
