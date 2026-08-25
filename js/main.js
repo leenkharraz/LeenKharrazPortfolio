@@ -22,12 +22,12 @@ const EXPERIENCE = [
     role: "Software Engineering Intern — Backend",
     org: "Ting",
     orgUrl: "https://www.linkedin.com/company/tingsaudi/about/",
-    date: "Jun 2026 – Present",
+    date: "Jun 2026 – Aug 2026",
     sortDate: "2026-06",
     location: "",
     accent: "berry",
     tags: ["Internship", "Backend"],
-    desc: "Supporting backend development work, API-related tasks, branch management, and technical coordination within the project.",
+    desc: "Supported backend development work, API-related tasks, branch management, and technical coordination within the project.",
     skills: ["Backend Operations", "Branch Management", "API Integration"],
   },
   {
@@ -106,7 +106,7 @@ const EXPERIENCE = [
     role: "Vice Team Leader",
     org: "Bashosh Volunteer Team",
     orgUrl: "https://www.linkedin.com/company/%D9%81%D8%B1%D9%8A%D9%82-%D8%A8%D8%B4%D9%88%D8%B4-%D8%A7%D9%84%D8%AA%D8%B7%D9%88%D8%B9%D9%8A/posts/?feedView=all",
-    date: "Mar 2025 – Nov 2025 · 9 mos",
+    date: "Mar 2025 – Nov 2025",
     sortDate: "2025-03",
     location: "",
     accent: "olive",
@@ -299,6 +299,43 @@ function selectRace(index) {
 }
 
 /* ============================================================
+   TECH_ICONS — logo lookup for project tag chips. A tag whose
+   normalized text matches a key here renders as a small square logo
+   chip (see renderTagOrIcon); every other tag renders as the existing
+   text pill, unchanged — so category/concept tags ("Website", "API",
+   "Teamwork", "UI/UX"...) are left alone on purpose, only real
+   technologies/tools/platforms get a logo.
+
+   Lookup is case/punctuation-insensitive so it matches the same tag
+   spelled identically in the English PROJECTS data and the Arabic
+   PROJECTS_AR overrides in js/i18n.js — technology names are kept in
+   Latin script in both, so one map covers both languages.
+
+   Add a new technology by dropping its SVG in
+   assets/icons/technologies/ and adding one line below.
+   ============================================================ */
+const TECH_ICONS = {
+  javascript: { name: "JavaScript", file: "javascript.svg" },
+  nextjs:     { name: "Next.js",    file: "nextdotjs.svg" },
+  figma:      { name: "Figma",      file: "figma.svg" },
+  pwa:        { name: "PWA",        file: "pwa.svg" },
+  replit:     { name: "Replit",     file: "replit.svg" },
+};
+function techIconKey(tag) {
+  return String(tag).toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+/* Renders a known technology as a small logo chip (tooltip + aria-label
+   carry the name, since the visible face is icon-only); falls back to
+   the existing text pill for anything not in TECH_ICONS above — so a
+   tag never disappears or breaks the page just because it has no icon
+   yet. */
+function renderTagOrIcon(tag, accent) {
+  const icon = TECH_ICONS[techIconKey(tag)];
+  if (!icon) return `<span class="pill pill--${accent}">${esc(tag)}</span>`;
+  return `<span class="tech-icon" tabindex="0" aria-label="${esc(icon.name)}" data-tip="${esc(icon.name)}"><img src="assets/icons/technologies/${icon.file}" alt="" aria-hidden="true" width="20" height="20" loading="lazy"></span>`;
+}
+
+/* ============================================================
    2. PROJECTS — grouped into apps (iPhone) and sites (browser).
    frame     : "phone" | "browser"
    accent    : palette accent used for the badge + stage tint
@@ -307,7 +344,9 @@ function selectRace(index) {
    hackathon : optional hackathon name; adds a "Hackathon" pill in the meta row
    wide      : optional; spans both grid columns on large screens
                (used for the 3rd Website card only — see .device-card--wide)
-   tags      : meaningful, no duplicated "Tech Tech"
+   tags      : meaningful, no duplicated "Tech Tech"; a tag matching
+               TECH_ICONS above renders as a logo chip instead of text
+               (see renderTagOrIcon)
    screen    : optional path to a real screenshot shown inside the
                device mockup; omit it to show the name-label preview.
    ============================================================ */
@@ -321,7 +360,7 @@ const PROJECTS = {
       frame: "phone",
       role: "Co-founder / Software Engineering Student",
       desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
-      tags: ["App", "Product Thinking", "UI/UX"],
+      tags: ["App", "Product Thinking", "UI/UX", "Replit"],
       link: "#", // [LEEN: add link when available]
     },
     {
@@ -516,6 +555,7 @@ const PROJECTS = {
     /* PROJECTS_AR is keyed by the English `name` (already unique per
        entry), so the PROJECTS data above never needs to change or
        duplicate for Arabic — see js/i18n.js. */
+    const pName = tField(PROJECTS_AR, p.name, "name", p.name);
     const pType = tField(PROJECTS_AR, p.name, "type", p.type);
     const pRole = tField(PROJECTS_AR, p.name, "role", p.role);
     const pDesc = tField(PROJECTS_AR, p.name, "desc", p.desc);
@@ -524,16 +564,16 @@ const PROJECTS = {
     const badgeText = p.badge === "Website" ? t("projects.badgeWebsite") : t("projects.badgeApp");
     const cta = (isBrowser ? t("projects.ctaVisitSite") : t("projects.ctaViewPrototype")) + " " + arrow;
 
-    const tags = pTags.map((tag) => `<span class="pill pill--${p.accent}">${esc(tag)}</span>`).join("");
+    const tags = pTags.map((tag) => renderTagOrIcon(tag, p.accent)).join("");
     const hackathonRow = pHackathon
       ? `<span class="k">${esc(t("projects.metaHackathon"))}</span><span class="device-tags"><span class="pill pill--${p.accent}">${esc(pHackathon)}</span></span>`
       : "";
     const screen = p.screen
       ? `<div class="device-screen project-screen">
-          <img class="device-screen__img" src="${esc(p.screen)}" alt="${esc(p.name)} — site preview" loading="lazy">
+          <img class="device-screen__img" src="${esc(p.screen)}" alt="${esc(pName)} — site preview" loading="lazy">
         </div>`
       : `<div class="device-screen project-screen">
-        <span class="project-screen__label">${esc(p.name)}</span>
+        <span class="project-screen__label">${esc(pName)}</span>
       </div>`;
     const frame = isBrowser
       ? `<div class="browser">
@@ -553,13 +593,13 @@ const PROJECTS = {
       ? `<div class="device-overlay__actions">${ctaHtml}${githubHtml}</div>`
       : "";
     return `
-      <article class="device-card ${frameClass}${wideClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(p.name)} — ${esc(pType)}${esc(t("projects.cardAriaSuffix"))}">
+      <article class="device-card ${frameClass}${wideClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(pName)} — ${esc(pType)}${esc(t("projects.cardAriaSuffix"))}">
         <div class="device-stage">
           <span class="device-badge${isBrowser ? " device-badge--alt" : ""}">${esc(badgeText)}</span>
           ${frame}
           <div class="device-overlay">
             <p class="device-overlay__type">${esc(pType)}</p>
-            <h3 class="device-overlay__name">${esc(p.name)}</h3>
+            <h3 class="device-overlay__name">${esc(pName)}</h3>
             <p class="device-overlay__desc">${esc(pDesc)}</p>
             <div class="device-overlay__meta">
               <span class="k">${esc(t("projects.metaTech"))}</span><span class="device-tags">${tags}</span>
@@ -604,7 +644,7 @@ const PROJECTS = {
     if (!codeEl) return;
     const tokens = [
       { t: "const ", c: "kw" }, { t: "leen", c: "var" }, { t: " = {\n  ", c: "" },
-      { t: "name", c: "key" }, { t: ": ", c: "" }, { t: `"Leen Kharraz"`, c: "str" }, { t: ",\n  ", c: "" },
+      { t: "name", c: "key" }, { t: ": ", c: "" }, { t: `"${heroCodeStr("Leen Kharraz")}"`, c: "str" }, { t: ",\n  ", c: "" },
       { t: "role", c: "key" }, { t: ": ", c: "" }, { t: `"${heroCodeStr("Software Engineering Student")}"`, c: "str" }, { t: ",\n  ", c: "" },
       { t: "openTo", c: "key" }, { t: ": [", c: "" },
       { t: `"${heroCodeStr("Internships")}"`, c: "str" }, { t: ", ", c: "" },

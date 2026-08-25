@@ -1232,22 +1232,24 @@ h1, h2, h3, h4 {
   gap: 1.5rem;
   grid-template-columns: minmax(0, 1fr);
 }
+/* Tablet and up: two per row. */
 @media (min-width: 640px) { .showcase__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* Apps: two per row, capped so cards don't stretch on wide screens.
-   Sites: same two-per-row cap, but the 3rd (.device-card--wide) card
-   spans both columns underneath — see the featured-card rules below. */
-@media (min-width: 980px) {
-  .showcase__grid--apps  { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
-  .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; }
+/* Laptop/desktop and up: three per row, so cards sit at a sensible
+   width instead of stretching into two oversized ones. No extra
+   max-width is needed here — the outer .section already caps the
+   whole panel at --content-max (1200px), which is what keeps the grid
+   from stretching further on huge displays. */
+@media (min-width: 1100px) {
+  .showcase__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* Featured 3rd Website card only (.device-card--wide, set via p.wide in
-   PROJECTS.sites): spans both site columns on large screens, growing in
-   WIDTH only — .device-stage keeps the same min-height as every other
-   card, and the browser mockup gets an explicit height (instead of its
-   usual 16:10 aspect-ratio) so widening it doesn't also make it taller.
-   Scoped to .showcase__grid--sites so it never affects Application cards. */
-@media (min-width: 980px) {
+/* Featured 3rd Website card (.device-card--wide, set via p.wide in
+   PROJECTS.sites): spans both columns only in the two-column tablet/
+   small-desktop range, where 3 cards would otherwise leave an orphan
+   on its own row. At three-per-row (≥1100px) all three site cards sit
+   evenly in one row instead — "cards in the same row should have
+   consistent sizing" — so the span is switched off there. */
+@media (min-width: 980px) and (max-width: 1099.98px) {
   .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
   .showcase__grid--sites .device-card--wide .browser { max-width: 760px; height: 230px; }
 }
@@ -1291,7 +1293,11 @@ h1, h2, h3, h4 {
 /* --- iPhone frame (pure CSS, drop a screenshot into the screen) --- */
 .iphone {
   position: relative;
-  width: min(210px, 60%);
+  /* Floor (170px) keeps the name-label preview (e.g. "Schoolo") from
+     clipping inside the screen once cards get narrower at 3-per-row;
+     the 60% term is what naturally shrinks the mockup a bit on
+     desktop, without needing a separate breakpoint override. */
+  width: clamp(170px, 60%, 210px);
   aspect-ratio: 9 / 19;
   background: #16151a;
   border-radius: 34px;
@@ -1464,7 +1470,61 @@ h1, h2, h3, h4 {
 .device-overlay .btn { align-self: flex-start; margin-top: 0.3rem; }
 .device-overlay__actions { display: flex; flex-wrap: wrap; align-self: flex-start; gap: 0.6rem; margin-top: 0.3rem; }
 .device-overlay__actions .btn { margin-top: 0; }
-.device-tags { display: inline-flex; flex-wrap: wrap; gap: 0.2rem; }
+.device-tags { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem; }
+
+/* --- Technology/tool logo chip (see renderTagOrIcon in js/main.js) ---
+   Small square, logo centered on a light chip so brand marks stay
+   readable regardless of theme — the parent .device-overlay is always
+   a dark surface by design (see its gradient above), same as the
+   footer's .iconbtn tooltip pattern this reuses. Tooltip + aria-label
+   carry the technology name since the visible face is icon-only. */
+.tech-icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  margin: 0.15rem 0.15rem 0.15rem 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tech-icon img { width: 18px; height: 18px; display: block; }
+.tech-icon:hover,
+.tech-icon:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+.tech-icon:focus-visible { outline: 2px solid var(--apricot); outline-offset: 2px; }
+.tech-icon::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  white-space: nowrap;
+  background: var(--card-hi);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.3em 0.6em;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+/* :active covers touch — a tap shows the tooltip too, not just hover. */
+.tech-icon:hover::after,
+.tech-icon:focus-visible::after,
+.tech-icon:active::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* --- Featured card: device beside always-visible info --- */
 .device-card--featured .device-stage { min-height: 420px; }
@@ -1823,6 +1883,7 @@ h1, h2, h3, h4 {
 :root[dir="rtl"] .race-strip__node,
 :root[dir="rtl"] .race-detail__info,
 :root[dir="rtl"] .footer__tag,
+:root[dir="rtl"] .hero__copy,
 :root[dir="rtl"] .btn {
   direction: rtl;
 }
@@ -1833,6 +1894,35 @@ h1, h2, h3, h4 {
   direction: ltr;
   text-align: left;
   unicode-bidi: isolate;
+}
+/* Hero, Arabic only: mirror the two-column layout so the name/copy
+   sits on the right and the code editor sits on the left — this is
+   the one place the design should feel mirrored, not just re-worded,
+   since "copy reads first, editor illustrates" only lands as RTL if
+   copy is on the side Arabic readers land on first. */
+:root[dir="rtl"] .hero__ghost {
+  left: auto;
+  right: -0.03em;
+}
+:root[dir="rtl"] .hero__cta {
+  justify-content: flex-end;
+}
+/* Projects category headers ("Applications  Mobile Apps"): the kicker
+   pill + title pin their LTR order (see the direction:ltr rule on
+   .showcase__group-h above) so "Applications" doesn't swap sides with
+   "Mobile Apps", but .showcase__group-h is a flex row whose default
+   justify-content (flex-start) then hugs that pinned pair to the left
+   edge — leaving the whole heading floating in dead space instead of
+   starting from the right, where Arabic reading begins. flex-end
+   anchors the pinned pair to the right edge without reordering it. */
+:root[dir="rtl"] .showcase__group-h {
+  justify-content: flex-end;
+}
+@media (min-width: 900px) {
+  :root[dir="rtl"] .hero__inner {
+    grid-template-areas: "editor copy" "editor cta";
+    grid-template-columns: 0.95fr 1.05fr;
+  }
 }
 /* Bashosh's role-progression steps keep their connector dot/line
    pinned to the physical left (position:absolute, unaffected by

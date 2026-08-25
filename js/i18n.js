@@ -43,6 +43,7 @@ const UI = {
 
     "hero.introAria": "Introduction",
     "hero.ghost": "Portfolio",
+    "hero.name": "Leen Kharraz",
     "hero.role": "Software Engineering Student",
     "hero.contact": "Contact Me",
     "hero.projects": "Projects",
@@ -62,6 +63,8 @@ const UI = {
     "about.toolsLabel": "Tools & Project Management",
     "about.pill.projectManagement": "Project Management",
     "about.pill.leadership": "Leadership",
+    "about.tabLabel": "about",
+    "about.pathLabel": "about/",
 
     "experience.title": "Experience",
     "experience.sortAria": "Sort experience by date",
@@ -72,9 +75,13 @@ const UI = {
     "experience.topSkills": "Top skills",
     "experience.viewRaces": "View Races",
     "experience.present": "Present",
+    "experience.tabLabel": "experience",
+    "experience.pathLabel": "experience/",
+    "experience.racesPathLabel": "experience/scrutineer/races",
 
     "motorsport.title": "Scrutineer Marshal — Race Timeline",
     "motorsport.lede": "Motorsport events supported since March 2024, newest first.",
+    "motorsport.selectRaceAria": "Select a race event",
     "motorsport.selectedRace": "Selected Race",
     "motorsport.photosComingSoon": "Race photos coming soon",
 
@@ -95,6 +102,8 @@ const UI = {
     "projects.metaRole": "Role",
     "projects.metaHackathon": "Hackathon",
     "projects.cardAriaSuffix": ", tap to reveal details",
+    "projects.tabLabel": "projects",
+    "projects.pathLabel": "projects/",
 
     "footer.tag": "Software Engineering Student",
     "footer.githubAria": "GitHub profile",
@@ -115,11 +124,12 @@ const UI = {
     "nav.closeMenu": "إغلاق القائمة",
     "nav.themeToLight": "التبديل إلى الوضع الفاتح",
     "nav.themeToDark": "التبديل إلى الوضع الداكن",
-    "nav.langToArabic": "Switch to Arabic",
+    "nav.langToArabic": "التبديل إلى العربية",
     "nav.langToEnglish": "التبديل إلى الإنجليزية",
 
     "hero.introAria": "مقدمة",
     "hero.ghost": "ملف الأعمال",
+    "hero.name": "لين خراز",
     "hero.role": "طالبة هندسة برمجيات",
     "hero.contact": "تواصل معي",
     "hero.projects": "المشاريع",
@@ -139,6 +149,8 @@ const UI = {
     "about.toolsLabel": "الأدوات وإدارة المشاريع",
     "about.pill.projectManagement": "إدارة المشاريع",
     "about.pill.leadership": "القيادة",
+    "about.tabLabel": "نبذة عني",
+    "about.pathLabel": "نبذة-عني/",
 
     "experience.title": "الخبرات",
     "experience.sortAria": "ترتيب الخبرات حسب التاريخ",
@@ -149,9 +161,13 @@ const UI = {
     "experience.topSkills": "أبرز المهارات",
     "experience.viewRaces": "عرض السباقات",
     "experience.present": "حتى الآن",
+    "experience.tabLabel": "الخبرات",
+    "experience.pathLabel": "الخبرات/",
+    "experience.racesPathLabel": "الخبرات/الفحص-الفني/السباقات",
 
     "motorsport.title": "مسؤولة الفحص الفني — الجدول الزمني للسباقات",
     "motorsport.lede": "فعاليات رياضة السيارات التي شاركت فيها منذ مارس 2024، الأحدث أولاً.",
+    "motorsport.selectRaceAria": "اختيار سباق",
     "motorsport.selectedRace": "السباق المختار",
     "motorsport.photosComingSoon": "صور السباق قريبًا",
 
@@ -172,6 +188,8 @@ const UI = {
     "projects.metaRole": "الدور",
     "projects.metaHackathon": "الهاكاثون",
     "projects.cardAriaSuffix": "، اضغط لعرض التفاصيل",
+    "projects.tabLabel": "المشاريع",
+    "projects.pathLabel": "المشاريع/",
 
     "footer.tag": "طالبة هندسة برمجيات",
     "footer.githubAria": "الملف الشخصي على GitHub",
@@ -184,9 +202,10 @@ const UI = {
 /* ---------- EXPERIENCE — keyed by exact `org` string ---------- */
 const EXPERIENCE_AR = {
   "Ting": {
-    role: "متدربة هندسة برمجيات — الواجهة الخلفية",
-    date: "يونيو 2026 – حتى الآن",
-    desc: "المساهمة في أعمال تطوير الواجهة الخلفية، والمهام المرتبطة بواجهات البرمجة (API)، وإدارة الفروع البرمجية، والتنسيق التقني ضمن المشروع.",
+    org: "تنج",
+    role: "متدربة هندسة برمجيات",
+    date: "يونيو 2026 – أغسطس 2026",
+    desc: "ساهمت في أعمال تطوير الواجهة الخلفية، والمهام المرتبطة بواجهات البرمجة (API)، وإدارة الفروع البرمجية، والتنسيق التقني ضمن المشروع.",
     tags: ["تدريب", "الواجهة الخلفية"],
     skills: ["عمليات الواجهة الخلفية", "إدارة الفروع البرمجية", "ربط واجهات البرمجة (API)"],
   },
@@ -199,6 +218,7 @@ const EXPERIENCE_AR = {
     skills: ["إدارة المشاريع البرمجية", "تحليل المتطلبات", "التنسيق التقني"],
   },
   "Local Organising Committee": {
+    org: "اللجنة المحلية المنظمة",
     role: "أخصائية تجربة الفعاليات",
     date: "أبريل 2026",
     desc: "تطوعت في عمليات الفعاليات وأنشطة الدعم لفعالية كروية كبرى، والمساهمة في تجربة الحضور وتنسيق الفعالية.",
@@ -214,6 +234,7 @@ const EXPERIENCE_AR = {
     skills: ["إدارة المشاريع", "التوعية بالذكاء الاصطناعي", "العمل الجماعي"],
   },
   "Google Developer Group on Campus": {
+    org: "مجموعة مطوري قوقل",
     role: "منسقة إدارة المشاريع",
     date: "نوفمبر 2025 – حتى الآن",
     desc: "قيادة التخطيط وتوليد الأفكار لفعاليات جامعية موجهة للمطورين، وصياغة مفاهيم الفعاليات والجداول الزمنية وتوزيع المهام على الفريق.",
@@ -239,14 +260,14 @@ const EXPERIENCE_AR = {
   "Bashosh Volunteer Team": {
     org: "فريق بشوش التطوعي",
     role: "نائبة قائد الفريق",
-    date: "مارس 2025 – نوفمبر 2025 · 9 أشهر",
+    date: "مارس 2025 – نوفمبر 2025",
     desc: "شغلت منصب نائبة قائد فريق بشوش التطوعي، حيث تولّت تنسيق المتطوعين وتخطيط الفعاليات والتواصل المجتمعي ضمن مبادرات إنسانية.",
     tags: ["عمل تطوعي", "القيادة"],
     skills: ["إدارة المتطوعين", "التخطيط", "القيادة"],
     roleSteps: [
       "نائبة رئيس قسم التخطيط والإدارة",
       "رئيسة قسم التخطيط والإدارة",
-      "عضو إداري أول",
+      "إدارة عليا",
       "نائبة قائد الفريق",
     ],
   },
@@ -263,18 +284,21 @@ const EXPERIENCE_AR = {
 /* ---------- PROJECTS — keyed by exact `name` ---------- */
 const PROJECTS_AR = {
   "Schoolo": {
+    name: "سكولو",
     type: "تطبيق جوال · فكرة ناشئة",
     role: "شريكة مؤسسة / طالبة هندسة برمجيات",
     desc: "منصة للبحث عن المدارس ومقارنتها تساعد أولياء الأمور في السعودية على إيجاد المدارس الأهلية ومقارنتها في مكان واحد — من خلال تنظيم الرسوم والمناهج والمرافق والقبول والتقييمات في تجربة أوضح.",
-    tags: ["تطبيق", "التفكير المنتجي", "UI/UX"],
+    tags: ["تطبيق", "التفكير المنتجي", "UI/UX", "Replit"],
   },
   "Lume": {
+    name: "لومي",
     type: "تطبيق جوال · مشروع UI/UX",
     role: "مصممة UI/UX",
     desc: "نموذج أولي لتجربة وواجهة المستخدم مصمم في Figma لتطبيق جوال لتنظيم الفعاليات — يساعد المستخدمين على تنظيم الفعاليات وإدارة المهام وتنسيق التفاصيل من خلال واجهة نظيفة ومنظمة.",
     tags: ["UI/UX", "Figma", "تصميم تطبيقات الجوال"],
   },
   "SANAD": {
+    name: "سند",
     type: "تطبيق جوال · KSCDR Hackathon",
     role: "مطورة ومصممة منفردة",
     hackathon: "KSCDR Hackathon",
@@ -282,18 +306,21 @@ const PROJECTS_AR = {
     tags: ["إمكانية الوصول", "Next.js", "PWA"],
   },
   "F1 Driver Lookup": {
+    name: "البحث عن سائقين فورميلا ١",
     type: "موقع إلكتروني · مشروع API",
     role: "مطورة واجهات أمامية",
     desc: "تطبيق ويب للبحث واستكشاف سائقي الفورمولا 1 حسب الموسم، باستخدام واجهة برمجة التطبيقات Ergast API لجلب بيانات رياضة السيارات وعرض معلومات السائقين ديناميكيًا على الصفحة.",
     tags: ["موقع إلكتروني", "API", "JavaScript"],
   },
   "Card Magic": {
+    name: "سحر البطاقات",
     type: "موقع إلكتروني",
     role: "مطورة ويب",
     desc: "تطبيق ويب تعاوني (مشروع جماعي) لإنشاء وتخصيص بطاقات تهنئة رقمية للاحتفالات والمناسبات وأعياد الميلاد والفعاليات الخاصة — يعكس العمل الجماعي والتفاعل الوظيفي.",
     tags: ["موقع إلكتروني", "JavaScript", "العمل الجماعي"],
   },
   "FAHEEM": {
+    name: "فهيم",
     type: "موقع إلكتروني · Tuwaiq × Google Hackathon",
     role: "مطورة ويب",
     hackathon: "Tuwaiq × Google Hackathon",
@@ -302,25 +329,26 @@ const PROJECTS_AR = {
   },
 };
 
-/* ---------- MOTORSPORT_RACES — keyed by `id`; only date (and, for
-   the one non-brand event name) needs translation. Global racing-series
-   brand names (Formula E, F4, WRC, Formula 1, GT Fanatec) stay as-is
-   per the "don't translate established brands" rule. ---------- */
+/* ---------- MOTORSPORT_RACES — keyed by `id`. Race/event names are
+   translated to their natural Arabic form (Saudi motorsport-media
+   usage, e.g. the Saudi Press Agency's own wording for the Jeddah
+   Fanatec GT round), not literal word-for-word translations. ---------- */
 const MOTORSPORT_AR = {
-  "formula-e-2026":    { date: "فبراير 2026" },
-  "f4-2025":           { date: "ديسمبر 2025" },
-  "wrc-2025":          { date: "نوفمبر 2025" },
-  "formula-1-2025":    { date: "أبريل 2025" },
+  "formula-e-2026":    { name: "فورمولا إي", date: "فبراير 2026" },
+  "f4-2025":           { name: "فورمولا 4", date: "ديسمبر 2025" },
+  "wrc-2025":          { name: "بطولة العالم للراليات (WRC)", date: "نوفمبر 2025" },
+  "formula-1-2025":    { name: "فورمولا 1", date: "أبريل 2025" },
   "saudi-rally-2025":  { name: "رالي السعودية", date: "أبريل 2025" },
-  "formula-e-2025":    { date: "فبراير 2025" },
-  "gt-fanatec-2024":   { date: "نوفمبر 2024" },
-  "formula-2-2024":    { date: "مارس 2024" },
+  "formula-e-2025":    { name: "فورمولا إي", date: "فبراير 2025" },
+  "gt-fanatec-2024":   { name: "جي تي فاناتيك", date: "نوفمبر 2024" },
+  "formula-2-2024":    { name: "فورمولا 2", date: "مارس 2024" },
 };
 const MOTORSPORT_ROLE_AR = "مسؤولة الفحص الفني";
 
 /* ---------- Hero code-typing animation — Arabic values for the
    human-meaningful strings only; JS keys/punctuation stay as code. ---------- */
 const HERO_CODE_AR = {
+  "Leen Kharraz": "لين خراز",
   "Software Engineering Student": "طالبة هندسة برمجيات",
   "Internships": "التدريب",
   "Projects": "المشاريع",
