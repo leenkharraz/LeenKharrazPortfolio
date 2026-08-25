@@ -136,6 +136,29 @@ const EXPERIENCE = [
 ];
 
 /* ============================================================
+   ORG_LOGOS — small organization/company logo shown on the timeline
+   card, keyed by the EXPERIENCE entry's exact `org` string (same
+   keying convention as EXPERIENCE_AR). Only real, official logos are
+   listed here — an org with no entry simply renders without a logo
+   (see renderExperience), never a placeholder or invented mark.
+
+   Sources (see final report for the full list):
+   - Ting: official site (tingsaudi.com) wordmark
+   - Google Developer Group on Campus: GDG's square icon mark (the
+     official wordmark is a ~10:1 lockup, illegible at badge size)
+   - Local Organising Committee: official AFC Asian Cup Saudi Arabia
+     2027 tournament logo (this is the "major football event" the
+     entry's description refers to)
+   - Saudi Automobile & Motorcycle Federation: official SAMF site logo
+   ============================================================ */
+const ORG_LOGOS = {
+  "Ting": { file: "ting.png" },
+  "Google Developer Group on Campus": { file: "gdg.svg" },
+  "Local Organising Committee": { file: "afc-asian-cup-2027.svg" },
+  "Saudi Automobile & Motorcycle Federation": { file: "samf.svg" },
+};
+
+/* ============================================================
    MOTORSPORT_RACES — Scrutineer Marshal race timeline.
    Newest → oldest. The selected-race card shows only: the
    "Selected Race" eyebrow, the race name, the Scrutineer Marshal
@@ -321,7 +344,6 @@ const TECH_ICONS = {
   pwa:        { name: "PWA",        file: "pwa.svg" },
   replit:     { name: "Replit",     file: "replit.svg" },
   github:     { name: "GitHub",     file: "github.svg" },
-  claude:     { name: "Claude",     file: "claude.svg" },
   claudecode: { name: "Claude Code", file: "claudecode.svg" },
   codex:      { name: "Codex",      file: "codex.svg" },
   gemini:     { name: "Gemini",     file: "gemini.svg" },
@@ -384,7 +406,7 @@ function renderSkillIcon(name) {
 const SKILLS = {
   technical: [
     "HTML", "CSS", "JavaScript", "Node.js", "Figma", "MySQL", "Python",
-    "Replit", "Codex", "Claude", "GitHub",
+    "Replit", "Codex", "Claude Code", "GitHub",
     /* Confirmed by actual project data, not invented — Vercel hosts
        SANAD (js/i18n.js PROJECTS_AR.SANAD.tags), and API is F1 Driver
        Lookup's own tag (PROJECTS.sites). */
@@ -424,7 +446,7 @@ const PROJECTS = {
       frame: "phone",
       role: "Co-founder / Software Engineering Student",
       desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
-      tags: ["Replit", "Codex", "Claude", "GitHub"],
+      tags: ["Replit", "Codex", "Claude Code", "GitHub"],
       link: "#", // [LEEN: add link when available]
     },
     {
@@ -537,9 +559,16 @@ const PROJECTS = {
       const racesButton = x.hasRaces
         ? `<div class="tl-card__actions"><button type="button" class="btn btn--small btn--solid" id="viewRacesBtn" aria-expanded="false" aria-controls="raceStrip">${esc(t("experience.viewRaces"))}</button></div>`
         : "";
+      /* Rendered as a sibling of .tl-card (not nested inside it) so it
+         can visually overlap the card's edge — .tl-card has
+         overflow:hidden, which would otherwise clip it. */
+      const orgLogo = ORG_LOGOS[x.org]
+        ? `<div class="tl-logo"><img src="assets/icons/organizations/${ORG_LOGOS[x.org].file}" alt="" aria-hidden="true" loading="lazy"></div>`
+        : "";
       return `
       <li class="tl-item tl-item--${x.accent}">
         <div class="tl-dot" aria-hidden="true"></div>
+        ${orgLogo}
         <article class="tl-card">
           <button class="tl-card__head" aria-expanded="false">
             <div class="tl-card__tags">${tags}</div>
