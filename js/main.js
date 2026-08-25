@@ -19,16 +19,16 @@
    ============================================================ */
 const EXPERIENCE = [
   {
-    role: "Software Engineering Intern — Backend",
+    role: "Software Engineering Intern",
     org: "Ting",
     orgUrl: "https://www.linkedin.com/company/tingsaudi/about/",
     date: "Jun 2026 – Aug 2026",
     sortDate: "2026-06",
     location: "",
     accent: "berry",
-    tags: ["Internship", "Backend"],
-    desc: "Supported backend development work, API-related tasks, branch management, and technical coordination within the project.",
-    skills: ["Backend Operations", "Branch Management", "API Integration"],
+    tags: ["Internship", "Full-Stack"],
+    desc: "Worked across two company projects, contributing to full-stack development, AI agent and chatbot development, testing, and GitHub-based collaboration while using modern AI development tools throughout the engineering workflow.",
+    skills: ["Full-Stack Development", "AI Agent Development", "GitHub Collaboration"],
   },
   {
     role: "Software Engineer",
@@ -75,7 +75,7 @@ const EXPERIENCE = [
     location: "",
     accent: "olive",
     tags: ["University Club", "Project Management"],
-    desc: "Driving planning and ideation for developer-focused campus events, shaping event concepts, timelines, and task ownership across the team.",
+    desc: "Contributed to 4+ developer-focused workshops across multiple project management roles, supporting planning, coordination, task ownership, and event execution with the team.",
     skills: ["Event Planning", "Project Coordination", "Team Collaboration"],
   },
   {
@@ -99,7 +99,7 @@ const EXPERIENCE = [
     location: "",
     accent: "sage",
     tags: ["University Club", "Leadership"],
-    desc: "Led committee-level planning and supported club activities through coordination, task management, and team communication.",
+    desc: "Led the planning and delivery of 7+ in-person and online workshops, coordinating teams, timelines, responsibilities, and execution to ensure activities were delivered effectively.",
     skills: ["Committee Leadership", "Planning", "Team Coordination"],
   },
   {
@@ -111,7 +111,7 @@ const EXPERIENCE = [
     location: "",
     accent: "olive",
     tags: ["Volunteering", "Leadership"],
-    desc: "Served as Vice Team Leader for Bashosh Volunteer Team, managing volunteer coordination, event planning, and community outreach across humanitarian initiatives.",
+    desc: "Managed 200+ members across 7 departments as Vice Team Leader, overseeing team coordination, supporting departmental operations, and interviewing applicants during recruitment and team expansion.",
     skills: ["Volunteer Management", "Planning", "Leadership"],
     roleSteps: [
       "Co-Leader of Planning and Management Department",
@@ -129,7 +129,7 @@ const EXPERIENCE = [
     location: "",
     accent: "berry",
     tags: ["Sports Volunteering", "Motorsport", "Technical Inspection"],
-    desc: "Marshal since March 2024 across multiple motorsport events, part of a top-3 global Formula E technical inspection team while supporting inspection and compliance work.",
+    desc: "Participated as a Scrutineer Marshal in 7+ motorsport races and earned 3 motorsport certifications, supporting technical inspection, safety checks, and regulatory compliance across major racing events.",
     skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
     hasRaces: true,
   },

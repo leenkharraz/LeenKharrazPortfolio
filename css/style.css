@@ -536,7 +536,7 @@ h1, h2, h3, h4 {
 .foldertabs {
   display: inline-flex;
   align-items: flex-end;
-  margin-left: clamp(0.5rem, 2vw, 1.5rem);
+  margin-inline-start: clamp(0.5rem, 2vw, 1.5rem);
   position: relative;
   z-index: 2;
 }
@@ -560,7 +560,7 @@ h1, h2, h3, h4 {
 .foldertabs__tab--ghost,
 .foldertabs__tab--ghost2 {
   align-self: flex-start;
-  margin-left: -14px;
+  margin-inline-start: -14px;
   background: color-mix(in srgb, var(--a) 55%, var(--card));
 }
 .foldertabs__tab--ghost  { width: 52px; height: 26px; z-index: 2; }
@@ -634,7 +634,7 @@ h1, h2, h3, h4 {
 .filecard {
   background: var(--card);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--a, var(--apricot));
+  border-inline-start: 4px solid var(--a, var(--apricot));
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
 }
@@ -731,6 +731,12 @@ h1, h2, h3, h4 {
 /* ============================================================
    9. EXPERIENCE TIMELINE
    ============================================================ */
+/* Timeline structural positioning is intentionally physical (left/
+   right), not logical — it must stay pixel-identical between English
+   and Arabic: same spine position, same dot position, same which-side
+   each card sits on. Only the TEXT inside each card should respond to
+   language (see .tl-card__head's text-align: start below); the
+   geometry itself is language-independent by design. */
 .timeline { position: relative; margin-top: 1rem; padding-left: 2rem; }
 .timeline::before {
   content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
@@ -748,6 +754,7 @@ h1, h2, h3, h4 {
 .tl-item--olive   .tl-dot { background: var(--olive); }
 .tl-item--apricot .tl-dot { background: var(--apricot); }
 .tl-item--mocha   .tl-dot { background: var(--mocha); }
+.tl-item--sage    .tl-dot { background: var(--sage); }
 
 .tl-card {
   background: var(--card);
@@ -762,9 +769,15 @@ h1, h2, h3, h4 {
 .tl-item--olive   .tl-card { border-left: 4px solid var(--olive); }
 .tl-item--apricot .tl-card { border-left: 4px solid var(--apricot); }
 .tl-item--mocha   .tl-card { border-left: 4px solid var(--mocha); }
+.tl-item--sage    .tl-card { border-left: 4px solid var(--sage); }
 
+/* text-align: start (not a hardcoded "left") is what actually lets
+   the role/org/date text inside each card read right-aligned in
+   Arabic — it resolves per the inherited direction (rtl in Arabic,
+   ltr in English), independent of which physical side the card
+   itself sits on. */
 .tl-card__head {
-  display: block; width: 100%; text-align: left;
+  display: block; width: 100%; text-align: start;
   background: none; border: none; cursor: pointer;
   font: inherit; color: inherit; padding: 1.1rem 1.3rem;
 }
@@ -845,16 +858,22 @@ h1, h2, h3, h4 {
   color: var(--text-mut);
   margin-bottom: 0.5rem;
 }
+/* Unlike the main alternating timeline above, this mini list (Bashosh's
+   role progression) is single-column with a connector on one side
+   only — it has no "which side" structural meaning to preserve, so
+   (like .filecard's accent border) it uses logical properties: the
+   connector dot/line and the text both naturally move to the right
+   together in Arabic. */
 .mini-steps {
   position: relative;
   display: grid;
   gap: 0.45rem;
-  padding-left: 1.1rem;
+  padding-inline-start: 1.1rem;
 }
 .mini-steps::before {
   content: "";
   position: absolute;
-  left: 3px; top: 0.35em; bottom: 0.35em;
+  inset-inline-start: 3px; top: 0.35em; bottom: 0.35em;
   width: 2px;
   background: color-mix(in srgb, var(--ca, var(--mocha)) 40%, transparent);
 }
@@ -867,13 +886,20 @@ h1, h2, h3, h4 {
 .mini-steps__item::before {
   content: "";
   position: absolute;
-  left: -1.1rem; top: 0.4em;
+  inset-inline-start: -1.1rem; top: 0.4em;
   width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--ca, var(--mocha));
 }
 .mini-steps__item:last-child { color: var(--text); font-weight: 600; }
 
+/* Desktop alternating timeline: odd items sit physically LEFT, even
+   items physically RIGHT, dots facing the center spine — identical in
+   English and Arabic. This geometry is intentionally NOT
+   language-aware: the card a reader lands on for a given role must be
+   the same physical card in both languages, so only its own text
+   direction changes (see .tl-card__head { text-align: start } above),
+   never which side it sits on. */
 @media (min-width: 1024px) {
   .timeline { padding-left: 0; }
   .timeline::before { left: 50%; transform: translateX(-50%); }
@@ -1240,7 +1266,11 @@ h1, h2, h3, h4 {
    block must stay scoped to --sites only so it never affects
    Applications. ===== */
 @media (min-width: 640px) {
-  .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; }
+  /* margin-inline: auto centers the capped-width grid within the full
+     panel width instead of it hugging the start edge — same fix,
+     same visual result, in both languages, since centering is
+     symmetric regardless of direction. */
+  .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; margin-inline: auto; }
   .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
   /* The wide card's browser mockup gets an explicit height (instead of
      its usual 16:10 aspect-ratio) so spanning the full row width
@@ -1600,7 +1630,7 @@ h1, h2, h3, h4 {
   .device-card[tabindex]:not(.device-card--featured)::after {
     content: "Tap for details";
     position: absolute;
-    right: 1rem; bottom: 1rem;
+    inset-inline-end: 1rem; bottom: 1rem;
     z-index: 4;
     font-family: var(--font-mono);
     font-size: 0.6rem;
@@ -1854,6 +1884,13 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 560px) {
   .footer__inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  /* .footer__inner stays direction:ltr always (see the RTL section
+     below) so its brand-block/icons order never swaps at wider
+     widths, but that also pins this stacked mobile layout's
+     align-items to physical left regardless of language. There's no
+     "which side" ordering concern once it's a single-column stack, so
+     right-align the stack for Arabic specifically. */
+  :root[dir="rtl"] .footer__inner { align-items: flex-end; }
 }
 
 
@@ -1917,15 +1954,11 @@ h1, h2, h3, h4 {
   direction: rtl;
 }
 /* The browser-chrome URL bar is a real, never-translated URL, so it
-   always stays LTR. Most .path-label instances (about/experience/
-   projects/races) ARE translated content in Arabic now, though, and
-   should read like any other Arabic text — right-aligned, starting
-   from the right — so only the hero's own path-label (the personal
-   "~/leen-kharraz" handle, never translated either) keeps the
-   always-LTR treatment; every other .path-label just inherits the
-   page's current direction like normal text. */
-.browser__url,
-.hero__copy .path-label {
+   always stays LTR. Every .path-label (hero/about/experience/projects/
+   races) is translated content in Arabic — hero.pathLabel included,
+   see js/i18n.js — so they all just inherit the page's current
+   direction like normal text, reading right-aligned in Arabic. */
+.browser__url {
   direction: ltr;
   text-align: left;
   unicode-bidi: isolate;
@@ -1959,11 +1992,11 @@ h1, h2, h3, h4 {
     grid-template-columns: 0.95fr 1.05fr;
   }
 }
-/* Bashosh's role-progression steps keep their connector dot/line
-   pinned to the physical left (position:absolute, unaffected by
-   direction); left-align the step text too so it stays flush against
-   its own dot instead of drifting to the right. */
-:root[dir="rtl"] .mini-steps__item { text-align: left; }
+/* Bashosh's role-progression steps (.mini-steps) now use logical
+   properties (padding-inline-start / inset-inline-start) instead of
+   hardcoded left values, so the connector dot/line and text both
+   naturally flip to the right side in Arabic — no override needed
+   here anymore. */
 /* device-card's own reset above makes its heading/tags/description
    read RTL correctly; the CTA/GitHub button row was already forced ltr
    via .device-overlay__actions above, and its .btn children are reset
@@ -1985,7 +2018,9 @@ h1, h2, h3, h4 {
   transition-delay: var(--d, 0s);
 }
 .tl-item.is-visible { opacity: 1; transform: none; }
-/* Desktop: alternate a gentle slide from each side to match the two-column flow */
+/* Desktop: alternate a gentle slide from each side to match the two-column
+   flow — same physical sides in both languages, matching the cards
+   themselves never swapping sides (see the odd/even margin rules above). */
 @media (min-width: 1024px) {
   .tl-item:nth-child(odd)  { transform: translateX(-22px); }
   .tl-item:nth-child(even) { transform: translateX(22px); }
