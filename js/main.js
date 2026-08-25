@@ -299,20 +299,20 @@ function selectRace(index) {
 }
 
 /* ============================================================
-   TECH_ICONS — logo lookup for project tag chips. A tag whose
-   normalized text matches a key here renders as a small square logo
-   chip (see renderTagOrIcon); every other tag renders as the existing
-   text pill, unchanged — so category/concept tags ("Website", "API",
-   "Teamwork", "UI/UX"...) are left alone on purpose, only real
-   technologies/tools/platforms get a logo.
+   TECH_ICONS — single logo lookup shared by every technology/tool
+   chip on the site: project tag rows (renderTagOrIcon) AND the About
+   section's Skills lists (renderSkillIcon, SKILLS below). One map,
+   one visual component (.tech-icon, styled in css/style.css) — a
+   technology's logo, size, and tooltip behavior are defined once and
+   look identical everywhere it appears.
 
-   Lookup is case/punctuation-insensitive so it matches the same tag
-   spelled identically in the English PROJECTS data and the Arabic
-   PROJECTS_AR overrides in js/i18n.js — technology names are kept in
-   Latin script in both, so one map covers both languages.
+   Lookup is case/punctuation-insensitive so it matches the same name
+   spelled identically in English and Arabic data — technology names
+   are kept in Latin script in both, so one map covers both languages.
 
-   Add a new technology by dropping its SVG in
-   assets/icons/technologies/ and adding one line below.
+   Add a new technology by dropping its logo file (SVG preferred, PNG
+   is fine — see excel/word/powerpoint, which only exist as official
+   PNGs) in assets/icons/technologies/ and adding one line below.
    ============================================================ */
 const TECH_ICONS = {
   javascript: { name: "JavaScript", file: "javascript.svg" },
@@ -320,19 +320,83 @@ const TECH_ICONS = {
   figma:      { name: "Figma",      file: "figma.svg" },
   pwa:        { name: "PWA",        file: "pwa.svg" },
   replit:     { name: "Replit",     file: "replit.svg" },
+  github:     { name: "GitHub",     file: "github.svg" },
+  claude:     { name: "Claude",     file: "claude.svg" },
+  claudecode: { name: "Claude Code", file: "claudecode.svg" },
+  codex:      { name: "Codex",      file: "codex.svg" },
+  gemini:     { name: "Gemini",     file: "gemini.svg" },
+  vercel:     { name: "Vercel",     file: "vercel.svg" },
+  html:       { name: "HTML",       file: "html5.svg" },
+  css:        { name: "CSS",        file: "css.svg" },
+  nodejs:     { name: "Node.js",    file: "nodedotjs.svg" },
+  express:    { name: "Express",    file: "express.svg" },
+  mysql:      { name: "MySQL",      file: "mysql.svg" },
+  python:     { name: "Python",     file: "python.svg" },
+  notion:     { name: "Notion",     file: "notion.svg" },
+  clickup:    { name: "ClickUp",    file: "clickup.svg" },
+  canva:      { name: "Canva",      file: "canva.svg" },
+  mondaycom:  { name: "Monday.com", file: "monday.svg" },
+  excel:      { name: "Excel",      file: "excel.png" },
+  word:       { name: "Word",       file: "word.png" },
+  powerpoint: { name: "PowerPoint", file: "powerpoint.png" },
+  /* No official/recognizable logo exists for a bare "API" — clean
+     text-in-chip fallback instead of a fake logo (see renderTechChip). */
+  api:        { name: "API", fallbackText: "API" },
 };
 function techIconKey(tag) {
   return String(tag).toLowerCase().replace(/[^a-z0-9]/g, "");
 }
-/* Renders a known technology as a small logo chip (tooltip + aria-label
-   carry the name, since the visible face is icon-only); falls back to
-   the existing text pill for anything not in TECH_ICONS above — so a
-   tag never disappears or breaks the page just because it has no icon
-   yet. */
+/* Renders the visible face of one .tech-icon chip — a real logo <img>
+   or, for an entry with no `file` (see TECH_ICONS.api), a short text
+   mark inside the exact same square container, so a fallback never
+   reads as a stray leftover next to real logos. tooltip + aria-label
+   carry the name either way, since the visible face is icon-only. */
+function renderTechChip(icon) {
+  const inner = icon.file
+    ? `<img src="assets/icons/technologies/${icon.file}" alt="" aria-hidden="true" width="20" height="20" loading="lazy">`
+    : `<span class="tech-icon__fallback" aria-hidden="true">${esc(icon.fallbackText)}</span>`;
+  return `<span class="tech-icon" tabindex="0" aria-label="${esc(icon.name)}" data-tip="${esc(icon.name)}">${inner}</span>`;
+}
+/* Project tag → chip. Falls back to the legacy text pill only for a
+   tag that isn't in TECH_ICONS at all — a safety net against a data
+   typo, not a design path; every tag currently in PROJECTS/
+   PROJECTS_AR has an entry above so this should never actually
+   render for a project card. */
 function renderTagOrIcon(tag, accent) {
   const icon = TECH_ICONS[techIconKey(tag)];
   if (!icon) return `<span class="pill pill--${accent}">${esc(tag)}</span>`;
-  return `<span class="tech-icon" tabindex="0" aria-label="${esc(icon.name)}" data-tip="${esc(icon.name)}"><img src="assets/icons/technologies/${icon.file}" alt="" aria-hidden="true" width="20" height="20" loading="lazy"></span>`;
+  return renderTechChip(icon);
+}
+/* Skill name → chip, for the About section's Skills lists (see
+   SKILLS below). Every name listed there is expected to resolve via
+   TECH_ICONS; if one somehow doesn't, this still renders a normal
+   chip labeled with the raw name rather than a broken image. */
+function renderSkillIcon(name) {
+  return renderTechChip(TECH_ICONS[techIconKey(name)] || { name, fallbackText: name });
+}
+
+/* ============================================================
+   SKILLS — About section's two icon rows (#technicalSkills,
+   #toolsSkills in index.html). Same list in both languages: these are
+   technology/tool names, not prose, so nothing here is translated —
+   see renderSkillIcon above and TECH_ICONS for the logos.
+   ============================================================ */
+const SKILLS = {
+  technical: [
+    "HTML", "CSS", "JavaScript", "Node.js", "Figma", "MySQL", "Python",
+    "Replit", "Codex", "Claude", "GitHub",
+    /* Confirmed by actual project data, not invented — Vercel hosts
+       SANAD (js/i18n.js PROJECTS_AR.SANAD.tags), and API is F1 Driver
+       Lookup's own tag (PROJECTS.sites). */
+    "Vercel", "API",
+  ],
+  tools: ["Excel", "Word", "PowerPoint", "Canva", "Monday.com", "Notion", "ClickUp"],
+};
+function renderSkillIcons() {
+  const technical = document.getElementById("technicalSkills");
+  const tools = document.getElementById("toolsSkills");
+  if (technical) technical.innerHTML = SKILLS.technical.map(renderSkillIcon).join("");
+  if (tools) tools.innerHTML = SKILLS.tools.map(renderSkillIcon).join("");
 }
 
 /* ============================================================
@@ -360,7 +424,7 @@ const PROJECTS = {
       frame: "phone",
       role: "Co-founder / Software Engineering Student",
       desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
-      tags: ["App", "Product Thinking", "UI/UX", "Replit"],
+      tags: ["Replit", "Codex", "Claude", "GitHub"],
       link: "#", // [LEEN: add link when available]
     },
     {
@@ -371,7 +435,7 @@ const PROJECTS = {
       frame: "phone",
       role: "UI/UX Designer",
       desc: "A UI/UX prototype designed in Figma for an event-planning mobile app — helping users organize events, manage tasks, and coordinate details through a clean, structured interface.",
-      tags: ["UI/UX", "Figma", "Mobile Design"],
+      tags: ["Figma"],
       link: "https://www.figma.com/design/zTjzMQZaucXDS3mLRmfJbc/Lume-Prototype?node-id=0-1",
     },
     {
@@ -383,7 +447,7 @@ const PROJECTS = {
       role: "Solo Developer & Designer",
       hackathon: "KSCDR Hackathon",
       desc: "Independently designed and developed for the KSCDR Hackathon, SANAD is an accessibility-focused companion app for people who are Deaf or hard of hearing, blind or low vision, or speech-impaired — built end-to-end by me, from live captioning and text-to-speech to an emergency SOS flow.",
-      tags: ["Accessibility", "Next.js", "PWA"],
+      tags: ["Claude Code", "Vercel", "HTML", "CSS"],
       link: "https://sanad-coral.vercel.app/",
       github: "https://github.com/leenkharraz/Sanad",
     },
@@ -397,7 +461,7 @@ const PROJECTS = {
       frame: "browser",
       role: "Frontend Developer",
       desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
-      tags: ["Website", "API", "JavaScript"],
+      tags: ["API", "HTML", "CSS", "JavaScript"],
       link: "https://leenkharraz.github.io/F1-Driver-Lookup/",
     },
     {
@@ -408,7 +472,7 @@ const PROJECTS = {
       frame: "browser",
       role: "Web Developer",
       desc: "A collaborative web app (group project) for creating and customizing digital greeting cards for celebrations, anniversaries, birthdays, and special events — demonstrating teamwork and interactive functionality.",
-      tags: ["Website", "JavaScript", "Teamwork"],
+      tags: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "MySQL"],
       link: "https://leenkharraz.github.io/CardMagic/",
     },
     {
@@ -420,7 +484,7 @@ const PROJECTS = {
       role: "Web Developer",
       hackathon: "Tuwaiq × Google Hackathon",
       desc: "Built for the Tuwaiq × Google Hackathon, FAHEEM is an AI-powered classroom analytics platform that turns raw assessment scores into learning-gap insights, student groupings, and prioritized intervention plans for teachers, with a fully Arabic, RTL-first interface.",
-      tags: ["Website", "Next.js", "AI Integration"],
+      tags: ["Gemini", "Codex", "CSS", "JavaScript"],
       link: "https://faheem-nine.vercel.app/",
       github: "https://github.com/leenkharraz/Faheem",
       wide: true,
@@ -639,9 +703,29 @@ const PROJECTS = {
      punctuation stay as code, per "code/keys aren't localized content". */
   function heroCodeStr(en) { return isAr() ? (HERO_CODE_AR[en] || en) : en; }
   function isAr() { return currentLang === "ar"; }
+  /* Bumped on every call so an in-flight typing animation from a
+     previous call (e.g. the initial English type-in, still mid-way
+     through its setTimeout chain) can tell it's been superseded and
+     stop — otherwise a language switch mid-animation would leave its
+     old characters appended after the new content once its stale
+     step() ticks kept firing. */
+  let heroTypeGen = 0;
   function typeHeroCode(instant) {
     const codeEl = document.getElementById("typedCode");
     if (!codeEl) return;
+    const myGen = ++heroTypeGen;
+    /* `focus` has a different item count in Arabic (2) than English (3),
+       so — unlike the other fields above, which are simple 1:1 swaps via
+       heroCodeStr()/HERO_CODE_AR — it's built directly here as its own
+       list per language. English list is unchanged from before. */
+    const focusItems = isAr()
+      ? ["تطوير المواقع", "إدارة المشاريع"]
+      : ["Software Development", "Project Management", "Backend & API Integration"];
+    const focusTokens = [];
+    focusItems.forEach((item, i) => {
+      focusTokens.push({ t: `"${item}"`, c: "str" });
+      if (i < focusItems.length - 1) focusTokens.push({ t: ", ", c: "" });
+    });
     const tokens = [
       { t: "const ", c: "kw" }, { t: "leen", c: "var" }, { t: " = {\n  ", c: "" },
       { t: "name", c: "key" }, { t: ": ", c: "" }, { t: `"${heroCodeStr("Leen Kharraz")}"`, c: "str" }, { t: ",\n  ", c: "" },
@@ -651,9 +735,8 @@ const PROJECTS = {
       { t: `"${heroCodeStr("Projects")}"`, c: "str" }, { t: ", ", c: "" },
       { t: `"${heroCodeStr("Learning Opportunities")}"`, c: "str" }, { t: "],\n  ", c: "" },
       { t: "focus", c: "key" }, { t: ": [", c: "" },
-      { t: `"${heroCodeStr("Software Development")}"`, c: "str" }, { t: ", ", c: "" },
-      { t: `"${heroCodeStr("Project Management")}"`, c: "str" }, { t: ", ", c: "" },
-      { t: `"${heroCodeStr("Backend & API Integration")}"`, c: "str" }, { t: "]\n};", c: "" },
+      ...focusTokens,
+      { t: "]\n};", c: "" },
     ];
     if (prefersReducedMotion || instant) {
       codeEl.innerHTML = tokens.map((tok) => tok.c ? `<span class="tok tok--${tok.c}">${esc(tok.t)}</span>` : esc(tok.t)).join("");
@@ -661,6 +744,7 @@ const PROJECTS = {
     }
     let ti = 0, ci = 0, span = null;
     (function step() {
+      if (myGen !== heroTypeGen) return; // superseded by a newer call — stop
       if (ti >= tokens.length) return;
       const tok = tokens[ti];
       if (ci === 0) {
@@ -675,6 +759,7 @@ const PROJECTS = {
     })();
   }
 
+  renderSkillIcons();
   renderExperience("desc");
   bindTimelineInteractions();
   bindExperienceSort();

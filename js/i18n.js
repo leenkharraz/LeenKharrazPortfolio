@@ -61,8 +61,6 @@ const UI = {
     "about.skillsHeading": "Skills",
     "about.technicalLabel": "Technical",
     "about.toolsLabel": "Tools & Project Management",
-    "about.pill.projectManagement": "Project Management",
-    "about.pill.leadership": "Leadership",
     "about.tabLabel": "about",
     "about.pathLabel": "about/",
 
@@ -147,8 +145,6 @@ const UI = {
     "about.skillsHeading": "المهارات",
     "about.technicalLabel": "المهارات التقنية",
     "about.toolsLabel": "الأدوات وإدارة المشاريع",
-    "about.pill.projectManagement": "إدارة المشاريع",
-    "about.pill.leadership": "القيادة",
     "about.tabLabel": "نبذة عني",
     "about.pathLabel": "نبذة-عني/",
 
@@ -288,14 +284,14 @@ const PROJECTS_AR = {
     type: "تطبيق جوال · فكرة ناشئة",
     role: "شريكة مؤسسة / طالبة هندسة برمجيات",
     desc: "منصة للبحث عن المدارس ومقارنتها تساعد أولياء الأمور في السعودية على إيجاد المدارس الأهلية ومقارنتها في مكان واحد — من خلال تنظيم الرسوم والمناهج والمرافق والقبول والتقييمات في تجربة أوضح.",
-    tags: ["تطبيق", "التفكير المنتجي", "UI/UX", "Replit"],
+    tags: ["Replit", "Codex", "Claude", "GitHub"],
   },
   "Lume": {
     name: "لومي",
     type: "تطبيق جوال · مشروع UI/UX",
     role: "مصممة UI/UX",
     desc: "نموذج أولي لتجربة وواجهة المستخدم مصمم في Figma لتطبيق جوال لتنظيم الفعاليات — يساعد المستخدمين على تنظيم الفعاليات وإدارة المهام وتنسيق التفاصيل من خلال واجهة نظيفة ومنظمة.",
-    tags: ["UI/UX", "Figma", "تصميم تطبيقات الجوال"],
+    tags: ["Figma"],
   },
   "SANAD": {
     name: "سند",
@@ -303,21 +299,21 @@ const PROJECTS_AR = {
     role: "مطورة ومصممة منفردة",
     hackathon: "KSCDR Hackathon",
     desc: "صُمم ونُفذ بشكل مستقل لفعالية KSCDR Hackathon، وتطبيق SANAD هو تطبيق مرافق يركّز على إمكانية الوصول لذوي الإعاقة السمعية أو ضعاف السمع، وذوي الإعاقة البصرية أو ضعاف البصر، وذوي صعوبات النطق — طورته بالكامل بنفسي من الترجمة الفورية للكلام وتحويل النص إلى صوت وحتى نظام الطوارئ (SOS).",
-    tags: ["إمكانية الوصول", "Next.js", "PWA"],
+    tags: ["Claude Code", "Vercel", "HTML", "CSS"],
   },
   "F1 Driver Lookup": {
     name: "البحث عن سائقين فورميلا ١",
     type: "موقع إلكتروني · مشروع API",
     role: "مطورة واجهات أمامية",
     desc: "تطبيق ويب للبحث واستكشاف سائقي الفورمولا 1 حسب الموسم، باستخدام واجهة برمجة التطبيقات Ergast API لجلب بيانات رياضة السيارات وعرض معلومات السائقين ديناميكيًا على الصفحة.",
-    tags: ["موقع إلكتروني", "API", "JavaScript"],
+    tags: ["API", "HTML", "CSS", "JavaScript"],
   },
   "Card Magic": {
     name: "سحر البطاقات",
     type: "موقع إلكتروني",
     role: "مطورة ويب",
     desc: "تطبيق ويب تعاوني (مشروع جماعي) لإنشاء وتخصيص بطاقات تهنئة رقمية للاحتفالات والمناسبات وأعياد الميلاد والفعاليات الخاصة — يعكس العمل الجماعي والتفاعل الوظيفي.",
-    tags: ["موقع إلكتروني", "JavaScript", "العمل الجماعي"],
+    tags: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "MySQL"],
   },
   "FAHEEM": {
     name: "فهيم",
@@ -325,7 +321,7 @@ const PROJECTS_AR = {
     role: "مطورة ويب",
     hackathon: "Tuwaiq × Google Hackathon",
     desc: "بُني لفعالية Tuwaiq × Google Hackathon، ومنصة FAHEEM هي منصة تحليلات صفية مدعومة بالذكاء الاصطناعي تُحوّل درجات التقييم الخام إلى رؤى حول الفجوات التعليمية، وتصنيفات للطلاب، وخطط تدخل مرتبة حسب الأولوية للمعلمين، بواجهة عربية بالكامل ومصممة أساسًا لدعم الكتابة من اليمين إلى اليسار.",
-    tags: ["موقع إلكتروني", "Next.js", "دمج الذكاء الاصطناعي"],
+    tags: ["Gemini", "Codex", "CSS", "JavaScript"],
   },
 };
 
@@ -346,14 +342,14 @@ const MOTORSPORT_AR = {
 const MOTORSPORT_ROLE_AR = "مسؤولة الفحص الفني";
 
 /* ---------- Hero code-typing animation — Arabic values for the
-   human-meaningful strings only; JS keys/punctuation stay as code. ---------- */
+   human-meaningful strings only; JS keys/punctuation stay as code.
+   `focus` is Arabic-only content with a different item count than the
+   English version (2 items vs. 3), so it's built directly in
+   typeHeroCode() rather than through this 1:1 lookup — see main.js. ---------- */
 const HERO_CODE_AR = {
   "Leen Kharraz": "لين خراز",
   "Software Engineering Student": "طالبة هندسة برمجيات",
   "Internships": "التدريب",
   "Projects": "المشاريع",
-  "Learning Opportunities": "فرص التعلم",
-  "Software Development": "تطوير البرمجيات",
-  "Project Management": "إدارة المشاريع",
-  "Backend & API Integration": "تطوير الخلفية وربط واجهات البرمجة (API)",
+  "Learning Opportunities": "فرص تعلم",
 };

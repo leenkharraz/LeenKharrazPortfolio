@@ -1232,26 +1232,45 @@ h1, h2, h3, h4 {
   gap: 1.5rem;
   grid-template-columns: minmax(0, 1fr);
 }
-/* Tablet and up: two per row. */
-@media (min-width: 640px) { .showcase__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* Laptop/desktop and up: three per row, so cards sit at a sensible
-   width instead of stretching into two oversized ones. No extra
-   max-width is needed here — the outer .section already caps the
-   whole panel at --content-max (1200px), which is what keeps the grid
-   from stretching further on huge displays. */
-@media (min-width: 1100px) {
-  .showcase__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* ===== Websites (.showcase__grid--sites) — unchanged: 2 cards side
+   by side, with the featured 3rd card (.device-card--wide, set via
+   p.wide on FAHEEM) spanning both columns on its own row underneath.
+   Applications intentionally uses a different pattern below — this
+   block must stay scoped to --sites only so it never affects
+   Applications. ===== */
+@media (min-width: 640px) {
+  .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; }
+  .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
+  /* The wide card's browser mockup gets an explicit height (instead of
+     its usual 16:10 aspect-ratio) so spanning the full row width
+     doesn't also make it taller. */
+  .showcase__grid--sites .device-card--wide .browser { max-width: 760px; height: 230px; }
 }
 
-/* Featured 3rd Website card (.device-card--wide, set via p.wide in
-   PROJECTS.sites): spans both columns only in the two-column tablet/
-   small-desktop range, where 3 cards would otherwise leave an orphan
-   on its own row. At three-per-row (≥1100px) all three site cards sit
-   evenly in one row instead — "cards in the same row should have
-   consistent sizing" — so the span is switched off there. */
-@media (min-width: 980px) and (max-width: 1099.98px) {
-  .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
-  .showcase__grid--sites .device-card--wide .browser { max-width: 760px; height: 230px; }
+/* ===== Applications (.showcase__grid--apps) — all 3 cards (Schoolo,
+   Lume, SANAD) sit beside each other whenever there's room; no
+   .device-card--wide/featured treatment here, every card is
+   equal-sized. Two bands, each sized with minmax so cards never get
+   fixed pixel widths:
+     - 640–899px (tablet, where 3 real device cards get cramped):
+       2 columns, with the 3rd/last card centered on its own row
+       instead of stranded in column 1 with dead space beside it.
+     - ≥900px (laptop and up, including 1024/1280/1366/1440/1920):
+       3 columns — comfortably fits three ~240px+ cards at every one
+       of those widths without ballooning, since the outer .section
+       already caps overall width at --content-max (1200px). ===== */
+@media (min-width: 640px) and (max-width: 899.98px) {
+  .showcase__grid--apps { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+  .showcase__grid--apps .device-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+    max-width: calc(50% - 0.75rem);
+  }
+}
+@media (min-width: 900px) {
+  .showcase__grid--apps { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
 }
 
 /* --- The stage that holds a device, tinted with the section accent --- */
@@ -1493,6 +1512,16 @@ h1, h2, h3, h4 {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .tech-icon img { width: 18px; height: 18px; display: block; }
+/* Fallback face for a technology with no real logo (currently just
+   "API" — see TECH_ICONS.api in js/main.js): same chip container/size
+   as a real logo, so it never reads as a stray leftover text pill. */
+.tech-icon__fallback {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2f2a26;
+}
 .tech-icon:hover,
 .tech-icon:focus-visible {
   transform: translateY(-3px);
@@ -1887,10 +1916,16 @@ h1, h2, h3, h4 {
 :root[dir="rtl"] .btn {
   direction: rtl;
 }
-/* Code-styled path labels and the browser-chrome URL bar stay LTR in
-   both languages — they display literal paths/URLs, not prose. */
-.path-label,
-.browser__url {
+/* The browser-chrome URL bar is a real, never-translated URL, so it
+   always stays LTR. Most .path-label instances (about/experience/
+   projects/races) ARE translated content in Arabic now, though, and
+   should read like any other Arabic text — right-aligned, starting
+   from the right — so only the hero's own path-label (the personal
+   "~/leen-kharraz" handle, never translated either) keeps the
+   always-LTR treatment; every other .path-label just inherits the
+   page's current direction like normal text. */
+.browser__url,
+.hero__copy .path-label {
   direction: ltr;
   text-align: left;
   unicode-bidi: isolate;
