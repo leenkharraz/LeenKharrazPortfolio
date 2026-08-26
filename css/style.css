@@ -762,6 +762,13 @@ h1, h2, h3, h4 {
 .tl-item--apricot .tl-dot { background: var(--apricot); }
 .tl-item--mocha   .tl-dot { background: var(--mocha); }
 .tl-item--sage    .tl-dot { background: var(--sage); }
+/* Every item gets one of the six accent fills above regardless of
+   whether its node is a logo — needed for the plain color dots, but a
+   logo needs a plain white plate to stay legible no matter the card's
+   own accent. .tl-item .tl-dot.tl-dot--logo (3 classes) outweighs
+   .tl-item--x .tl-dot (2 classes), so the white background always
+   wins here no matter which accent the item is. */
+.tl-item .tl-dot.tl-dot--logo { background: #fff; }
 
 /* Organization logo badge — replaces the plain colored center of
    .tl-dot for any org with a real logo in ORG_LOGOS (see
