@@ -764,50 +764,40 @@ h1, h2, h3, h4 {
 .tl-item--sage    .tl-dot { background: var(--sage); }
 /* Every item gets one of the six accent fills above regardless of
    whether its node is a logo — needed for the plain color dots, but a
-   logo node's INNER background depends on the asset itself (see
-   ORG_LOGOS.ownBg in js/main.js): a transparent logo (a bare wordmark
-   or icon with no background of its own — Ting, GDG, the AFC Asian
-   Cup mark, SAMF) gets a plain white plate so it stays legible in
-   dark mode, while a logo whose artwork already IS a complete badge
-   (its own dark/colored background baked into the image — Numu, AI
-   Club, EGVR Club, Drone Club, Bashosh) keeps that background as-is,
-   with no white frame added around it. Both rules need 3 classes of
-   specificity (.tl-item .tl-dot.tl-dot--x) to reliably outweigh the
-   2-class accent rules above, regardless of source order. The OUTER
-   node — size, border, shadow, position — stays identical either way
-   (see .tl-dot--logo below); only this inner fill differs. */
-.tl-item .tl-dot.tl-dot--logo:not(.tl-dot--logo-owned) { background: #fff; }
-.tl-item .tl-dot.tl-dot--logo-owned { background: transparent; }
+   logo node has no fill of its own (see .tl-dot--logo below): the
+   accent color must not show through behind it. .tl-item
+   .tl-dot.tl-dot--logo (3 classes) reliably outweighs the 2-class
+   accent rules above, regardless of source order. */
+.tl-item .tl-dot.tl-dot--logo { background: none; }
 
-/* Organization logo badge — replaces the plain colored center of
-   .tl-dot for any org with a real logo in ORG_LOGOS (see
-   renderExperience in js/main.js); the node itself IS the logo badge,
-   not a separate box beside it. Same left offset formula as the plain
-   dot above (kept centered on the timeline line at the new, larger
-   size), and the same language-independent physical positioning rule
-   as the rest of the timeline — only which orgs get a logo differs,
-   never which side they render on. Omitted entirely for an org with
-   no real logo; never a placeholder image. */
+/* Organization logo — replaces the plain colored center of .tl-dot
+   for any org with a real logo in ORG_LOGOS (see renderExperience in
+   js/main.js). No frame: no background, border, or radius — the logo
+   itself is the node, just centered on the timeline line at a small,
+   consistent size. A soft drop-shadow on the image (not a box behind
+   it) is the only readability aid, kept the same for every logo
+   regardless of ORG_LOGOS.ownBg — that flag no longer changes the
+   styling now that there's no badge plate to size padding against.
+   Same physical positioning rule as the rest of the timeline — only
+   which orgs get a logo differs, never which side they render on.
+   Omitted entirely for an org with no real logo; never a placeholder
+   image. */
 .tl-dot--logo {
-  width: 32px;
-  height: 32px;
-  left: -38px;
-  top: 0.85rem;
-  border-radius: 8px;
-  border: 2px solid var(--panel-base);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
-  padding: 3px;
+  width: 26px;
+  height: 26px;
+  left: -35px;
+  top: 1.05rem;
   display: grid;
   place-items: center;
-  overflow: hidden;
   z-index: 3;
 }
-.tl-dot--logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-/* Owned-background logos (see ORG_LOGOS.ownBg) only need enough
-   padding to keep the artwork off the node's own border — the badge
-   itself should read as the node face, not float inside extra frame
-   space the way a backed transparent logo does. */
-.tl-dot--logo-owned { padding: 1.5px; }
+.tl-dot--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
 
 .tl-card {
   background: var(--card);
@@ -977,12 +967,11 @@ h1, h2, h3, h4 {
   .tl-item:nth-child(odd)  .tl-dot { left: auto; right: calc(-2.5rem - 9px); }
   .tl-item:nth-child(even) .tl-dot { left: calc(-2.5rem - 9px); }
   /* Logo node is bigger — same "centered on the spine" formula
-     (right/left = -(gap + radius)), just with radius 20px instead of
+     (right/left = -(gap + radius)), just with radius 16px instead of
      the plain dot's 9px. */
-  .tl-dot--logo { width: 40px; height: 40px; top: 0.65rem; border-radius: 10px; padding: 4px; }
-  .tl-dot--logo-owned { padding: 2px; }
-  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 20px); }
-  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 20px); }
+  .tl-dot--logo { width: 32px; height: 32px; top: 0.9rem; }
+  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 16px); }
+  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 16px); }
 }
 
 /* --- Small "Newest first / Oldest first" sort control ---
