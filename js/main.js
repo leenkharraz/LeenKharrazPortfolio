@@ -824,7 +824,13 @@ const PROJECTS = {
   bindProjectGroupJumps();
   setTimeout(typeHeroCode, 350);
 
-  /* ---------- Theme toggle (default dark, persisted) ---------- */
+  /* ---------- Theme toggle ----------
+     Default (saved preference, else device prefers-color-scheme, else
+     dark) is already decided and applied to <html data-theme> by the
+     inline script in index.html's <head> — before this file even
+     loads — specifically so that decision happens pre-paint with no
+     flash. This just reads that result to wire up the toggle's own
+     state; it never re-derives the default. */
   const toggle = document.getElementById("themeToggle");
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
@@ -833,9 +839,7 @@ const PROJECTS = {
     toggle.setAttribute("aria-pressed", String(!nowDark));
     toggle.setAttribute("aria-label", nowDark ? t("nav.themeToLight") : t("nav.themeToDark"));
   }
-  let saved = null;
-  try { saved = localStorage.getItem("theme"); } catch (e) {}
-  applyTheme(saved === "light" ? "light" : "dark");
+  applyTheme(root.getAttribute("data-theme") === "light" ? "light" : "dark");
   if (toggle) {
     toggle.addEventListener("click", () => {
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";

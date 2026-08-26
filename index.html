@@ -6,6 +6,28 @@
   <meta name="description" content="Leen Kharraz — Software Engineering Student. Portfolio: experience timeline and projects." id="metaDescription">
   <title>Leen Kharraz — Software Engineering Student</title>
 
+  <!-- Sets data-theme before the stylesheet paints, so there's no flash of
+       the wrong theme. Priority: saved preference -> device
+       prefers-color-scheme -> dark. Kept as a tiny synchronous inline
+       script (not deferred to js/main.js) specifically because it must run
+       before first paint; js/main.js's own theme init just reads whatever
+       this already set (see there). data-theme="dark" on <html> above is
+       the no-JS fallback only. -->
+  <script>
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        try {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        } catch (e) {
+          theme = "dark";
+        }
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Figtree:wght@400;500;600&family=Space+Mono:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
