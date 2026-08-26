@@ -698,6 +698,13 @@ h1, h2, h3, h4 {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
+/* Mobile (below the 2-column breakpoint, both languages): the icon rows
+   wrap left-heavy by default since flex's initial justify-content is
+   flex-start. Centering keeps rows balanced regardless of how many
+   icons land on the last, partially-filled row. */
+@media (max-width: 639.98px) {
+  .skills-mini__pills { justify-content: center; }
+}
 
 
 /* ============================================================
@@ -756,43 +763,31 @@ h1, h2, h3, h4 {
 .tl-item--mocha   .tl-dot { background: var(--mocha); }
 .tl-item--sage    .tl-dot { background: var(--sage); }
 
-/* Small organization/company badge (see ORG_LOGOS/renderExperience in
-   js/main.js) — a sibling of .tl-dot and .tl-card, not nested inside
-   the card (whose overflow:hidden would clip it), overlapping the
-   card's inner edge as a compact identifier rather than a second
-   card. Position is physical, matching .tl-dot's own always-left
-   (mobile) / inner-edge-per-side (desktop) pattern — same
-   language-independent geometry rule as the rest of the timeline.
-   Renders only for orgs with a real logo in ORG_LOGOS; omitted
-   entirely otherwise, never a placeholder box. */
-.tl-logo {
-  position: absolute;
-  top: 1rem;
-  left: -14px;
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+/* Organization logo badge — replaces the plain colored center of
+   .tl-dot for any org with a real logo in ORG_LOGOS (see
+   renderExperience in js/main.js); the node itself IS the logo badge,
+   not a separate box beside it. Same left offset formula as the plain
+   dot above (kept centered on the timeline line at the new, larger
+   size), and the same language-independent physical positioning rule
+   as the rest of the timeline — only which orgs get a logo differs,
+   never which side they render on. Omitted entirely for an org with
+   no real logo; never a placeholder image. */
+.tl-dot--logo {
+  width: 40px;
+  height: 40px;
+  left: -42px;
+  top: 0.6rem;
+  border-radius: 10px;
+  border: 2px solid var(--panel-base);
   background: #fff;
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
+  padding: 5px;
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 4px;
   z-index: 3;
 }
-.tl-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
-
-@media (min-width: 1024px) {
-  .tl-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    padding: 6px;
-  }
-  .tl-item:nth-child(odd)  .tl-logo { left: auto; right: -14px; }
-  .tl-item:nth-child(even) .tl-logo { left: -14px; }
-}
+.tl-dot--logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 .tl-card {
   background: var(--card);
@@ -877,6 +872,21 @@ h1, h2, h3, h4 {
   margin-bottom: 0.4rem;
 }
 .tl-card__skills-pills { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+/* Mobile: a long skill name can be wider than the card itself, and
+   .tl-card's overflow:hidden would silently clip a nowrap pill instead
+   of shrinking it — so this lets a single pill wrap its own text
+   rather than overflow, and centers the whole group so a
+   partially-filled last row doesn't read left-heavy. Same rule for
+   both languages; Arabic pill text still reads RTL via inheritance. */
+@media (max-width: 639.98px) {
+  .tl-card__skills { text-align: center; }
+  .tl-card__skills-pills { justify-content: center; }
+  .tl-card__skills-pills .pill {
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
 /* soft skill pill tinted with the card accent (in-family, readable both modes) */
 .pill--soft {
   background: color-mix(in srgb, var(--ca, var(--mocha)) 14%, transparent);
@@ -946,9 +956,21 @@ h1, h2, h3, h4 {
   .tl-item:nth-child(even) { margin-left: auto; }
   .tl-item:nth-child(odd)  .tl-dot { left: auto; right: calc(-2.5rem - 9px); }
   .tl-item:nth-child(even) .tl-dot { left: calc(-2.5rem - 9px); }
+  /* Logo node is bigger — same "centered on the spine" formula
+     (right/left = -(gap + radius)), just with radius 24px instead of
+     the plain dot's 9px. */
+  .tl-dot--logo { width: 48px; height: 48px; top: 0.4rem; border-radius: 12px; padding: 6px; }
+  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 24px); }
+  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 24px); }
 }
 
-/* --- Small "Newest first / Oldest first" sort control --- */
+/* --- Small "Newest first / Oldest first" sort control ---
+   Unlike the timeline itself, .exp-head has no "physical side" meaning
+   to preserve — it's just a title + a sort control — so in Arabic it's
+   left to inherit direction:rtl naturally (same mechanism as the plain
+   Projects header) rather than being pinned ltr and patched back. That
+   flips which flex item sits on which side, moving the title to the
+   physical right without any text-align hack. */
 .exp-head {
   display: flex;
   flex-wrap: wrap;
@@ -1962,7 +1984,6 @@ h1, h2, h3, h4 {
 :root[dir="rtl"] .hero__cta,
 :root[dir="rtl"] .about__grid,
 :root[dir="rtl"] .skills-mini,
-:root[dir="rtl"] .exp-head,
 :root[dir="rtl"] .exp-sort,
 :root[dir="rtl"] .race-strip__list,
 :root[dir="rtl"] .race-detail__card,
@@ -1976,7 +1997,6 @@ h1, h2, h3, h4 {
   direction: ltr;
 }
 :root[dir="rtl"] .tab,
-:root[dir="rtl"] .exp-head__title,
 :root[dir="rtl"] .exp-sort__btn,
 :root[dir="rtl"] .showcase__group-kicker,
 :root[dir="rtl"] .showcase__group-title,

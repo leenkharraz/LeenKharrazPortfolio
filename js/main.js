@@ -55,7 +55,7 @@ const EXPERIENCE = [
     skills: ["Event Operations", "Crowd Support", "Communication"],
   },
   {
-    role: "Project Management Co-Leader",
+    role: "Project Management Committee Co-Leader",
     org: "Artificial Intelligence Club",
     orgUrl: "https://www.linkedin.com/company/ai-club-at-ujj/",
     date: "Jan 2026 – Present",
@@ -91,7 +91,7 @@ const EXPERIENCE = [
     skills: ["Project Management", "Event Coordination", "Communication"],
   },
   {
-    role: "Project Management Leader",
+    role: "Project Management Committee Leader",
     org: "Drone Club",
     orgUrl: "https://www.linkedin.com/company/drone-club-uj/posts/?feedView=all",
     date: "Sep 2025 – Present",
@@ -150,11 +150,22 @@ const EXPERIENCE = [
      2027 tournament logo (this is the "major football event" the
      entry's description refers to)
    - Saudi Automobile & Motorcycle Federation: official SAMF site logo
+   - Numu for Research & Innovation, Artificial Intelligence Club,
+     Electronic Games and Virtual Reality Club, Drone Club, Bashosh
+     Volunteer Team: none of these run their own website, so each
+     logo is the official square logo from that org's own LinkedIn
+     company page (the same orgUrl each entry already links to above),
+     saved locally — never hotlinked.
    ============================================================ */
 const ORG_LOGOS = {
   "Ting": { file: "ting.png" },
+  "Numu for Research & Innovation": { file: "numu.jpg" },
   "Google Developer Group on Campus": { file: "gdg.svg" },
   "Local Organising Committee": { file: "afc-asian-cup-2027.svg" },
+  "Artificial Intelligence Club": { file: "ai-club.jpg" },
+  "Electronic Games and Virtual Reality Club": { file: "egvr-club.jpg" },
+  "Drone Club": { file: "drone-club.jpg" },
+  "Bashosh Volunteer Team": { file: "bashosh.jpg" },
   "Saudi Automobile & Motorcycle Federation": { file: "samf.svg" },
 };
 
@@ -540,6 +551,7 @@ const PROJECTS = {
       const xTags = tField(EXPERIENCE_AR, x.org, "tags", x.tags);
       const xSkills = tField(EXPERIENCE_AR, x.org, "skills", x.skills);
       const xRoleSteps = tField(EXPERIENCE_AR, x.org, "roleSteps", x.roleSteps);
+      const xRoleProgressionLabel = tField(EXPERIENCE_AR, x.org, "roleProgressionLabel", t("experience.roleProgression"));
 
       const firstTag = xTags[0] || "";
       const tags = firstTag
@@ -552,23 +564,24 @@ const PROJECTS = {
       const skills = xSkills.map((s) => `<span class="pill pill--soft">${esc(s)}</span>`).join("");
       const roleTimeline = xRoleSteps && xRoleSteps.length
         ? `<div class="tl-card__roles">
-            <span class="tl-card__roles-label">${esc(t("experience.roleProgression"))}</span>
+            <span class="tl-card__roles-label">${esc(xRoleProgressionLabel)}</span>
             <ol class="mini-steps">${xRoleSteps.map((r) => `<li class="mini-steps__item">${esc(r)}</li>`).join("")}</ol>
           </div>`
         : "";
       const racesButton = x.hasRaces
         ? `<div class="tl-card__actions"><button type="button" class="btn btn--small btn--solid" id="viewRacesBtn" aria-expanded="false" aria-controls="raceStrip">${esc(t("experience.viewRaces"))}</button></div>`
         : "";
-      /* Rendered as a sibling of .tl-card (not nested inside it) so it
-         can visually overlap the card's edge — .tl-card has
-         overflow:hidden, which would otherwise clip it. */
-      const orgLogo = ORG_LOGOS[x.org]
-        ? `<div class="tl-logo"><img src="assets/icons/organizations/${ORG_LOGOS[x.org].file}" alt="" aria-hidden="true" loading="lazy"></div>`
-        : "";
+      /* The org logo (see ORG_LOGOS) renders INSIDE the timeline node
+         itself — the node's plain colored center is replaced by the
+         logo, not a separate badge beside it. An org with no logo
+         simply keeps the plain .tl-dot, never a placeholder image. */
+      const logo = ORG_LOGOS[x.org];
+      const tlDot = logo
+        ? `<div class="tl-dot tl-dot--logo" aria-hidden="true"><img src="assets/icons/organizations/${logo.file}" alt="" loading="lazy"></div>`
+        : `<div class="tl-dot" aria-hidden="true"></div>`;
       return `
       <li class="tl-item tl-item--${x.accent}">
-        <div class="tl-dot" aria-hidden="true"></div>
-        ${orgLogo}
+        ${tlDot}
         <article class="tl-card">
           <button class="tl-card__head" aria-expanded="false">
             <div class="tl-card__tags">${tags}</div>
