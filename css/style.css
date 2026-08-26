@@ -772,30 +772,44 @@ h1, h2, h3, h4 {
 
 /* Organization logo — replaces the plain colored center of .tl-dot
    for any org with a real logo in ORG_LOGOS (see renderExperience in
-   js/main.js). No frame: no background, border, or radius — the logo
-   itself is the node, just centered on the timeline line at a small,
-   consistent size. A soft drop-shadow on the image (not a box behind
-   it) is the only readability aid, kept the same for every logo
-   regardless of ORG_LOGOS.ownBg — that flag no longer changes the
-   styling now that there's no badge plate to size padding against.
-   Same physical positioning rule as the rest of the timeline — only
-   which orgs get a logo differs, never which side they render on.
-   Omitted entirely for an org with no real logo; never a placeholder
-   image. */
+   js/main.js). The logo IS the marker: no circle, no square frame, no
+   background — .tl-dot's own border/border-radius/box-shadow (all
+   set only on the bare selector, so a same-specificity override here
+   is needed) are explicitly cleared, since .tl-dot--logo only shares
+   the base .tl-dot rule's *positioning* machinery, not its "plain dot"
+   appearance.
+
+   Sized by height only (width: auto) so each logo keeps its own
+   aspect ratio instead of being squeezed into an identical square —
+   a wide wordmark renders wide, a compact mark stays compact. Because
+   the box's own width is now content-dependent, it can't be centered
+   with a fixed left offset the way the plain dot is; instead `left`
+   targets the exact x-position of the timeline line and
+   `transform: translateX(-50%)` centers the (auto-width) box on that
+   point regardless of how wide it ends up. That target point is the
+   same language-independent physical spot the plain dot centers on —
+   only which orgs get a logo differs, never which side they render
+   on. Omitted entirely for an org with no real logo; never a
+   placeholder image. */
 .tl-dot--logo {
-  width: 26px;
-  height: 26px;
-  left: -35px;
-  top: 1.05rem;
-  display: grid;
-  place-items: center;
+  width: auto;
+  height: 36px;
+  left: -22.5px;
+  top: 0.7rem;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   z-index: 3;
 }
 .tl-dot--logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
   display: block;
+  height: 100%;
+  width: auto;
+  max-width: 64px;
+  object-fit: contain;
+  /* Very subtle lift off the page background — not a shape behind
+     the logo, just enough to keep it visually separated. */
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
 
@@ -966,12 +980,17 @@ h1, h2, h3, h4 {
   .tl-item:nth-child(even) { margin-left: auto; }
   .tl-item:nth-child(odd)  .tl-dot { left: auto; right: calc(-2.5rem - 9px); }
   .tl-item:nth-child(even) .tl-dot { left: calc(-2.5rem - 9px); }
-  /* Logo node is bigger — same "centered on the spine" formula
-     (right/left = -(gap + radius)), just with radius 16px instead of
-     the plain dot's 9px. */
-  .tl-dot--logo { width: 32px; height: 32px; top: 0.9rem; }
-  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 16px); }
-  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 16px); }
+  /* Logo node is a little taller, and — since its width is auto,
+     content-dependent (see .tl-dot--logo above) — centers on the
+     spine via `left` + translateX(-50%) rather than a `right/left =
+     -(gap + radius)` offset sized to a fixed box: `left: 100% + gap`
+     places that center-point at the odd item's own right edge plus
+     the gap to the spine; `left: -gap` places it the gap's width to
+     the left of the even item's own left edge. Works for any logo
+     width without knowing it in advance. */
+  .tl-dot--logo { height: 44px; top: 0.5rem; }
+  .tl-item:nth-child(odd)  .tl-dot--logo { right: auto; left: calc(100% + 2.5rem); }
+  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem); }
 }
 
 /* --- Small "Newest first / Oldest first" sort control ---
