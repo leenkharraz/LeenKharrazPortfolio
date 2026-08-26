@@ -156,16 +156,25 @@ const EXPERIENCE = [
      logo is the official square logo from that org's own LinkedIn
      company page (the same orgUrl each entry already links to above),
      saved locally — never hotlinked.
+
+   ownBg: true marks a logo file that already renders as a complete,
+   opaque badge (its own colored/dark background baked into the
+   image) — the timeline node gives it minimal padding and no white
+   plate behind it, so that badge IS the node face. Omitted (falsy)
+   for a logo that's transparent artwork on its own (a wordmark or
+   icon with no background of its own), which instead gets a white
+   backing so it stays legible in dark mode — see .tl-dot--logo /
+   .tl-dot--logo-owned in css/style.css.
    ============================================================ */
 const ORG_LOGOS = {
   "Ting": { file: "ting.png" },
-  "Numu for Research & Innovation": { file: "numu.jpg" },
+  "Numu for Research & Innovation": { file: "numu.jpg", ownBg: true },
   "Google Developer Group on Campus": { file: "gdg.svg" },
   "Local Organising Committee": { file: "afc-asian-cup-2027.svg" },
-  "Artificial Intelligence Club": { file: "ai-club.jpg" },
-  "Electronic Games and Virtual Reality Club": { file: "egvr-club.jpg" },
-  "Drone Club": { file: "drone-club.jpg" },
-  "Bashosh Volunteer Team": { file: "bashosh.jpg" },
+  "Artificial Intelligence Club": { file: "ai-club.jpg", ownBg: true },
+  "Electronic Games and Virtual Reality Club": { file: "egvr-club.jpg", ownBg: true },
+  "Drone Club": { file: "drone-club.jpg", ownBg: true },
+  "Bashosh Volunteer Team": { file: "bashosh.jpg", ownBg: true },
   "Saudi Automobile & Motorcycle Federation": { file: "samf.svg" },
 };
 
@@ -576,8 +585,9 @@ const PROJECTS = {
          logo, not a separate badge beside it. An org with no logo
          simply keeps the plain .tl-dot, never a placeholder image. */
       const logo = ORG_LOGOS[x.org];
+      const logoClass = logo ? `tl-dot tl-dot--logo${logo.ownBg ? " tl-dot--logo-owned" : ""}` : "";
       const tlDot = logo
-        ? `<div class="tl-dot tl-dot--logo" aria-hidden="true"><img src="assets/icons/organizations/${logo.file}" alt="" loading="lazy"></div>`
+        ? `<div class="${logoClass}" aria-hidden="true"><img src="assets/icons/organizations/${logo.file}" alt="" loading="lazy"></div>`
         : `<div class="tl-dot" aria-hidden="true"></div>`;
       return `
       <li class="tl-item tl-item--${x.accent}">

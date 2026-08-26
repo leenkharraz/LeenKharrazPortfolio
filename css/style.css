@@ -764,11 +764,20 @@ h1, h2, h3, h4 {
 .tl-item--sage    .tl-dot { background: var(--sage); }
 /* Every item gets one of the six accent fills above regardless of
    whether its node is a logo — needed for the plain color dots, but a
-   logo needs a plain white plate to stay legible no matter the card's
-   own accent. .tl-item .tl-dot.tl-dot--logo (3 classes) outweighs
-   .tl-item--x .tl-dot (2 classes), so the white background always
-   wins here no matter which accent the item is. */
-.tl-item .tl-dot.tl-dot--logo { background: #fff; }
+   logo node's INNER background depends on the asset itself (see
+   ORG_LOGOS.ownBg in js/main.js): a transparent logo (a bare wordmark
+   or icon with no background of its own — Ting, GDG, the AFC Asian
+   Cup mark, SAMF) gets a plain white plate so it stays legible in
+   dark mode, while a logo whose artwork already IS a complete badge
+   (its own dark/colored background baked into the image — Numu, AI
+   Club, EGVR Club, Drone Club, Bashosh) keeps that background as-is,
+   with no white frame added around it. Both rules need 3 classes of
+   specificity (.tl-item .tl-dot.tl-dot--x) to reliably outweigh the
+   2-class accent rules above, regardless of source order. The OUTER
+   node — size, border, shadow, position — stays identical either way
+   (see .tl-dot--logo below); only this inner fill differs. */
+.tl-item .tl-dot.tl-dot--logo:not(.tl-dot--logo-owned) { background: #fff; }
+.tl-item .tl-dot.tl-dot--logo-owned { background: transparent; }
 
 /* Organization logo badge — replaces the plain colored center of
    .tl-dot for any org with a real logo in ORG_LOGOS (see
@@ -786,7 +795,6 @@ h1, h2, h3, h4 {
   top: 0.6rem;
   border-radius: 10px;
   border: 2px solid var(--panel-base);
-  background: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
   padding: 5px;
   display: grid;
@@ -795,6 +803,11 @@ h1, h2, h3, h4 {
   z-index: 3;
 }
 .tl-dot--logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* Owned-background logos (see ORG_LOGOS.ownBg) only need enough
+   padding to keep the artwork off the node's own border — the badge
+   itself should read as the node face, not float inside extra frame
+   space the way a backed transparent logo does. */
+.tl-dot--logo-owned { padding: 2px; }
 
 .tl-card {
   background: var(--card);
@@ -967,6 +980,7 @@ h1, h2, h3, h4 {
      (right/left = -(gap + radius)), just with radius 24px instead of
      the plain dot's 9px. */
   .tl-dot--logo { width: 48px; height: 48px; top: 0.4rem; border-radius: 12px; padding: 6px; }
+  .tl-dot--logo-owned { padding: 3px; }
   .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 24px); }
   .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 24px); }
 }
