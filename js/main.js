@@ -144,18 +144,22 @@ const EXPERIENCE = [
 
    Sources (see final report for the full list):
    - Ting: official site (tingsaudi.com) wordmark
-   - Google Developer Group on Campus: GDG's square icon mark (the
-     official wordmark is a ~10:1 lockup, illegible at badge size)
    - Local Organising Committee: official AFC Asian Cup Saudi Arabia
      2027 tournament logo (this is the "major football event" the
      entry's description refers to)
    - Saudi Automobile & Motorcycle Federation: official SAMF site logo
-   - Numu for Research & Innovation, Artificial Intelligence Club,
-     Electronic Games and Virtual Reality Club, Drone Club, Bashosh
-     Volunteer Team: none of these run their own website, so each
-     logo is the official square logo from that org's own LinkedIn
-     company page (the same orgUrl each entry already links to above),
-     saved locally — never hotlinked.
+   - Numu for Research & Innovation, Google Developer Group on Campus,
+     Artificial Intelligence Club, Electronic Games and Virtual
+     Reality Club, Drone Club, Bashosh Volunteer Team: none of these
+     run their own website, so each logo is the official square logo
+     from that org's own LinkedIn company page (the same orgUrl each
+     entry already links to above), saved locally — never hotlinked.
+     Google Developer Group on Campus specifically uses "GDGoC —
+     University of Jeddah"'s own club mark from
+     linkedin.com/company/google-developer-student-club-uj/ (its
+     LinkedIn page title is "GDG On Campus | UJ") — not the generic
+     Google Developer Groups bolt icon used there previously, which
+     wasn't this specific club's actual mark.
 
    ownBg: true marks a logo file that already renders as a complete,
    opaque badge (its own colored/dark background baked into the
@@ -169,7 +173,7 @@ const EXPERIENCE = [
 const ORG_LOGOS = {
   "Ting": { file: "ting.png" },
   "Numu for Research & Innovation": { file: "numu.jpg", ownBg: true },
-  "Google Developer Group on Campus": { file: "gdg.svg" },
+  "Google Developer Group on Campus": { file: "gdg-uj.jpg", ownBg: true },
   "Local Organising Committee": { file: "afc-asian-cup-2027.svg" },
   "Artificial Intelligence Club": { file: "ai-club.jpg", ownBg: true },
   "Electronic Games and Virtual Reality Club": { file: "egvr-club.jpg", ownBg: true },
