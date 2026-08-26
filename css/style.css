@@ -789,14 +789,14 @@ h1, h2, h3, h4 {
    never which side they render on. Omitted entirely for an org with
    no real logo; never a placeholder image. */
 .tl-dot--logo {
-  width: 40px;
-  height: 40px;
-  left: -42px;
-  top: 0.6rem;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  left: -38px;
+  top: 0.85rem;
+  border-radius: 8px;
   border: 2px solid var(--panel-base);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
-  padding: 5px;
+  padding: 3px;
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -807,7 +807,7 @@ h1, h2, h3, h4 {
    padding to keep the artwork off the node's own border — the badge
    itself should read as the node face, not float inside extra frame
    space the way a backed transparent logo does. */
-.tl-dot--logo-owned { padding: 2px; }
+.tl-dot--logo-owned { padding: 1.5px; }
 
 .tl-card {
   background: var(--card);
@@ -977,12 +977,12 @@ h1, h2, h3, h4 {
   .tl-item:nth-child(odd)  .tl-dot { left: auto; right: calc(-2.5rem - 9px); }
   .tl-item:nth-child(even) .tl-dot { left: calc(-2.5rem - 9px); }
   /* Logo node is bigger — same "centered on the spine" formula
-     (right/left = -(gap + radius)), just with radius 24px instead of
+     (right/left = -(gap + radius)), just with radius 20px instead of
      the plain dot's 9px. */
-  .tl-dot--logo { width: 48px; height: 48px; top: 0.4rem; border-radius: 12px; padding: 6px; }
-  .tl-dot--logo-owned { padding: 3px; }
-  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 24px); }
-  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 24px); }
+  .tl-dot--logo { width: 40px; height: 40px; top: 0.65rem; border-radius: 10px; padding: 4px; }
+  .tl-dot--logo-owned { padding: 2px; }
+  .tl-item:nth-child(odd)  .tl-dot--logo { left: auto; right: calc(-2.5rem - 20px); }
+  .tl-item:nth-child(even) .tl-dot--logo { left: calc(-2.5rem - 20px); }
 }
 
 /* --- Small "Newest first / Oldest first" sort control ---
