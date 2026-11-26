@@ -19,7 +19,25 @@
    ============================================================ */
 const EXPERIENCE = [
   {
-    role: "Software Engineering Intern",
+    role: "3D Printing Engineer",
+    org: "Tuwaiq Club | UJ",
+    orgUrl: "https://www.linkedin.com/company/tuwaiq-club-uj/",
+    date: "Sep 2026 – Present",
+    sortDate: "2026-09",
+    location: "",
+    accent: "mocha",
+    tags: ["University Club", "3D Design"],
+    desc: "Designing 3D models in Autodesk Fusion as part of Tuwaiq Club's 3D printing program at the University of Jeddah.",
+    skills: ["Autodesk Fusion", "3D Modeling"],
+    /* Named design contributions, rendered as a short list in the
+       expanded card (see renderExperience). Arabic in EXPERIENCE_AR. */
+    projects: [
+      { name: "DualID — UJ SmartPass", desc: "Modeled a custom enclosure in Autodesk Fusion 360 for DualID, a team project proposing facial recognition and fingerprint verification for university access." },
+      { name: "Programming Track Keychain", desc: "Designed a laptop-shaped keychain in Autodesk Fusion for the programming track during Tuwaiq Club's 3D printing program." },
+    ],
+  },
+  {
+    role: "AI Engineer Intern",
     org: "Ting",
     orgUrl: "https://www.linkedin.com/company/tingsaudi/about/",
     date: "Jun 2026 – Aug 2026",
@@ -27,8 +45,8 @@ const EXPERIENCE = [
     location: "",
     accent: "berry",
     tags: ["Internship", "Full-Stack"],
-    desc: "Worked across two company projects, contributing to full-stack development, AI agent and chatbot development, testing, and GitHub-based collaboration while using modern AI development tools throughout the engineering workflow.",
-    skills: ["Full-Stack Development", "AI Agent Development", "GitHub Collaboration"],
+    desc: "Contributed to two company projects across AI-enabled workflows and full-stack development. Worked on backend requirements, database structure, API integration, and AI agent workflows for the first project, then developed and refined admin-dashboard interfaces, responsive layouts, and Arabic localization for the second. Supported testing and GitHub-based collaboration throughout the internship.",
+    skills: ["AI Agent Workflows", "Backend & API Integration", "Admin Dashboard Development"],
   },
   {
     role: "Software Engineer",
@@ -39,14 +57,14 @@ const EXPERIENCE = [
     location: "",
     accent: "blue",
     tags: ["Volunteering", "Project Management"],
-    desc: "Working on software project planning, requirements analysis, and coordination for research and innovation-focused initiatives.",
-    skills: ["Software Project Management", "Requirements Analysis", "Technical Coordination"],
+    desc: "Developing frontend features with React, Next.js, and Tailwind CSS for a bilingual administrative dashboard and public website — including About Us and Goals management pages, Arabic and English content management with preview functionality, announcement features, and responsive layouts for laptop and mobile screens — while also contributing to software project planning, requirements analysis, and coordination for research and innovation-focused initiatives.",
+    skills: ["Frontend Development", "Bilingual Dashboard Development", "Requirements Analysis"],
   },
   {
     role: "Event Experience Specialist",
     org: "Local Organising Committee",
     orgUrl: "https://www.linkedin.com/company/saudiloc/",
-    date: "Apr 2026",
+    date: "Apr 2026 – May 2026",
     sortDate: "2026-04",
     location: "",
     accent: "apricot",
@@ -55,16 +73,21 @@ const EXPERIENCE = [
     skills: ["Event Operations", "Crowd Support", "Communication"],
   },
   {
-    role: "Project Management Committee Co-Leader",
+    role: "Event Management Leader",
     org: "Artificial Intelligence Club",
     orgUrl: "https://www.linkedin.com/company/ai-club-at-ujj/",
-    date: "Jan 2026 – Present",
-    sortDate: "2026-01",
+    date: "Nov 2025 – Present",
+    sortDate: "2025-11",
     location: "",
     accent: "mocha",
     tags: ["University Club", "Student"],
-    desc: "Contributing to AI club activities and project management work within student-led initiatives.",
-    skills: ["Project Management", "AI Awareness", "Teamwork"],
+    desc: "Lead event planning and coordination for the Artificial Intelligence Club, organizing tasks, timelines, and team responsibilities to support student workshops and club activities.",
+    skills: ["Event Planning", "Team Coordination"],
+    roleSteps: [
+      "Project Manager · Nov 2025 – Jan 2026",
+      "Project Management Committee Co-Leader · Jan 2026 – Sep 2026",
+      "Event Management Leader · Sep 2026 – Present",
+    ],
   },
   {
     role: "Project Management Coordinator",
@@ -82,7 +105,7 @@ const EXPERIENCE = [
     role: "Project Manager",
     org: "Electronic Games and Virtual Reality Club",
     orgUrl: "https://www.linkedin.com/company/egvruj/posts/?feedView=all",
-    date: "Sep 2025 – Present",
+    date: "Sep 2025 – Sep 2026",
     sortDate: "2025-09",
     location: "",
     accent: "blue",
@@ -94,12 +117,15 @@ const EXPERIENCE = [
     role: "Project Management Committee Leader",
     org: "Drone Club",
     orgUrl: "https://www.linkedin.com/company/drone-club-uj/posts/?feedView=all",
-    date: "Sep 2025 – Present",
+    date: "Sep 2025 – Oct 2026",
     sortDate: "2025-09",
     location: "",
     accent: "sage",
+    /* Light mode only: render with the olive family (same green as the
+       GDG on Campus card). Dark mode keeps sage. See .tl-item--light-*. */
+    lightAccent: "olive",
     tags: ["University Club", "Leadership"],
-    desc: "Led the planning and delivery of 7+ in-person and online workshops, coordinating teams, timelines, responsibilities, and execution to ensure activities were delivered effectively.",
+    desc: "Led the Project Management Committee, coordinating 20+ members and leading the planning and delivery of 7+ in-person and online workshops — managing teams, timelines, responsibilities, and execution to ensure activities were delivered effectively.",
     skills: ["Committee Leadership", "Planning", "Team Coordination"],
   },
   {
@@ -117,7 +143,7 @@ const EXPERIENCE = [
       "Co-Leader of Planning and Management Department",
       "Leader of Planning and Management Department",
       "Senior Management Member",
-      "Vice Team Leader",
+      "Vice Team Leader · Jul 2025 – Nov 2025",
     ],
   },
   {
@@ -129,7 +155,7 @@ const EXPERIENCE = [
     location: "",
     accent: "berry",
     tags: ["Sports Volunteering", "Motorsport", "Technical Inspection"],
-    desc: "Participated as a Scrutineer Marshal in 7+ motorsport races and earned 3 motorsport certifications, supporting technical inspection, safety checks, and regulatory compliance across major racing events.",
+    desc: "Participated in 9 motorsport events — including Formula 1, Formula E, WRC, Formula 2, Formula 4, and GT — and earned 3 motorsport certifications, carrying out scrutineering and technical inspections following FIA-related procedures to verify vehicle safety and regulatory compliance. Part of a scrutineering team recognized among the top 3 technical inspection teams worldwide in Formula E.",
     skills: ["Technical Inspection", "FIA Compliance", "Motorsport Operations"],
     hasRaces: true,
   },
@@ -160,6 +186,9 @@ const EXPERIENCE = [
      LinkedIn page title is "GDG On Campus | UJ") — not the generic
      Google Developer Groups bolt icon used there previously, which
      wasn't this specific club's actual mark.
+   - Tuwaiq Club | UJ: the club's own "Tuwaiq CLUB" mark (purple-square
+     LinkedIn variant), supplied by Leen — club.tuwaiq.edu.sa blocks
+     automated access. Not the Tuwaiq Academy logo.
 
    ownBg: true marks a logo file that already renders as a complete,
    opaque badge (its own colored/dark background baked into the
@@ -171,6 +200,7 @@ const EXPERIENCE = [
    .tl-dot--logo-owned in css/style.css.
    ============================================================ */
 const ORG_LOGOS = {
+  "Tuwaiq Club | UJ": { file: "tuwaiq-club-uj.jpg", ownBg: true },
   "Ting": { file: "ting.png" },
   "Numu for Research & Innovation": { file: "numu.jpg", ownBg: true },
   "Google Developer Group on Campus": { file: "gdg-uj.jpg", ownBg: true },
@@ -198,8 +228,9 @@ const ORG_LOGOS = {
    no layout code needs to change when photos are added.
    ============================================================ */
 const MOTORSPORT_RACES = [
+  { id: "f4-2026", name: "Formula 4", date: "Oct 2026", images: ["assets/images/motorsport/f4-2026-1.jpeg"] },
   { id: "formula-e-2026", name: "Formula E", date: "Feb 2026", images: ["assets/images/motorsport/formula-e-2026-1.JPG"] },
-  { id: "f4-2025", name: "F4", date: "Dec 2025", images: ["assets/images/motorsport/f4-2025-1.jpeg"] },
+  { id: "f4-2025", name: "Formula 4", date: "Dec 2025", images: ["assets/images/motorsport/f4-2025-1.jpeg"] },
   { id: "wrc-2025", name: "WRC", date: "Nov 2025", images: ["assets/images/motorsport/wrc-2025-1.jpeg"] },
   { id: "formula-1-2025", name: "Formula 1", date: "Apr 2025", images: ["assets/images/motorsport/formula-1-2025-1.jpeg"] },
   { id: "saudi-rally-2025", name: "Saudi Arabia Rally", date: "Apr 2025", images: ["assets/images/motorsport/saudi-rally-2025-1.jpeg"] },
@@ -364,6 +395,12 @@ function selectRace(index) {
 const TECH_ICONS = {
   javascript: { name: "JavaScript", file: "javascript.svg" },
   nextjs:     { name: "Next.js",    file: "nextdotjs.svg" },
+  react:      { name: "React",      file: "react.svg" },
+  typescript: { name: "TypeScript", file: "typescript.svg" },
+  tailwindcss: { name: "Tailwind CSS", file: "tailwindcss.svg" },
+  prisma:     { name: "Prisma",     file: "prisma.svg" },
+  supabase:   { name: "Supabase",   file: "supabase.svg" },
+  zod:        { name: "Zod",        file: "zod.svg" },
   figma:      { name: "Figma",      file: "figma.svg" },
   pwa:        { name: "PWA",        file: "pwa.svg" },
   replit:     { name: "Replit",     file: "replit.svg" },
@@ -372,6 +409,7 @@ const TECH_ICONS = {
   codex:      { name: "Codex",      file: "codex.svg" },
   gemini:     { name: "Gemini",     file: "gemini.svg" },
   vercel:     { name: "Vercel",     file: "vercel.svg" },
+  godaddy:    { name: "GoDaddy",    file: "godaddy.svg" },
   html:       { name: "HTML",       file: "html5.svg" },
   css:        { name: "CSS",        file: "css.svg" },
   nodejs:     { name: "Node.js",    file: "nodedotjs.svg" },
@@ -435,6 +473,10 @@ const SKILLS = {
        SANAD (js/i18n.js PROJECTS_AR.SANAD.tags), and API is F1 Driver
        Lookup's own tag (PROJECTS.sites). */
     "Vercel", "API",
+    /* Confirmed by project source (FAHEEM/SANAD package.json) and the
+       Ting/Numu experience entries above. */
+    "React", "Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Supabase",
+    "Gemini", "Zod",
   ],
   tools: ["Excel", "Word", "PowerPoint", "Canva", "Monday.com", "Notion", "ClickUp"],
 };
@@ -449,12 +491,18 @@ function renderSkillIcons() {
    2. PROJECTS — grouped into apps (iPhone) and sites (browser).
    frame     : "phone" | "browser"
    accent    : palette accent used for the badge + stage tint
-   link      : full URL, or "#" for a placeholder (button auto-disables)
-   github    : optional repo URL; adds a secondary source-code button
+   link      : full URL, or "#" for a placeholder (button auto-disables).
+               Phone cards link to their project PDF under
+               assets/documents/projects/ — always a repo-relative path
+               (no leading "/") so it resolves under the GitHub Pages
+               /LeenKharrazPortfolio/ subpath. Phone CTA reads
+               "View Project"; browser CTA reads "View Website".
+   website   : optional live-site URL for a phone card whose primary
+               link is its PDF; adds a "View Website" button between
+               "View Project" and "View GitHub" (e.g. SANAD).
+   github    : optional repo URL; adds a "View GitHub" button (last)
    hackathon : optional hackathon name; adds a "Hackathon" pill in the meta row
-   wide      : optional; spans both grid columns on large screens
-               (used for the 3rd Website card only — see .device-card--wide)
-   tags      : meaningful, no duplicated "Tech Tech"; a tag matching
+   tags      :meaningful, no duplicated "Tech Tech"; a tag matching
                TECH_ICONS above renders as a logo chip instead of text
                (see renderTagOrIcon)
    screen    : optional path to a real screenshot shown inside the
@@ -471,7 +519,7 @@ const PROJECTS = {
       role: "Co-founder / Software Engineering Student",
       desc: "A school search and comparison platform helping parents in Saudi Arabia find and compare private schools in one place — organizing fees, curriculum, facilities, admissions, and reviews into a clearer experience.",
       tags: ["Replit", "Codex", "Claude Code", "GitHub"],
-      link: "#", // [LEEN: add link when available]
+      link: "assets/documents/projects/schoolo.pdf",
     },
     {
       name: "Lume",
@@ -480,9 +528,9 @@ const PROJECTS = {
       accent: "apricot",
       frame: "phone",
       role: "UI/UX Designer",
-      desc: "A UI/UX prototype designed in Figma for an event-planning mobile app — helping users organize events, manage tasks, and coordinate details through a clean, structured interface.",
+      desc: "A Figma UI/UX prototype for a personal budgeting mobile app, with an income and expenses dashboard, spending summaries, expense details, and budget management in a structured interface.",
       tags: ["Figma"],
-      link: "https://www.figma.com/design/zTjzMQZaucXDS3mLRmfJbc/Lume-Prototype?node-id=0-1",
+      link: "assets/documents/projects/lume.pdf",
     },
     {
       name: "SANAD",
@@ -492,10 +540,23 @@ const PROJECTS = {
       frame: "phone",
       role: "Solo Developer & Designer",
       hackathon: "KSCDR Hackathon",
-      desc: "Independently designed and developed for the KSCDR Hackathon, SANAD is an accessibility-focused companion app for people who are Deaf or hard of hearing, blind or low vision, or speech-impaired — built end-to-end by me, from live captioning and text-to-speech to an emergency SOS flow.",
-      tags: ["Claude Code", "Vercel", "HTML", "CSS"],
-      link: "https://sanad-coral.vercel.app/",
+      desc: "Independently designed and developed for the KSCDR Hackathon, SANAD is an accessibility-focused companion app that helps people who are Deaf or hard of hearing, blind or low vision, or speech-impaired communicate and stay safe — built end-to-end by me as an installable PWA with live captioning (speech-to-text), text-to-speech, tap-to-speak quick phrases, an emergency SOS flow with location sharing, accessible Light/Dark/Calm themes with font scaling, and a full English/Arabic interface.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "PWA", "Claude Code", "Vercel"],
+      link: "assets/documents/projects/sanad.pdf",
+      website: "https://sanad-coral.vercel.app",
       github: "https://github.com/leenkharraz/Sanad",
+    },
+    {
+      name: "Claim Mate",
+      type: "Web Application · Tuwaiq × Bupa Arabia Hackathon",
+      badge: "App",
+      accent: "blue",
+      frame: "phone",
+      role: "Software Engineer · Backend & Web Development",
+      hackathon: "Tuwaiq Club Hackathon · Bupa Arabia Challenge",
+      desc: "Built a working bilingual medical reimbursement web prototype for the Tuwaiq Club Hackathon's Bupa Arabia challenge. Developed the Python backend and ran the application on a local server, connecting document upload and local extraction with validation, claim review, submission, and tracking in Arabic and English.",
+      tags: ["Python", "HTML", "CSS", "JavaScript"],
+      link: "assets/documents/projects/claim-mate.pdf",
     },
   ],
   sites: [
@@ -506,7 +567,7 @@ const PROJECTS = {
       accent: "olive",
       frame: "browser",
       role: "Frontend Developer",
-      desc: "A web app to search and explore Formula 1 drivers by season, using the Ergast API to fetch motorsport data and dynamically render driver information on the page.",
+      desc: "A web app to search and explore Formula 1 drivers by season, using the Jolpica-F1 API (the Ergast-compatible successor to the Ergast API) to fetch motorsport data and dynamically render driver information on the page.",
       tags: ["API", "HTML", "CSS", "JavaScript"],
       link: "https://leenkharraz.github.io/F1-Driver-Lookup/",
     },
@@ -529,11 +590,21 @@ const PROJECTS = {
       frame: "browser",
       role: "Web Developer",
       hackathon: "Tuwaiq × Google Hackathon",
-      desc: "Built for the Tuwaiq × Google Hackathon, FAHEEM is an AI-powered classroom analytics platform that turns raw assessment scores into learning-gap insights, student groupings, and prioritized intervention plans for teachers, with a fully Arabic, RTL-first interface.",
-      tags: ["Gemini", "Codex", "CSS", "JavaScript"],
+      desc: "Built for the Tuwaiq × Google Hackathon, FAHEEM is an AI-powered classroom analytics platform that turns raw assessment scores into learning-gap insights, student groupings, and prioritized intervention plans for teachers, with a fully Arabic, RTL-first interface. Built with Next.js, React, TypeScript, and Tailwind CSS, using the Gemini API for analysis, Zod for data validation, and Recharts for performance charts.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Gemini", "Zod", "Codex"],
       link: "https://faheem-nine.vercel.app/",
       github: "https://github.com/leenkharraz/Faheem",
-      wide: true,
+    },
+    {
+      name: "Beyond Events",
+      type: "Website · Events Company",
+      badge: "Website",
+      accent: "mocha",
+      frame: "browser",
+      role: "Web Developer",
+      desc: "Developed and refined a bilingual events-company website using Next.js, with responsive Arabic and English interfaces and improved contact sections. Configured the custom domain and DNS through GoDaddy and connected it to the Vercel deployment.",
+      tags: ["Next.js", "CSS", "Vercel", "GoDaddy"],
+      link: "https://www.beyondevents.org/en",
     },
   ],
 };
@@ -565,6 +636,7 @@ const PROJECTS = {
       const xSkills = tField(EXPERIENCE_AR, x.org, "skills", x.skills);
       const xRoleSteps = tField(EXPERIENCE_AR, x.org, "roleSteps", x.roleSteps);
       const xRoleProgressionLabel = tField(EXPERIENCE_AR, x.org, "roleProgressionLabel", t("experience.roleProgression"));
+      const xProjects = tField(EXPERIENCE_AR, x.org, "projects", x.projects);
 
       const firstTag = xTags[0] || "";
       const tags = firstTag
@@ -581,6 +653,15 @@ const PROJECTS = {
             <ol class="mini-steps">${xRoleSteps.map((r) => `<li class="mini-steps__item">${esc(r)}</li>`).join("")}</ol>
           </div>`
         : "";
+      /* Optional named design/project contributions within a role
+         (e.g. Tuwaiq Club | UJ) — plain readable text, no images. */
+      const projectList = xProjects && xProjects.length
+        ? `<div class="tl-card__projects">
+            <span class="tl-card__roles-label">${esc(t("experience.projects"))}</span>
+            <ul class="tl-card__projects-list">${xProjects.map((pr) =>
+              `<li class="tl-card__project"><strong class="tl-card__project-name">${esc(pr.name)}</strong><span class="tl-card__project-desc">${esc(pr.desc)}</span></li>`).join("")}</ul>
+          </div>`
+        : "";
       const racesButton = x.hasRaces
         ? `<div class="tl-card__actions"><button type="button" class="btn btn--small btn--solid" id="viewRacesBtn" aria-expanded="false" aria-controls="raceStrip">${esc(t("experience.viewRaces"))}</button></div>`
         : "";
@@ -594,7 +675,7 @@ const PROJECTS = {
         ? `<div class="${logoClass}" aria-hidden="true"><img src="assets/icons/organizations/${logo.file}" alt="" loading="lazy"></div>`
         : `<div class="tl-dot" aria-hidden="true"></div>`;
       return `
-      <li class="tl-item tl-item--${x.accent}">
+      <li class="tl-item tl-item--${x.accent}${x.lightAccent ? ` tl-item--light-${x.lightAccent}` : ""}">
         ${tlDot}
         <article class="tl-card">
           <button class="tl-card__head" aria-expanded="false">
@@ -605,6 +686,7 @@ const PROJECTS = {
           </button>
           <div class="tl-card__body">
             <p class="tl-card__desc">${esc(xDesc)}</p>
+            ${projectList}
             <div class="tl-card__skills">
               <span class="tl-card__skills-label">${esc(t("experience.topSkills"))}</span>
               <div class="tl-card__skills-pills">${skills}</div>
@@ -666,7 +748,6 @@ const PROJECTS = {
   /* ---------- Render PROJECTS (apps + sites) ---------- */
   function projectCard(p) {
     const frameClass = p.frame === "browser" ? "device-card--browser" : "device-card--phone";
-    const wideClass = p.wide ? " device-card--wide" : "";
     const isBrowser = frameClass === "device-card--browser";
     const hasLink = !!(p.link && p.link !== "#");
     const isAr = currentLang === "ar";
@@ -682,7 +763,7 @@ const PROJECTS = {
     const pTags = tField(PROJECTS_AR, p.name, "tags", p.tags);
     const pHackathon = tField(PROJECTS_AR, p.name, "hackathon", p.hackathon);
     const badgeText = p.badge === "Website" ? t("projects.badgeWebsite") : t("projects.badgeApp");
-    const cta = (isBrowser ? t("projects.ctaVisitSite") : t("projects.ctaViewPrototype")) + " " + arrow;
+    const cta = (isBrowser ? t("projects.ctaViewWebsite") : t("projects.ctaViewProject")) + " " + arrow;
 
     const tags = pTags.map((tag) => renderTagOrIcon(tag, p.accent)).join("");
     const hackathonRow = pHackathon
@@ -704,16 +785,20 @@ const PROJECTS = {
          </div>`
       : `<div class="iphone">${screen}</div>`;
     const ctaHtml = hasLink
-      ? `<a class="btn btn--small btn--accent" href="${esc(p.link)}" target="_blank" rel="noopener">${cta}</a>`
+      ? `<a class="btn btn--small btn--accent" href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">${cta}</a>`
+      : "";
+    /* Order is fixed: primary (PDF / live site) → live website → GitHub. */
+    const websiteHtml = p.website
+      ? `<a class="btn btn--small btn--ghost" href="${esc(p.website)}" target="_blank" rel="noopener noreferrer">${esc(t("projects.ctaViewWebsite"))} ${arrow}</a>`
       : "";
     const githubHtml = p.github
-      ? `<a class="btn btn--small btn--ghost" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(t("projects.ctaGithub"))} ${arrow}</a>`
+      ? `<a class="btn btn--small btn--ghost" href="${esc(p.github)}" target="_blank" rel="noopener noreferrer">${esc(t("projects.ctaGithub"))} ${arrow}</a>`
       : "";
-    const actionsHtml = (ctaHtml || githubHtml)
-      ? `<div class="device-overlay__actions">${ctaHtml}${githubHtml}</div>`
+    const actionsHtml = (ctaHtml || websiteHtml || githubHtml)
+      ? `<div class="device-overlay__actions">${ctaHtml}${websiteHtml}${githubHtml}</div>`
       : "";
     return `
-      <article class="device-card ${frameClass}${wideClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(pName)} — ${esc(pType)}${esc(t("projects.cardAriaSuffix"))}">
+      <article class="device-card ${frameClass}" data-accent="${p.accent}" data-type="${esc(p.badge.toLowerCase())}" tabindex="0" aria-label="${esc(pName)} — ${esc(pType)}${esc(t("projects.cardAriaSuffix"))}">
         <div class="device-stage">
           <span class="device-badge${isBrowser ? " device-badge--alt" : ""}">${esc(badgeText)}</span>
           ${frame}

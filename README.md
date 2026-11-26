@@ -12,14 +12,15 @@ The site is built around three sections — About, Experience, and Projects — 
 
 - **About** — background, university, languages, and a technical/tools skills summary.
 - **Experience** — a sortable (newest/oldest) timeline of internships, volunteering roles, and university club leadership positions (e.g. AI Club, Google Developer Group on Campus, Drone Club, Electronic Games and VR Club), each expandable for a description and top skills.
-- **Motorsport / Scrutineering** — a dedicated race-timeline panel, revealed from the Scrutineer Marshal experience card, listing motorsport events (Formula E, F1, F4, WRC, GT, Saudi Arabia Rally) with event photos.
+- **Motorsport / Scrutineering** — a dedicated race-timeline panel, revealed from the Scrutineer Marshal experience card, listing motorsport events (Formula E, F1, Formula 4, WRC, GT, Saudi Arabia Rally) with event photos.
 - **Projects** — a categorized showcase split into Mobile Apps and Web Projects, each rendered as an interactive device mockup (phone or browser frame).
 
 ## Selected Projects
 
 - **Schoolo** — a school search and comparison concept for parents in Saudi Arabia, organizing fees, curriculum, and admissions information.
-- **Lume** — a Figma UI/UX prototype for an event-planning mobile app.
-- **F1 Driver Lookup** — a web app that queries the Ergast API to look up Formula 1 drivers by season.
+- **Lume** — a Figma UI/UX prototype for a personal budgeting mobile app.
+- **Claim Mate** — a bilingual medical reimbursement web prototype with a Python backend, built for the Tuwaiq Club Hackathon's Bupa Arabia challenge.
+- **F1 Driver Lookup** — a web app that queries the Jolpica-F1 API (the Ergast-compatible successor to the Ergast API) to look up Formula 1 drivers by season.
 - **Card Magic** — a collaborative group project for creating and customizing digital greeting cards.
 - **Personal Portfolio** and **Portfolio Redesign** — earlier portfolio iterations, linked from the site as prior work.
 

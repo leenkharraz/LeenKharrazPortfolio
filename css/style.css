@@ -205,7 +205,7 @@ h1, h2, h3, h4 {
 }
 /* Accent-matched CTA — used where a button should follow its own card's
    accent (--a/--a-ink) instead of the site-wide apricot, e.g. project
-   "Visit Site" buttons, so each project's button matches its own theme. */
+   "View Website" / "View Project" buttons, so each project's button matches its own theme. */
 .btn--accent { background: var(--a, var(--apricot)); color: var(--a-ink, var(--on-apricot)); }
 .btn--accent:hover { transform: translateY(-2px); box-shadow: 0 8px 26px color-mix(in srgb, var(--a, var(--apricot)) 35%, transparent); }
 .btn--ghost { border: 1.5px solid var(--border); color: var(--text); }
@@ -812,7 +812,6 @@ h1, h2, h3, h4 {
      the logo, just enough to keep it visually separated. */
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
-
 .tl-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -846,6 +845,13 @@ h1, h2, h3, h4 {
 .tl-item--apricot { --ca: var(--apricot); --ca-ink: var(--on-apricot); }
 .tl-item--mocha   { --ca: var(--mocha);   --ca-ink: #fff; }
 .tl-item--sage    { --ca: var(--sage);    --ca-ink: var(--on-sage); }
+/* Per-entry LIGHT-MODE accent override (EXPERIENCE `lightAccent`, e.g.
+   Drone Club → olive, matching the GDG on Campus card). Swaps only that
+   card's accent variables + left border while data-theme="light";
+   dark mode and the global tokens (--sage etc.) are untouched.
+   (0,2,0)/(0,3,0) outrank .tl-item--sage / .tl-item--sage .tl-card. */
+[data-theme="light"] .tl-item--light-olive { --ca: var(--olive); --ca-ink: #fff; }
+[data-theme="light"] .tl-item--light-olive .tl-card { border-left-color: var(--olive); }
 
 .tl-card__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.55rem; }
 .tl-card__badge {
@@ -964,6 +970,22 @@ h1, h2, h3, h4 {
   background: var(--ca, var(--mocha));
 }
 .mini-steps__item:last-child { color: var(--text); font-weight: 600; }
+
+/* Named projects inside an expanded experience card (e.g. Tuwaiq
+   Club | UJ's 3D designs) — readable text items with an accent rule
+   on the logical start edge, so it mirrors naturally in Arabic. */
+.tl-card__projects { margin-bottom: 0.9rem; }
+.tl-card__projects-list { display: grid; gap: 0.55rem; list-style: none; margin: 0; padding: 0; }
+.tl-card__project {
+  display: grid;
+  gap: 0.15rem;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 2px solid color-mix(in srgb, var(--ca, var(--mocha)) 55%, transparent);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.tl-card__project-name { color: var(--text); font-weight: 600; }
+.tl-card__project-desc { color: var(--text-2); }
 
 /* Desktop alternating timeline: odd items sit physically LEFT, even
    items physically RIGHT, dots facing the center spine — identical in
@@ -1348,48 +1370,52 @@ h1, h2, h3, h4 {
   grid-template-columns: minmax(0, 1fr);
 }
 
-/* ===== Websites (.showcase__grid--sites) — unchanged: 2 cards side
-   by side, with the featured 3rd card (.device-card--wide, set via
-   p.wide on FAHEEM) spanning both columns on its own row underneath.
-   Applications intentionally uses a different pattern below — this
-   block must stay scoped to --sites only so it never affects
+/* ===== Websites (.showcase__grid--sites) — 4 equal cards in a
+   regular 2 × 2 grid (F1 Driver Lookup, Card Magic / FAHEEM, Beyond
+   Events, in DOM order); one per row below 640px. No card spans
+   both columns. Scoped to --sites only so it never affects
    Applications. ===== */
 @media (min-width: 640px) {
   /* margin-inline: auto centers the capped-width grid within the full
-     panel width instead of it hugging the start edge — same fix,
-     same visual result, in both languages, since centering is
-     symmetric regardless of direction. */
+     panel width instead of it hugging the start edge — same visual
+     result in both languages, since centering is symmetric. */
   .showcase__grid--sites { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 920px; margin-inline: auto; }
-  .showcase__grid--sites .device-card--wide { grid-column: 1 / -1; }
-  /* The wide card's browser mockup gets an explicit height (instead of
-     its usual 16:10 aspect-ratio) so spanning the full row width
-     doesn't also make it taller. */
-  .showcase__grid--sites .device-card--wide .browser { max-width: 760px; height: 230px; }
 }
 
-/* ===== Applications (.showcase__grid--apps) — all 3 cards (Schoolo,
-   Lume, SANAD) sit beside each other whenever there's room; no
-   .device-card--wide/featured treatment here, every card is
-   equal-sized. Two bands, each sized with minmax so cards never get
-   fixed pixel widths:
-     - 640–899px (tablet, where 3 real device cards get cramped):
-       2 columns, with the 3rd/last card centered on its own row
-       instead of stranded in column 1 with dead space beside it.
-     - ≥900px (laptop and up, including 1024/1280/1366/1440/1920):
-       3 columns — comfortably fits three ~240px+ cards at every one
-       of those widths without ballooning, since the outer .section
-       already caps overall width at --content-max (1200px). ===== */
-@media (min-width: 640px) and (max-width: 899.98px) {
-  .showcase__grid--apps { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
-  .showcase__grid--apps .device-card:last-child {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: 100%;
-    max-width: calc(50% - 0.75rem);
-  }
+/* ===== Applications (.showcase__grid--apps) — 4 equal phone cards
+   (Schoolo, Lume, SANAD, Claim Mate). minmax(0, 1fr) everywhere so a
+   column can never be forced wider than the panel:
+     - < 1200px (phones + tablets): 2 × 2
+     - ≥ 1200px:                    all 4 side by side in one row
+   Nothing is scaled with transform — the frame, padding and overlay
+   layout are resized instead, so text stays at its normal size. ===== */
+.showcase__grid--apps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Phones: two ~140px columns. The stage, phone frame and badge shrink
+   to fit; the revealed details stack label-over-value (instead of the
+   side-by-side meta grid) so icons, role and hackathon get the full
+   card width, and keep scrolling vertically when the content is long. */
+@media (max-width: 639.98px) {
+  .showcase__grid--apps { gap: 0.75rem; }
+  .showcase__grid--apps .device-stage { padding: 2.2rem 0.6rem 0.9rem; min-height: 0; }
+  .showcase__grid--apps .device-badge { left: 0.55rem; top: 0.55rem; font-size: 0.6rem; }
+  .showcase__grid--apps .iphone { width: min(150px, 100%); border-radius: 24px; padding: 6px; }
+  .showcase__grid--apps .iphone::before { top: 11px; height: 13px; }
+  .showcase__grid--apps .iphone .device-screen { border-radius: 18px; }
+  .showcase__grid--apps .project-screen__label { font-size: 0.85rem; }
+  .showcase__grid--apps .device-overlay { padding: 0.85rem 0.75rem; gap: 0.4rem; }
+  .showcase__grid--apps .device-overlay__meta { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+  .showcase__grid--apps .device-overlay__meta .k:not(:first-child) { margin-top: 0.35rem; }
+  /* Buttons stack full-width so a label and its arrow stay together. */
+  .showcase__grid--apps .device-overlay__actions { flex-direction: column; align-self: stretch; gap: 0.45rem; }
+  .showcase__grid--apps .device-overlay__actions .btn { text-align: center; padding-inline: 0.7em; }
 }
-@media (min-width: 900px) {
-  .showcase__grid--apps { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
+@media (min-width: 1200px) {
+  .showcase__grid--apps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+  /* Four-across cards are narrower, so the stage's side padding is
+     trimmed and the phone sizes to the card rather than a fixed floor. */
+  .showcase__grid--apps .device-stage { padding-inline: 1rem; }
+  .showcase__grid--apps .iphone { width: min(210px, 88%); }
 }
 
 /* --- The stage that holds a device, tinted with the section accent --- */
@@ -1563,6 +1589,9 @@ h1, h2, h3, h4 {
   flex-direction: column;
   justify-content: flex-start;
   overflow-y: auto;
+  /* Vertical scroll only: a hidden tech-icon tooltip (::after) near the
+     edge must not make the panel scroll sideways. */
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   gap: 0.5rem;
   padding: clamp(1.2rem, 3vw, 1.8rem);
@@ -1592,7 +1621,10 @@ h1, h2, h3, h4 {
 .device-overlay__desc { font-size: 0.85rem; color: rgba(244,239,231,0.82); }
 .device-overlay__meta {
   display: grid;
-  grid-template-columns: auto 1fr;
+  /* minmax(0, 1fr) + wrapping pills: a long value (e.g. Claim Mate's
+     hackathon name) wraps inside narrow 4-across cards instead of
+     widening the column and clipping the tech icons and role text. */
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 0.3rem 0.6rem;
   align-items: center;
   font-size: 0.8rem;
@@ -1607,8 +1639,32 @@ h1, h2, h3, h4 {
 }
 .device-overlay .btn { align-self: flex-start; margin-top: 0.3rem; }
 .device-overlay__actions { display: flex; flex-wrap: wrap; align-self: flex-start; gap: 0.6rem; margin-top: 0.3rem; }
-.device-overlay__actions .btn { margin-top: 0; }
-.device-tags { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem; }
+.device-overlay__actions .btn { margin-top: 0; max-width: 100%; overflow-wrap: anywhere; }
+/* The details panel is always a dark gradient (in BOTH themes), so
+   outline buttons there ("View Website", "View GitHub") must use the
+   panel's light ink — never the page's --text, which is dark (#2F2A26)
+   in light mode and made the label + arrow nearly invisible. The arrow
+   is text inside the same <a>, so it inherits this color.
+   Specificity (0,4,0 / 0,5,0) deliberately outranks the general
+   .btn--ghost rules (0,1,0 / 0,2,0) and any theme-scoped button rule,
+   regardless of source order. Values match the existing dark-mode look,
+   so dark mode is unchanged. */
+.device-card .device-overlay .btn.btn--ghost,
+.device-card .device-overlay .btn.btn--ghost:visited {
+  color: #F4EFE7;
+  background: transparent;
+  border-color: rgba(244, 239, 231, 0.45);
+}
+.device-card .device-overlay .btn.btn--ghost:hover,
+.device-card .device-overlay .btn.btn--ghost:focus-visible,
+.device-card .device-overlay .btn.btn--ghost:active {
+  color: var(--apricot);
+  background: transparent;
+  border-color: var(--apricot);
+}.device-tags { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem; min-width: 0; }
+/* 12px ≈ half a single-line pill's height, so one-line pills stay fully
+   rounded while a wrapped one becomes a rounded rectangle, not an oval. */
+.device-overlay__meta .pill { white-space: normal; max-width: 100%; line-height: 1.35; border-radius: 12px; }
 
 /* --- Technology/tool logo chip (see renderTagOrIcon in js/main.js) ---
    Small square, logo centered on a light chip so brand marks stay
@@ -1666,6 +1722,10 @@ h1, h2, h3, h4 {
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 20;
 }
+/* Inside a project's details panel the tooltip only exists while it's
+   shown — a hidden one beside an edge icon in a narrow 2-across card
+   would otherwise add invisible horizontal overflow to the panel. */
+.device-overlay .tech-icon:not(:hover):not(:focus-visible):not(:active)::after { content: none; }
 /* :active covers touch — a tap shows the tooltip too, not just hover. */
 .tech-icon:hover::after,
 .tech-icon:focus-visible::after,
